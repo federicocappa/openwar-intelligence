@@ -1,0 +1,29 @@
+# OpenWar Intelligence - robots.txt
+# https://openwarintelligence.org/
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /download.html
+Allow: /docs.html
+Allow: /monitor-guerra.html
+
+# Block internal assets from indexing
+Disallow: /social-media-kit.html
+Disallow: /*.bat$
+
+# Sitemap location
+Sitemap: https://openwarintelligence.org/sitemap.xml
+
+# Crawl rate
+Crawl-delay: 2
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2

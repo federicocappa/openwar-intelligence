@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation — OpenWar Intelligence C4ISR Dashboard</title>
+<meta name="description" content="Complete documentation for OpenWar Intelligence C4ISR dashboard. Installation guide, data source configuration, API reference, neural network setup, contribution guidelines. Get started in 5 minutes.">
+<meta name="keywords" content="OpenWar Intelligence documentation, C4ISR installation guide, OSINT dashboard setup, military tracker API, ADS-B tracking setup, FIRMS integration, Leaflet military map, open source intelligence tutorial">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://openwarintelligence.org/docs.html">
+<meta property="og:title" content="Documentation — OpenWar Intelligence">
+<meta property="og:description" content="Installation, configuration, API reference and contribution guide for the open source C4ISR dashboard.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://openwarintelligence.org/docs.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://openwarintelligence.org/og-image.png">
+<meta property="og:image" content="https://openwarintelligence.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="openwar-icon.svg">
+<meta name="theme-color" content="#040810">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "OpenWar Intelligence Documentation",
+  "description": "Complete technical documentation for installing, configuring and extending the OpenWar Intelligence C4ISR dashboard.",
+  "author": {"@type": "Organization", "name": "OpenWar Intelligence Project"},
+  "datePublished": "2026-05-24",
+  "dateModified": "2026-05-24",
+  "mainEntityOfPage": "https://openwarintelligence.org/docs.html",
+  "publisher": {"@type": "Organization", "name": "OpenWar Intelligence"},
+  "articleSection": ["Installation", "Configuration", "API Reference", "Contributing"]
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{overflow-x:hidden;}
+:root{--bg:#040810;--bg2:#0a1628;--cyan:#00ffcc;--cyan2:#00b4d8;--red:#ff3344;--text:#e0e0e0;--text2:#8899aa;--border:rgba(0,255,204,0.15);}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.7;}
+a{color:var(--cyan);text-decoration:none;transition:all 0.3s;}
+a:hover{color:#fff;text-shadow:0 0 8px var(--cyan);}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,204,0.008) 2px,rgba(0,255,204,0.008) 4px);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(4,8,16,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-logo{width:36px;height:36px;}
+.nav-title{font-family:'Courier New',monospace;font-size:14px;letter-spacing:4px;color:var(--cyan);font-weight:700;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-family:monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+.nav-links a:hover{color:var(--cyan);}
+.nav-links a.active{color:var(--cyan);}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;padding:4px 10px;border-radius:3px;cursor:pointer;}
+@media(max-width:768px){.nav-links{display:none;position:absolute;top:64px;left:0;width:100%;background:rgba(4,8,16,0.98);flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--border);z-index:999;}.nav-links.open{display:flex;}.nav-toggle{display:block;}}
+
+/* LAYOUT */
+.docs-layout{display:grid;grid-template-columns:240px 1fr;gap:0;padding-top:64px;min-height:100vh;}
+@media(max-width:900px){.docs-layout{grid-template-columns:1fr;}}
+
+/* SIDEBAR */
+.docs-sidebar{background:rgba(10,22,40,0.4);border-right:1px solid var(--border);padding:30px 20px;position:sticky;top:64px;height:calc(100vh - 64px);overflow-y:auto;}
+@media(max-width:900px){.docs-sidebar{display:none;}}
+.sidebar-title{font-family:monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:16px;}
+.sidebar-nav a{display:block;padding:8px 12px;font-size:13px;color:var(--text2);border-left:2px solid transparent;margin-bottom:2px;transition:all 0.2s;border-radius:0 3px 3px 0;}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:var(--cyan);border-left-color:var(--cyan);background:rgba(0,255,204,0.03);}
+.sidebar-nav .sub{padding-left:24px;font-size:12px;}
+.sidebar-section{margin-top:20px;padding-top:16px;border-top:1px solid rgba(0,255,204,0.06);}
+
+/* CONTENT */
+.docs-content{padding:40px 50px 80px;max-width:860px;overflow-wrap:break-word;word-wrap:break-word;min-width:0;}
+@media(max-width:768px){.docs-content{padding:30px 15px 60px;}}
+.docs-content h1{font-family:'Arial Black',sans-serif;font-size:32px;letter-spacing:3px;margin-bottom:8px;color:#fff;}
+.docs-content h2{font-family:'Arial Black',sans-serif;font-size:22px;letter-spacing:2px;margin:50px 0 16px;padding-top:20px;border-top:1px solid rgba(0,255,204,0.08);color:#fff;}
+.docs-content h2:first-of-type{border-top:none;margin-top:30px;}
+.docs-content h3{font-family:monospace;font-size:15px;letter-spacing:2px;color:var(--cyan);margin:30px 0 12px;text-transform:uppercase;}
+.docs-content p{margin-bottom:16px;color:var(--text2);font-size:15px;}
+.docs-content strong{color:var(--text);}
+.breadcrumb{font-family:monospace;font-size:11px;color:var(--text2);margin-bottom:20px;letter-spacing:1px;}
+.breadcrumb a{color:var(--text2);}
+
+/* Code blocks */
+pre{background:rgba(0,0,0,0.4);border:1px solid rgba(0,255,204,0.08);border-radius:4px;padding:16px 20px;overflow-x:auto;margin:12px 0 20px;font-family:'Courier New',monospace;font-size:13px;color:var(--cyan);line-height:1.6;}
+code{font-family:'Courier New',monospace;font-size:13px;color:var(--cyan);background:rgba(0,255,204,0.05);padding:2px 6px;border-radius:2px;}
+pre code{background:none;padding:0;}
+
+/* Tables */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0 24px;}
+.doc-table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+.doc-table th{text-align:left;padding:10px 14px;background:rgba(0,255,204,0.05);color:var(--cyan);font-family:monospace;font-size:11px;letter-spacing:1px;border-bottom:1px solid var(--border);}
+.doc-table td{padding:10px 14px;border-bottom:1px solid rgba(0,255,204,0.04);color:var(--text2);}
+.doc-table td code{font-size:12px;}
+
+/* Callouts */
+.callout{padding:16px 20px;border-radius:4px;margin:16px 0 20px;font-size:13px;line-height:1.6;}
+.callout-info{background:rgba(0,180,216,0.06);border-left:3px solid var(--cyan2);color:var(--text2);}
+.callout-warn{background:rgba(255,170,0,0.06);border-left:3px solid #ffaa00;color:var(--text2);}
+.callout-danger{background:rgba(255,51,68,0.06);border-left:3px solid var(--red);color:var(--text2);}
+.callout strong{color:var(--text);}
+
+/* Lists */
+.docs-content ul,.docs-content ol{margin:8px 0 16px 24px;color:var(--text2);font-size:14px;}
+.docs-content li{margin-bottom:6px;}
+
+/* Footer */
+footer{padding:30px 40px;border-top:1px solid var(--border);text-align:center;}
+.footer-copy{font-family:monospace;font-size:10px;letter-spacing:2px;color:var(--text2);}
+.footer-links{margin-top:8px;display:flex;gap:16px;justify-content:center;}
+.footer-links a{font-size:11px;color:var(--text2);font-family:monospace;}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main navigation">
+  <div class="nav-brand">
+    <a href="index.html"><svg class="nav-logo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><polygon points="200,115 265,152 265,248 200,285 135,248 135,152" fill="none" stroke="#00ffcc" stroke-width="8"/><circle cx="200" cy="200" r="10" fill="none" stroke="#ff3344" stroke-width="5"/><circle cx="200" cy="200" r="4" fill="#ff3344"/></svg></a>
+    <a href="index.html"><span class="nav-title">OPENWAR INTEL</span></a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#features">Features</a>
+    <a href="index.html#demo">Demo</a>
+    <a href="docs.html" class="active">Docs</a>
+    <a href="download.html">Download</a>
+    <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</nav>
+
+<div class="docs-layout">
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar" aria-label="Documentation navigation">
+    <div class="sidebar-title">Documentation</div>
+    <div class="sidebar-nav">
+      <a href="#getting-started" class="active">Getting Started</a>
+      <a href="#installation" class="sub">Installation</a>
+      <a href="#quickstart" class="sub">Quick Start</a>
+      <a href="#requirements" class="sub">Requirements</a>
+      <div class="sidebar-section">
+        <a href="#architecture">Architecture</a>
+        <a href="#file-structure" class="sub">File Structure</a>
+        <a href="#data-flow" class="sub">Data Flow</a>
+      </div>
+      <div class="sidebar-section">
+        <a href="#configuration">Configuration</a>
+        <a href="#data-sources" class="sub">Data Sources</a>
+        <a href="#cors-proxy" class="sub">CORS Proxy</a>
+        <a href="#map-layers" class="sub">Map Layers</a>
+        <a href="#neural-network" class="sub">Neural Network</a>
+      </div>
+      <div class="sidebar-section">
+        <a href="#modules">Intelligence Modules</a>
+        <a href="#air-domain" class="sub">Air Domain</a>
+        <a href="#sigint" class="sub">SIGINT / ELINT</a>
+        <a href="#nuclear" class="sub">Nuclear Domain</a>
+        <a href="#maritime" class="sub">Maritime</a>
+        <a href="#economic" class="sub">Economic Warfare</a>
+        <a href="#firms" class="sub">FIRMS / Thermal</a>
+        <a href="#fusion" class="sub">Fusion Alerts</a>
+      </div>
+      <div class="sidebar-section">
+        <a href="#api-reference">API Reference</a>
+        <a href="#deployment">Deployment</a>
+        <a href="#contributing">Contributing</a>
+        <a href="#changelog">Changelog</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="docs-content">
+    <div class="breadcrumb"><a href="index.html">Home</a> / <strong>Documentation</strong></div>
+
+    <h1 id="getting-started">Documentation</h1>
+    <p>Complete guide to installing, configuring and extending OpenWar Intelligence — the open source real-time military C4ISR dashboard.</p>
+
+    <h2 id="installation">Installation</h2>
+    <p>OpenWar Intelligence is a single HTML file. No build tools, no package manager, no server-side dependencies. There are three ways to deploy it:</p>
+
+    <h3>Option 1: Direct Download</h3>
+    <p>The simplest method. <a href="download.html">Register and download</a> the HTML file, then open it in your browser.</p>
+    <pre><code># Download the file
+# Open monitor-guerra.html in any modern browser
+# That's it — the dashboard is running</code></pre>
+
+    <h3>Option 2: Local HTTP Server (Recommended)</h3>
+    <p>For the best experience with CORS proxy support, serve the file via a local HTTP server:</p>
+    <pre><code># Using Python (included batch file)
+python -m http.server 8080
+
+# Using Node.js
+npx serve -p 8080
+
+# Using PHP
+php -S localhost:8080
+
+# Then navigate to http://localhost:8080/monitor-guerra.html</code></pre>
+
+    <div class="callout callout-info"><strong>Windows users:</strong> Double-click <code>AVVIA-MONITOR.bat</code> to automatically start a Python HTTP server on port 8080 and open the dashboard in your default browser.</div>
+
+    <h3>Option 3: Git Clone</h3>
+    <pre><code>git clone https://github.com/openwar-intelligence/dashboard.git
+cd dashboard
+python -m http.server 8080</code></pre>
+
+    <h2 id="quickstart">Quick Start (5 Minutes)</h2>
+    <ol>
+      <li><a href="download.html">Register</a> and download <code>monitor-guerra.html</code></li>
+      <li>Place it in any folder on your computer</li>
+      <li>Open in Chrome, Firefox, Edge, or Safari</li>
+      <li>The dashboard loads with simulated data immediately</li>
+      <li>Real data begins streaming in after ~10 seconds (if CORS proxies are available)</li>
+    </ol>
+
+    <h2 id="requirements">System Requirements</h2>
+    <table class="doc-table">
+      <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+      <tr><td>Browser</td><td>Chrome 90+, Firefox 88+, Edge 90+, Safari 15+</td><td>Latest Chrome or Firefox</td></tr>
+      <tr><td>RAM</td><td>2 GB available</td><td>4 GB available</td></tr>
+      <tr><td>Screen</td><td>1280x720</td><td>1920x1080 or larger</td></tr>
+      <tr><td>Network</td><td>Any internet connection</td><td>Broadband for real-time feeds</td></tr>
+      <tr><td>Disk</td><td>1 MB (single file)</td><td>5 MB (with assets)</td></tr>
+    </table>
+
+    <h2 id="architecture">Architecture Overview</h2>
+    <p>OpenWar Intelligence follows a single-file architecture philosophy. Everything — HTML structure, CSS styling, JavaScript logic, data models, and SVG assets — lives in one <code>.html</code> file of approximately 4,000 lines.</p>
+
+    <h3 id="file-structure">File Structure</h3>
+    <pre><code>openwar-intelligence/
+  ├── index.html              # Landing page
+  ├── monitor-guerra.html     # Main C4ISR dashboard
+  ├── download.html           # Registration & download
+  ├── docs.html               # This documentation
+  ├── openwar-logo.svg        # Full brand logo
+  ├── openwar-icon.svg        # Icon/favicon
+  ├── social-media-kit.html   # Social media assets
+  ├── sitemap.xml             # SEO sitemap
+  ├── robots.txt              # Crawling directives
+  └── AVVIA-MONITOR.bat       # Windows launcher</code></pre>
+
+    <h3 id="data-flow">Data Flow Architecture</h3>
+    <p>The dashboard follows a multi-source data fusion pipeline:</p>
+    <pre><code>External APIs (FR24, OpenSky, ADSB-X, NASA FIRMS)
+    ↓ via CORS Proxy Chain (allorigins → corsproxy → codetabs)
+    ↓ Graceful fallback to simulated data
+    ↓
+Data Parsing & Normalization
+    ↓
+Feature Groups (Leaflet.js FeatureGroups)
+    ├── Aircraft Layer (117+ assets)
+    ├── Ships Layer (49+ vessels)
+    ├── Satellites Layer (15+ objects)
+    ├── Conflict Zones (12 areas)
+    ├── SIGINT Layer (A2/AD, GPS jamming)
+    ├── Nuclear Layer (SSBNs, silos)
+    ├── Maritime Layer (chokepoints)
+    ├── FIRMS Layer (thermal hotspots)
+    ├── Heatmap Layer (combat activity)
+    └── Fusion Alert Layer (cross-correlation)
+    ↓
+Neural Network (12-24-1, online learning)
+    ↓
+Predictive Timeline (1h-24h)</code></pre>
+
+    <h2 id="configuration">Configuration</h2>
+
+    <h3 id="data-sources">Data Sources</h3>
+    <table class="doc-table">
+      <tr><th>Source</th><th>Data Type</th><th>Update Interval</th><th>Fallback</th></tr>
+      <tr><td>FlightRadar24</td><td>Military aircraft positions</td><td>30s</td><td>OpenSky</td></tr>
+      <tr><td>OpenSky Network</td><td>ADS-B aircraft data</td><td>30s</td><td>ADSB Exchange</td></tr>
+      <tr><td>ADS-B Exchange</td><td>Aircraft positions (backup)</td><td>30s</td><td>Simulation</td></tr>
+      <tr><td>NASA FIRMS</td><td>VIIRS thermal anomalies</td><td>5min</td><td>Cached hotspots</td></tr>
+      <tr><td>MarineTraffic</td><td>AIS vessel positions</td><td>60s</td><td>Simulation</td></tr>
+      <tr><td>RSS/OSINT (19 feeds)</td><td>Geopolitical news</td><td>5min</td><td>Cached articles</td></tr>
+    </table>
+
+    <h3 id="cors-proxy">CORS Proxy Chain</h3>
+    <p>Since the dashboard runs client-side, it uses a triple-fallback CORS proxy chain to access external APIs:</p>
+    <pre><code>// Primary proxy
+https://api.allorigins.win/raw?url=
+
+// Fallback 1
+https://corsproxy.io/?
+
+// Fallback 2
+https://api.codetabs.com/v1/proxy?quest=
+
+// Final fallback: simulated data generation</code></pre>
+    <div class="callout callout-warn"><strong>Note:</strong> Free CORS proxies may have rate limits. For production deployments, consider setting up your own proxy server or backend API.</div>
+
+    <h3 id="map-layers">Map Tile Layers</h3>
+    <table class="doc-table">
+      <tr><th>Layer</th><th>Provider</th><th>Best For</th></tr>
+      <tr><td>Dark Matter</td><td>CartoDB</td><td>Default — optimal for military overlay visibility</td></tr>
+      <tr><td>Satellite</td><td>ESRI World Imagery</td><td>Terrain analysis, base identification</td></tr>
+      <tr><td>Terrain</td><td>OpenTopoMap</td><td>Elevation, terrain features, topography</td></tr>
+    </table>
+
+    <h3 id="neural-network">Neural Network Configuration</h3>
+    <p>The prediction engine uses a 3-layer feedforward neural network implemented in pure JavaScript:</p>
+    <pre><code>Architecture: 12 inputs → 24 hidden (sigmoid) → 1 output
+Learning rate: 0.01
+Training data: 37 historical conflict events
+Online learning: Retrained every 60 seconds
+Features: troop movements, air activity, naval presence,
+          diplomatic signals, economic indicators, FIRMS data</code></pre>
+
+    <h2 id="modules">Intelligence Modules Reference</h2>
+
+    <h3 id="air-domain">Air Domain Module</h3>
+    <p>Tracks military aircraft using multi-source data fusion. The module maintains a database of 117+ fallback aircraft across 27 nations with 33 callsign prefixes and 10 ICAO hex ranges for automatic military identification.</p>
+    <p>Aircraft are classified into 6 types with SVG silhouettes: <strong>fighter, bomber, transport, reconnaissance, tanker, helicopter</strong>. Technical specs are available for 50+ specific models including range, ceiling, payload, and crew.</p>
+
+    <h3 id="sigint">SIGINT / ELINT Module</h3>
+    <p>Full-spectrum electronic warfare monitoring: <strong>29 A2/AD systems</strong>, <strong>7 GPS jamming zones</strong>, <strong>10 EW platforms</strong>, <strong>9 radar emissions</strong>, <strong>7 cyber warfare operations</strong>, and <strong>9 EW spectrum bands</strong>. Visualizes denied-area environments with bubble overlays, frequency spectrum analysis, and real-time threat classification.</p>
+
+    <h3 id="nuclear">Nuclear Domain Module</h3>
+    <p>Strategic nuclear force monitoring: <strong>10 SSBN patrol zones</strong> with missile/warhead details, <strong>12 ICBM silos</strong> with regiment data, <strong>8 nuclear bombers</strong> (airborne/alert/ground status), <strong>12 C3 command nodes</strong>, and <strong>6 nuclear treaties</strong> with compliance status. Full posture assessment for 9 nuclear-armed nations with deployed/reserve/retired inventory and first-use doctrine.</p>
+
+    <h3 id="maritime">Maritime Domain Module</h3>
+    <p>Monitors 49+ naval vessels classified into 6 types: <strong>carrier, destroyer, cruiser, frigate, submarine, amphibious</strong>. Each type has an SVG silhouette and spec sheet. Tracks <strong>9 global maritime chokepoints</strong> with width, depth, oil flow data, blockade risk analysis. Includes <strong>9 naval deployments</strong> and <strong>8 recent maritime incidents</strong>.</p>
+
+    <h3 id="economic">Economic Warfare Module</h3>
+    <p>Monitors <strong>8 sanctions regimes</strong> with SWIFT access and asset freeze tracking, <strong>9 strategic commodities</strong> with price changes and war impact analysis, and <strong>8 critical supply chains</strong> with vulnerability scoring and alternative source mapping. Weighted economic threat index integrates all indicators.</p>
+
+    <h3 id="firms">FIRMS / Thermal Intelligence Module</h3>
+    <p>Integrates NASA FIRMS VIIRS satellite data to detect thermal anomalies that may indicate military activity (fires, explosions, artillery, rocket launches). Each hotspot includes direct links to satellite imagery providers:</p>
+    <ul>
+      <li><strong>Sentinel Hub</strong> — High-resolution multispectral imagery</li>
+      <li><strong>Copernicus Browser</strong> — EU Earth observation data</li>
+      <li><strong>NASA FIRMS Map</strong> — Official thermal anomaly viewer</li>
+      <li><strong>Google Satellite</strong> — Commercial satellite imagery</li>
+    </ul>
+
+    <h3 id="fusion">Fusion Alert Engine</h3>
+    <p>The cross-correlation engine monitors 9 signal types and generates alerts when multiple intelligence indicators converge on the same geographic area:</p>
+    <table class="doc-table">
+      <tr><th>Signal</th><th>Source</th><th>Weight</th></tr>
+      <tr><td>AIR</td><td>Military aircraft concentration</td><td>1.0</td></tr>
+      <tr><td>SHIP</td><td>Naval vessel concentration</td><td>1.0</td></tr>
+      <tr><td>ML-PRED</td><td>Neural network high-probability prediction</td><td>1.0</td></tr>
+      <tr><td>AIR-BRIDGE</td><td>Detected airlift/transport surge</td><td>1.0</td></tr>
+      <tr><td>A2AD</td><td>Proximity to A2/AD systems</td><td>1.0</td></tr>
+      <tr><td>THERMAL</td><td>FIRMS thermal hotspot cluster</td><td>1.0</td></tr>
+      <tr><td>NAVAL</td><td>Chokepoint deployment / blockade risk</td><td>1.0</td></tr>
+      <tr><td>CYBER</td><td>Active cyber warfare operations</td><td>1.0</td></tr>
+      <tr><td>NUCLEAR</td><td>Nuclear posture change / SSBN surge</td><td>1.0</td></tr>
+    </table>
+    <p>Alert levels: <strong>ELEVATED</strong> (3+ signals), <strong>HIGH</strong> (4+ signals), <strong>CRITICAL</strong> (5+ signals). Each alert is displayed as a sonar-pulse animated marker on the map.</p>
+
+    <h2 id="api-reference">API Reference</h2>
+    <p>OpenWar Intelligence exposes several JavaScript functions for programmatic interaction:</p>
+    <table class="doc-table">
+      <tr><th>Function</th><th>Description</th></tr>
+      <tr><td><code>focusMapOnAsset(type, id)</code></td><td>Zoom and flash a specific asset on the map</td></tr>
+      <tr><td><code>setTimeline(hours)</code></td><td>Set predictive timeline (0, 1, 3, 9, 12, 24)</td></tr>
+      <tr><td><code>switchTileLayer(name)</code></td><td>Switch map tiles (dark, satellite, terrain)</td></tr>
+      <tr><td><code>flashMarkerAt(lat, lng)</code></td><td>Flash a temporary marker at coordinates</td></tr>
+      <tr><td><code>toggleAssetPreview(type, id)</code></td><td>Show/hide asset spec card in sidebar</td></tr>
+      <tr><td><code>getAircraftSpecs(model)</code></td><td>Get technical specs for an aircraft model</td></tr>
+      <tr><td><code>getShipSpecs(type)</code></td><td>Get technical specs for a ship class</td></tr>
+    </table>
+
+    <h2 id="deployment">Deployment Guide</h2>
+    <h3>GitHub Pages (Free)</h3>
+    <pre><code>1. Fork the repository on GitHub
+2. Go to Settings → Pages
+3. Select "main" branch, root directory
+4. Your dashboard is live at username.github.io/dashboard/</code></pre>
+
+    <h3>Netlify (Free Tier)</h3>
+    <pre><code>1. Connect your GitHub repo to Netlify
+2. No build command needed
+3. Publish directory: /
+4. Deploy — instant global CDN</code></pre>
+
+    <h3>Self-Hosted</h3>
+    <pre><code># Nginx
+server {
+  listen 80;
+  server_name openwar.yourdomain.com;
+  root /var/www/openwar;
+  index index.html;
+  location / { try_files $uri $uri/ =404; }
+}
+
+# Apache
+DocumentRoot "/var/www/openwar"
+DirectoryIndex index.html</code></pre>
+
+    <h2 id="contributing">Contributing</h2>
+    <p>OpenWar Intelligence is open source and welcomes contributions from developers, analysts, researchers, and OSINT specialists.</p>
+
+    <h3>How to Contribute</h3>
+    <ol>
+      <li>Fork the repository on GitHub</li>
+      <li>Create a feature branch: <code>git checkout -b feature/new-module</code></li>
+      <li>Make your changes</li>
+      <li>Test in multiple browsers</li>
+      <li>Submit a Pull Request with a clear description</li>
+    </ol>
+
+    <h3>Contribution Ideas</h3>
+    <ul>
+      <li>Add new data sources (AIS providers, weather APIs, conflict databases)</li>
+      <li>Expand aircraft/ship databases with more models and nations</li>
+      <li>Improve neural network with additional training events</li>
+      <li>Add new intelligence modules (cyber, space weather, economic)</li>
+      <li>Translate the interface (currently English, Italian labels)</li>
+      <li>Optimize performance for mobile devices</li>
+      <li>Add unit tests for data parsing functions</li>
+    </ul>
+
+    <h2 id="changelog">Changelog</h2>
+    <h3>Version 5.0 — May 2026 (C4ISR EXPANDED)</h3>
+    <ul>
+      <li>SIGINT expanded: 29 A2/AD systems, 7 GPS jamming zones, 10 EW platforms, 9 radar emissions, 7 cyber ops, 9 spectrum bands</li>
+      <li>Nuclear monitor: 10 SSBN patrols, 12 ICBM silos, 8 nuclear bombers, 12 C3 nodes, 6 treaties</li>
+      <li>Maritime chokepoints: 9 detailed profiles with blockade risk, 9 naval deployments, 8 incidents</li>
+      <li>Economic warfare: 8 sanctions regimes, 9 commodities, 8 supply chains, weighted threat index</li>
+      <li>Fusion Alert Engine expanded to 9 signal types (added NAVAL, CYBER, NUCLEAR)</li>
+      <li>Full domain: openwarintelligence.org with landing page, docs, download portal</li>
+      <li>SEO: structured data, FAQ schema, Open Graph, sitemap, robots.txt</li>
+      <li>Social media launch: 5 platforms, 30-day editorial calendar</li>
+    </ul>
+
+    <h3>Version 2.0 — May 2026</h3>
+    <ul>
+      <li>Expanded to 117 aircraft, 49 ships, 27 nations</li>
+      <li>Added Fusion Alert Engine with sonar-pulse markers</li>
+      <li>Integrated NASA FIRMS thermal intelligence</li>
+      <li>Neural network prediction engine (12-24-1 architecture)</li>
+      <li>Aircraft/ship model preview cards with SVG silhouettes</li>
+      <li>Satellite imagery links (Sentinel Hub, Copernicus, Planet Labs)</li>
+      <li>Combat heatmap layer</li>
+      <li>Predictive timeline 1h/3h/9h/12h/24h</li>
+      <li>19 OSINT RSS feeds</li>
+      <li>Click-to-map navigation from sidebar</li>
+    </ul>
+
+    <h3>Version 1.0 — March 2026</h3>
+    <ul>
+      <li>Initial release with 55 aircraft, 24 ships</li>
+      <li>Basic Leaflet map with military overlays</li>
+      <li>RSS news aggregation</li>
+      <li>Nuclear domain monitoring</li>
+      <li>SIGINT/ELINT layer</li>
+    </ul>
+
+    <div class="callout callout-info" style="margin-top:40px;">
+      <strong>Need help?</strong> Open an issue on <a href="https://github.com/openwar-intelligence/dashboard/issues" target="_blank" rel="noopener noreferrer">GitHub</a> or join our community Discord.
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-copy">&#169; 2026 OPENWAR INTELLIGENCE — OPEN SOURCE UNDER MIT LICENSE</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="download.html">Download</a>
+    <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+// Highlight current section in sidebar
+const sections=document.querySelectorAll('h2[id],h3[id]');
+const sideLinks=document.querySelectorAll('.sidebar-nav a');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      sideLinks.forEach(l=>l.classList.remove('active'));
+      const link=document.querySelector(`.sidebar-nav a[href="#${e.target.id}"]`);
+      if(link)link.classList.add('active');
+    }
+  });
+},{threshold:0.3,rootMargin:'-80px 0px -60% 0px'});
+sections.forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenWar Intelligence — Open Source Military C4ISR Dashboard</title>
+<meta name="description" content="Free open source military intelligence dashboard. Track 117+ aircraft, 49+ ships, 15+ satellites across 27 nations. Neural network predictions, FIRMS thermal data, fusion alerts.">
+<meta name="keywords" content="military intelligence dashboard, C4ISR, OSINT, open source intelligence, flight tracker, ship tracker, satellite tracking, conflict monitor, NATO, military aircraft, naval vessels, ADS-B, thermal imaging, FIRMS, geopolitical intelligence, defense analytics, situational awareness">
+<meta name="author" content="OpenWar Intelligence Project">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://openwarintelligence.org/">
+<link rel="alternate" hreflang="en" href="https://openwarintelligence.org/">
+<link rel="alternate" hreflang="x-default" href="https://openwarintelligence.org/">
+
+<!-- Open Graph -->
+<meta property="og:title" content="OpenWar Intelligence — Real-Time Military C4ISR Dashboard">
+<meta property="og:description" content="Track 117+ military aircraft, 49+ ships, 15+ satellites across 27 nations. Neural network predictions, thermal intelligence, fusion alerts. 100% open source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://openwarintelligence.org/">
+<meta property="og:site_name" content="OpenWar Intelligence">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://openwarintelligence.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OpenWar Intelligence C4ISR Dashboard showing global military asset tracking">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@openwarintel">
+<meta name="twitter:creator" content="@openwarintel">
+<meta name="twitter:title" content="OpenWar Intelligence — Real-Time C4ISR Dashboard">
+<meta name="twitter:description" content="Open source military intelligence. Track aircraft, ships, satellites, conflicts worldwide.">
+<meta name="twitter:image" content="https://openwarintelligence.org/og-image.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="openwar-icon.svg">
+<link rel="apple-touch-icon" href="openwar-icon.svg">
+
+<!-- Performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<meta name="theme-color" content="#040810">
+
+<!-- Structured Data: WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "OpenWar Intelligence",
+  "alternateName": "OpenWar Intel",
+  "url": "https://openwarintelligence.org/",
+  "description": "Real-time open source military intelligence C4ISR dashboard for global situational awareness.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://openwarintelligence.org/docs.html?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- Structured Data: SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "OpenWar Intelligence Dashboard",
+  "operatingSystem": "Web Browser",
+  "applicationCategory": "SecurityApplication",
+  "applicationSubCategory": "Military Intelligence",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "OpenWar Intelligence Project",
+    "url": "https://openwarintelligence.org/"
+  },
+  "softwareVersion": "5.0",
+  "license": "https://opensource.org/licenses/MIT",
+  "downloadUrl": "https://openwarintelligence.org/download.html",
+  "screenshot": "https://openwarintelligence.org/og-image.png",
+  "featureList": [
+    "Real-time military aircraft tracking (117+ assets)",
+    "Naval vessel monitoring (49+ ships)",
+    "Satellite reconnaissance tracking",
+    "Neural network conflict prediction",
+    "NASA FIRMS thermal intelligence",
+    "Fusion alert cross-correlation engine",
+    "SIGINT/ELINT mapping",
+    "Nuclear domain monitoring",
+    "19 OSINT news feeds",
+    "Single HTML file — zero backend"
+  ]
+}
+</script>
+
+<!-- Structured Data: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "OpenWar Intelligence",
+  "url": "https://openwarintelligence.org/",
+  "logo": "https://openwarintelligence.org/openwar-logo.svg",
+  "sameAs": [
+    "https://github.com/openwar-intelligence",
+    "https://instagram.com/openwarintel",
+    "https://twitter.com/openwarintel",
+    "https://linkedin.com/company/openwar-intelligence",
+    "https://youtube.com/@openwarintel",
+    "https://reddit.com/r/openwarintelligence"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "technical support",
+    "url": "https://github.com/openwar-intelligence/dashboard/issues"
+  }
+}
+</script>
+
+<!-- Structured Data: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://openwarintelligence.org/"},
+    {"@type": "ListItem", "position": 2, "name": "Documentation", "item": "https://openwarintelligence.org/docs.html"},
+    {"@type": "ListItem", "position": 3, "name": "Download", "item": "https://openwarintelligence.org/download.html"}
+  ]
+}
+</script>
+
+<!-- Structured Data: FAQPage (SEO boost) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is OpenWar Intelligence?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OpenWar Intelligence is a free, open source real-time military intelligence dashboard (C4ISR) that tracks military aircraft, naval vessels, satellites, conflict zones, and thermal anomalies worldwide. It runs as a single HTML file in any browser with no server required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How many military assets does OpenWar Intelligence track?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OpenWar Intelligence tracks 117+ military aircraft, 49+ naval vessels, 15+ reconnaissance satellites across 27 nations, with 12 active conflict zones monitored in real-time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is OpenWar Intelligence free to use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. OpenWar Intelligence is 100% free and open source under the MIT License. You can download, modify, and distribute it freely. No registration required for basic use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What data sources does OpenWar Intelligence use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "OpenWar Intelligence aggregates data from FlightRadar24, OpenSky Network, ADS-B Exchange for aircraft; MarineTraffic for ships; NASA FIRMS for thermal hotspots; Sentinel Hub and Copernicus for satellite imagery; and 19 RSS/OSINT feeds for geopolitical news."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does OpenWar Intelligence require a server?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. OpenWar Intelligence is a single HTML file (~4000 lines) that runs entirely in your browser. No server, no database, no build tools required. Just open the file and it works."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#040810;--bg2:#0a1628;--bg3:#0d1f3c;
+  --cyan:#00ffcc;--cyan2:#00b4d8;--red:#ff3344;
+  --text:#e0e0e0;--text2:#8899aa;
+  --border:rgba(0,255,204,0.15);
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,-apple-system,sans-serif;overflow-x:hidden;line-height:1.6;}
+a{color:var(--cyan);text-decoration:none;transition:all 0.3s;}
+a:hover{color:#fff;text-shadow:0 0 10px var(--cyan);}
+
+/* SCANLINE */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,204,0.008) 2px,rgba(0,255,204,0.008) 4px);}
+
+/* NAV */
+header[role="banner"] nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(4,8,16,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-logo{width:36px;height:36px;}
+.nav-title{font-family:'Courier New',monospace;font-size:14px;letter-spacing:4px;color:var(--cyan);font-weight:700;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-family:monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);transition:all 0.3s;}
+.nav-links a:hover{color:var(--cyan);text-shadow:0 0 8px rgba(0,255,204,0.3);}
+.nav-cta{padding:8px 20px;border:1px solid var(--cyan);color:var(--cyan);font-family:monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;background:transparent;transition:all 0.3s;border-radius:2px;}
+.nav-cta:hover{background:var(--cyan);color:var(--bg);box-shadow:0 0 20px rgba(0,255,204,0.3);}
+/* Mobile menu */
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;padding:6px 10px;cursor:pointer;border-radius:3px;}
+@media(max-width:768px){
+  .nav-toggle{display:block;}
+  .nav-links{display:none;position:absolute;top:64px;left:0;width:100%;background:rgba(4,8,16,0.98);flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--border);}
+  .nav-links.open{display:flex;}
+}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 20px;}
+.hero-badge{display:inline-block;padding:6px 20px;border:1px solid var(--red);color:var(--red);font-family:monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;margin-bottom:30px;animation:pulse-badge 2s ease-in-out infinite;}
+@keyframes pulse-badge{0%,100%{opacity:0.7;border-color:var(--red);}50%{opacity:1;border-color:#ff6677;box-shadow:0 0 15px rgba(255,51,68,0.2);}}
+.hero h1{font-family:'Arial Black','Impact',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:900;letter-spacing:8px;line-height:1;margin-bottom:8px;background:linear-gradient(135deg,#ffffff 0%,#ccddee 50%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-family:'Courier New',monospace;font-size:clamp(14px,2vw,20px);letter-spacing:8px;color:var(--cyan);margin-bottom:40px;opacity:0.85;}
+.hero-desc{font-size:18px;color:var(--text2);max-width:650px;margin:0 auto 50px;line-height:1.8;}
+.hero-actions{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{padding:14px 40px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);font-family:monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:all 0.3s;border-radius:2px;}
+.btn-primary:hover{box-shadow:0 0 30px rgba(0,255,204,0.4);transform:translateY(-2px);}
+.btn-secondary{padding:14px 40px;background:transparent;color:var(--text);font-family:monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;border:1px solid var(--border);cursor:pointer;transition:all 0.3s;border-radius:2px;}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 15px rgba(0,255,204,0.1);}
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-top:60px;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:'Arial Black',sans-serif;font-size:36px;color:var(--cyan);line-height:1;}
+.hero-stat-label{font-family:monospace;font-size:10px;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-top:4px;}
+
+/* SCROLL */
+.scroll-ind{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+.scroll-ind span{font-family:monospace;font-size:9px;letter-spacing:3px;color:var(--text2);text-transform:uppercase;}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:rotate(45deg);opacity:0.5;}
+
+/* SECTIONS */
+section{padding:120px 40px;position:relative;}
+.section-label{font-family:monospace;font-size:10px;letter-spacing:6px;color:var(--red);text-transform:uppercase;margin-bottom:12px;}
+.section-title{font-family:'Arial Black',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:4px;margin-bottom:20px;}
+.section-desc{font-size:16px;color:var(--text2);max-width:600px;line-height:1.8;margin-bottom:60px;}
+
+/* FEATURES */
+#features{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;max-width:1200px;margin:0 auto;}
+.feature-card{background:rgba(10,22,40,0.6);border:1px solid var(--border);border-radius:4px;padding:35px 30px;transition:all 0.4s;position:relative;overflow:hidden;}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.4s;}
+.feature-card:hover{border-color:rgba(0,255,204,0.3);transform:translateY(-4px);box-shadow:0 10px 40px rgba(0,0,0,0.3);}
+.feature-card:hover::before{opacity:1;}
+.feature-icon{font-size:32px;margin-bottom:16px;display:block;}
+.feature-title{font-family:monospace;font-size:14px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:12px;}
+.feature-text{font-size:14px;color:var(--text2);line-height:1.7;}
+
+/* CAPABILITIES */
+#capabilities{background:var(--bg);}
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1100px;margin:0 auto;}
+.cap-item{display:flex;align-items:center;gap:12px;padding:16px 20px;background:rgba(10,22,40,0.4);border:1px solid rgba(0,255,204,0.06);border-radius:3px;font-family:monospace;font-size:12px;letter-spacing:1px;color:var(--text2);transition:all 0.3s;}
+.cap-item:hover{border-color:var(--border);color:var(--cyan);}
+.cap-check{color:var(--cyan);font-size:14px;}
+
+/* DEMO */
+#demo{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);text-align:center;}
+.demo-container{max-width:1200px;margin:0 auto;position:relative;}
+.demo-frame{width:100%;height:700px;border:1px solid var(--border);border-radius:4px;background:var(--bg);overflow:hidden;}
+.demo-frame iframe{width:100%;height:100%;border:none;}
+.demo-hud{position:absolute;top:-1px;left:50%;transform:translateX(-50%);padding:4px 20px;background:var(--bg2);border:1px solid var(--border);border-top:none;border-radius:0 0 4px 4px;font-family:monospace;font-size:9px;letter-spacing:3px;color:var(--red);text-transform:uppercase;}
+.demo-note{margin-top:20px;font-family:monospace;font-size:11px;color:var(--text2);letter-spacing:2px;}
+
+/* TECH */
+#tech{background:var(--bg);}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;max-width:1000px;margin:0 auto;}
+.tech-card{padding:24px;border-left:2px solid var(--cyan);background:rgba(10,22,40,0.3);}
+.tech-label{font-family:monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:8px;}
+.tech-value{font-size:14px;color:var(--text);line-height:1.6;}
+
+/* FAQ */
+#faq{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);}
+.faq-list{max-width:800px;margin:0 auto;}
+.faq-item{border:1px solid rgba(0,255,204,0.08);border-radius:4px;margin-bottom:12px;overflow:hidden;background:rgba(10,22,40,0.3);transition:border-color 0.3s;}
+.faq-item:hover{border-color:var(--border);}
+.faq-q{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:monospace;font-size:14px;letter-spacing:1px;color:var(--text);transition:color 0.3s;}
+.faq-q:hover{color:var(--cyan);}
+.faq-arrow{color:var(--cyan);font-size:18px;transition:transform 0.3s;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;padding:0 24px;font-size:14px;color:var(--text2);line-height:1.7;}
+.faq-item.open .faq-a{max-height:300px;padding:0 24px 20px;}
+
+/* CTA */
+#download{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%);text-align:center;padding:140px 40px;}
+.cta-box{max-width:700px;margin:0 auto;padding:60px 40px;border:1px solid var(--border);border-radius:4px;position:relative;overflow:hidden;background:rgba(10,22,40,0.5);}
+.cta-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(0,255,204,0.03) 0%,transparent 70%);pointer-events:none;}
+.cta-title{font-family:'Arial Black',sans-serif;font-size:32px;letter-spacing:4px;margin-bottom:16px;}
+.cta-desc{font-size:15px;color:var(--text2);margin-bottom:40px;line-height:1.7;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer[role="contentinfo"]{padding:60px 40px 30px;border-top:1px solid var(--border);background:var(--bg);}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;}
+.footer-brand{display:flex;flex-direction:column;gap:12px;}
+.footer-brand-title{font-family:'Courier New',monospace;font-size:14px;letter-spacing:4px;color:var(--cyan);}
+.footer-brand-desc{font-size:13px;color:var(--text2);line-height:1.6;max-width:300px;}
+.footer-col-title{font-family:monospace;font-size:10px;letter-spacing:3px;color:var(--text);text-transform:uppercase;margin-bottom:16px;}
+.footer-col a{display:block;font-size:13px;color:var(--text2);margin-bottom:10px;transition:color 0.3s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:20px;border-top:1px solid rgba(0,255,204,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-copy{font-family:monospace;font-size:10px;letter-spacing:2px;color:var(--text2);}
+.footer-social{display:flex;gap:16px;}
+.footer-social a{width:32px;height:32px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text2);transition:all 0.3s;}
+.footer-social a:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* PARTICLES */
+.particle{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;opacity:0;animation:float-particle 8s linear infinite;}
+@keyframes float-particle{0%{opacity:0;transform:translateY(0) translateX(0);}10%{opacity:0.5;}90%{opacity:0.3;}100%{opacity:0;transform:translateY(-400px) translateX(100px);}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  header[role="banner"] nav{padding:0 16px;}
+  section{padding:80px 20px;}
+  .hero-stats{gap:24px;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .demo-frame{height:400px;}
+  .hero-actions{flex-direction:column;align-items:center;}
+}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1);}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* GRID BG */
+.grid-bg{position:absolute;top:0;left:0;width:100%;height:100%;
+  background-image:linear-gradient(rgba(0,255,204,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,204,0.03) 1px,transparent 1px);
+  background-size:60px 60px;pointer-events:none;z-index:0;}
+</style>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header role="banner">
+<nav aria-label="Main navigation">
+  <div class="nav-brand">
+    <a href="index.html" aria-label="OpenWar Intelligence Home">
+    <svg class="nav-logo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OpenWar Intelligence Logo">
+      <polygon points="200,115 265,152 265,248 200,285 135,248 135,152" fill="none" stroke="#00ffcc" stroke-width="8"/>
+      <circle cx="200" cy="200" r="35" fill="none" stroke="#00ffcc" stroke-width="3" opacity="0.3"/>
+      <circle cx="200" cy="200" r="10" fill="none" stroke="#ff3344" stroke-width="5"/>
+      <circle cx="200" cy="200" r="4" fill="#ff3344"/>
+    </svg>
+    </a>
+    <span class="nav-title">OPENWAR INTEL</span>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links">
+    <a href="javascript:void(0)" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Features</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('capabilities').scrollIntoView({behavior:'smooth'})">Capabilities</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Live Demo</a>
+    <a href="docs.html">Docs</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('tech').scrollIntoView({behavior:'smooth'})">Tech</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('faq').scrollIntoView({behavior:'smooth'})">FAQ</a>
+    <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="download.html" class="nav-cta">Download</a>
+  </div>
+</nav>
+</header>
+
+<!-- HERO -->
+<main>
+<section class="hero" id="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-content fade-in">
+    <div class="hero-badge" role="status">Open Source Intelligence Platform</div>
+    <h1>OPENWAR<br><span style="font-size:clamp(20px,3vw,40px);letter-spacing:12px;-webkit-text-fill-color:var(--cyan);opacity:0.85;">INTELLIGENCE</span></h1>
+    <p class="hero-desc">Real-time global C4ISR dashboard. Track military aircraft, naval vessels, satellites, conflict zones, thermal anomalies and SIGINT activity worldwide. Powered by open data, driven by the community.</p>
+    <div class="hero-actions">
+      <a href="download.html"><button class="btn-primary">Get Access — Free Download</button></a>
+      <button class="btn-secondary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Launch Live Demo</button>
+    </div>
+    <div class="hero-stats" aria-label="Platform statistics">
+      <div class="hero-stat"><div class="hero-stat-num" id="statAir">117</div><div class="hero-stat-label">Aircraft Tracked</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="statShip">49</div><div class="hero-stat-label">Naval Vessels</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="statNation">27</div><div class="hero-stat-label">Nations Monitored</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="statFeed">19</div><div class="hero-stat-label">OSINT Feeds</div></div>
+    </div>
+  </div>
+  <div class="scroll-ind" aria-hidden="true">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" aria-labelledby="features-title">
+  <div class="grid-bg"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+    <div class="section-label fade-in">Core Systems</div>
+    <h2 class="section-title fade-in" id="features-title">Intelligence Modules</h2>
+    <p class="section-desc fade-in">13 integrated intelligence modules delivering multi-domain C4ISR situational awareness from a single browser window. Version 5.0.</p>
+    <div class="features-grid">
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#9992;</span>
+        <h3 class="feature-title">Air Domain Tracking</h3>
+        <p class="feature-text">Track 117+ military aircraft across 27 nations. Multi-source data fusion from FlightRadar24, OpenSky, ADS-B Exchange. Model identification with SVG silhouettes and full technical specs for 50+ airframes including fighters, bombers, tankers and reconnaissance platforms.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#9875;</span>
+        <h3 class="feature-title">Maritime Domain Awareness</h3>
+        <p class="feature-text">Monitor 49+ naval vessels including carriers, destroyers, cruisers, frigates and submarines. Track 9 global maritime chokepoints with blockade risk analysis, naval force deployments (9), recent incidents (8). AIS integration with vessel classification and threat assessment.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#128752;</span>
+        <h3 class="feature-title">Space Domain Intelligence</h3>
+        <p class="feature-text">15+ military and reconnaissance satellites tracked in real-time. Sentinel-2, Copernicus and NASA FIRMS integration for satellite imagery analysis. Tile layer switching between dark map, satellite and terrain views.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#129504;</span>
+        <h3 class="feature-title">Neural Network Prediction Engine</h3>
+        <p class="feature-text">Pure JavaScript neural network (12-24-1 architecture) trained on 37 historical conflict events. Online learning every 60 seconds. Predictive timeline from 1h to 24h with trajectory estimation and escalation probability scoring.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#128293;</span>
+        <h3 class="feature-title">Thermal Intelligence (FIRMS)</h3>
+        <p class="feature-text">NASA FIRMS VIIRS satellite thermal hotspot integration. Detect fires, explosions and artillery activity from space. Direct links to Sentinel Hub, Copernicus Browser, Planet Labs and Google Satellite imagery at exact coordinates.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#9889;</span>
+        <h3 class="feature-title">Fusion Alert Engine</h3>
+        <p class="feature-text">Cross-data correlation engine detecting convergence of 9 signal types: AIR, SHIP, ML-PRED, AIR-BRIDGE, A2AD, THERMAL, NAVAL, CYBER, NUCLEAR. Three alert levels (Elevated, High, Critical) with sonar-pulse animated markers on the operational map.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#128225;</span>
+        <h3 class="feature-title">SIGINT / ELINT Mapping</h3>
+        <p class="feature-text">Signal intelligence layer with A2/AD system mapping (29 systems), GPS jamming zones (7), EW platforms (10), radar emissions (9), cyber warfare tracking (7). Real-time EW spectrum monitoring across 9 frequency bands.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#9762;</span>
+        <h3 class="feature-title">Nuclear Domain Monitor</h3>
+        <p class="feature-text">SSBN patrol zones (10), ICBM silos (12), nuclear bombers (8), C3 command nodes (12), treaty compliance (6). Full nuclear posture assessment for 9 nuclear-armed nations with deployed/reserve/retired inventory and doctrine analysis.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#128240;</span>
+        <h3 class="feature-title">OSINT Feed Aggregation</h3>
+        <p class="feature-text">19 RSS feeds from defense and geopolitical sources including Reuters, AP, Jane's, The War Zone, Breaking Defense, and TASS. Real-time news ticker with source diversity for balanced intelligence picture.</p>
+      </article>
+      <article class="feature-card fade-in">
+        <span class="feature-icon" aria-hidden="true">&#128176;</span>
+        <h3 class="feature-title">Economic Warfare Monitor</h3>
+        <p class="feature-text">Track 8 sanctions regimes with SWIFT/asset freeze status, 9 strategic commodities with war impact analysis, 8 critical supply chains with vulnerability scoring. Weighted economic threat index with real-time indicators.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities" aria-labelledby="cap-title">
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+    <div class="section-label fade-in">System Capabilities</div>
+    <h2 class="section-title fade-in" id="cap-title">Full Spectrum Coverage</h2>
+    <p class="section-desc fade-in">Everything you need for global situational awareness in a single HTML file. No server required.</p>
+    <div class="cap-grid" role="list">
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 117+ Military Aircraft</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 49+ Naval Vessels</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 15+ Recon Satellites</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 12 Active Conflict Zones</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 27 Nations Monitored</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> 19 OSINT News Feeds</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Neural Network Prediction</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Fusion Alert Engine</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> NASA FIRMS Thermal Data</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Sentinel-2 Imagery Links</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Combat Heatmap Layer</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> A2/AD System Mapping</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> SSBN Patrol Tracking</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Maritime Chokepoints</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Economic Warfare Indicators</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Click-to-Map Navigation</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Model ID with SVG Silhouettes</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Single HTML — Zero Backend</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Predictive Timeline 1-24h</div>
+      <div class="cap-item fade-in" role="listitem"><span class="cap-check" aria-hidden="true">&#10003;</span> Multi-Source Data Fusion</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section id="demo" aria-labelledby="demo-title">
+  <div class="grid-bg"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="section-label fade-in">Live System</div>
+    <h2 class="section-title fade-in" id="demo-title" style="text-align:center;">Operational Dashboard Demo</h2>
+    <p class="section-desc fade-in" style="text-align:center;margin:0 auto 60px;">Fully functional C4ISR interface running in your browser. No installation required.</p>
+    <div class="demo-container fade-in">
+      <div class="demo-hud" aria-hidden="true">Live Feed — Unclassified</div>
+      <div class="demo-frame">
+        <iframe src="monitor-guerra.html" loading="lazy" title="OpenWar Intelligence Dashboard — Live Demo" sandbox="allow-scripts allow-same-origin"></iframe>
+      </div>
+    </div>
+    <p class="demo-note">Open <a href="monitor-guerra.html" target="_blank" rel="noopener">full-screen dashboard</a> for complete operational view &mdash; or <a href="download.html">register for free download</a></p>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech" aria-labelledby="tech-title">
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+    <div class="section-label fade-in">Architecture</div>
+    <h2 class="section-title fade-in" id="tech-title">Technical Stack</h2>
+    <p class="section-desc fade-in">Single-file architecture. No build tools, no dependencies, no server. Just open in a browser.</p>
+    <div class="tech-grid">
+      <div class="tech-card fade-in"><div class="tech-label">Frontend</div><div class="tech-value">Single HTML file (~4000 lines). Vanilla JS + CSS. Leaflet.js for mapping. Zero frameworks, zero build step.</div></div>
+      <div class="tech-card fade-in"><div class="tech-label">Data Sources</div><div class="tech-value">FlightRadar24, OpenSky Network, ADS-B Exchange, NASA FIRMS, MarineTraffic, 19 RSS/OSINT feeds via CORS proxy chain.</div></div>
+      <div class="tech-card fade-in"><div class="tech-label">ML Engine</div><div class="tech-value">Pure JavaScript neural network. 12-24-1 architecture. Sigmoid activation. Online learning with 60s retraining cycle on 37 events.</div></div>
+      <div class="tech-card fade-in"><div class="tech-label">Map Layers</div><div class="tech-value">11 FeatureGroups: aircraft, ships, satellites, bases, conflicts, sigint, nuclear, maritime, firms, heatmap, fusion alerts.</div></div>
+      <div class="tech-card fade-in"><div class="tech-label">CORS Strategy</div><div class="tech-value">Triple-fallback proxy chain: allorigins.win, corsproxy.io, codetabs.com. Graceful degradation to simulated data.</div></div>
+      <div class="tech-card fade-in"><div class="tech-label">Tile Layers</div><div class="tech-value">CartoDB Dark Matter, ESRI World Imagery, OpenTopoMap. Runtime switching with smooth transitions.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" aria-labelledby="faq-title">
+  <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+    <div class="section-label fade-in">Common Questions</div>
+    <h2 class="section-title fade-in" id="faq-title">Frequently Asked Questions</h2>
+    <p class="section-desc fade-in">Everything you need to know about OpenWar Intelligence.</p>
+    <div class="faq-list">
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What is OpenWar Intelligence?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">OpenWar Intelligence is a free, open source real-time military intelligence dashboard (C4ISR) that tracks military aircraft, naval vessels, satellites, conflict zones, and thermal anomalies worldwide. It runs as a single HTML file in any browser with no server required.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How many military assets does it track?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">The platform tracks 117+ military aircraft across 27 nations, 49+ naval vessels including carriers and submarines, 15+ reconnaissance satellites, and monitors 12 active conflict zones with thermal hotspot detection via NASA FIRMS.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Is it really free? What's the license?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Yes, OpenWar Intelligence is 100% free and open source under the MIT License. You can download, modify, redistribute and use it commercially. We only ask that you register so we can understand our user base and send important updates.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">What data sources does it use?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">We aggregate data from FlightRadar24, OpenSky Network, ADS-B Exchange for aircraft tracking; MarineTraffic for ships; NASA FIRMS VIIRS for thermal hotspots; Sentinel Hub and Copernicus for satellite imagery; and 19 RSS/OSINT feeds for geopolitical news.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">Do I need a server to run it?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">No. OpenWar Intelligence is a single HTML file (~4000 lines) that runs entirely in your browser. For the best experience we recommend serving it via a local HTTP server (included batch file) or any static hosting like GitHub Pages, Netlify, or Vercel.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How does the neural network prediction work?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">The prediction engine uses a pure JavaScript neural network with a 12-24-1 architecture (12 input features, 24 hidden neurons, 1 output). It's trained on 37 historical conflict events and performs online learning every 60 seconds, adjusting predictions based on current data.</div>
+      </div>
+      <div class="faq-item fade-in" onclick="this.classList.toggle('open')">
+        <div class="faq-q">How can I contribute?<span class="faq-arrow">&#9660;</span></div>
+        <div class="faq-a">Visit our GitHub repository to fork the project, submit pull requests, report bugs, or suggest features. We welcome contributions from developers, military analysts, data scientists, and OSINT researchers. Check our documentation for contribution guidelines.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section id="download" aria-labelledby="dl-title">
+  <div class="cta-box fade-in">
+    <div class="section-label" style="text-align:center;">Deploy Now</div>
+    <h2 class="cta-title" id="dl-title">Join the Mission</h2>
+    <p class="cta-desc">Register for free access. Download the dashboard, contribute to the codebase, or deploy your own instance. One file. Global intelligence.</p>
+    <div class="cta-buttons">
+      <a href="download.html"><button class="btn-primary">Register &amp; Download Free</button></a>
+      <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer"><button class="btn-secondary">Star on GitHub</button></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-brand-title">OPENWAR INTELLIGENCE</div>
+      <div class="footer-brand-desc">Open source global C4ISR platform. Track military assets, predict conflict trajectories, and monitor geopolitical events worldwide.</div>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Platform</div>
+      <a href="javascript:void(0)" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Features</a>
+      <a href="javascript:void(0)" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Live Demo</a>
+      <a href="docs.html">Documentation</a>
+      <a href="download.html">Download</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Community</div>
+      <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/openwar-intelligence/dashboard/issues" target="_blank" rel="noopener noreferrer">Report Bug</a>
+      <a href="https://github.com/openwar-intelligence/dashboard/pulls" target="_blank" rel="noopener noreferrer">Contribute</a>
+      <a href="https://reddit.com/r/openwarintelligence" target="_blank" rel="noopener noreferrer">Reddit Community</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Social</div>
+      <a href="https://twitter.com/openwarintel" target="_blank" rel="noopener noreferrer">X / Twitter</a>
+      <a href="https://linkedin.com/company/openwar-intelligence" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://reddit.com/r/openwarintelligence" target="_blank" rel="noopener noreferrer">Reddit</a>
+      <a href="https://instagram.com/openwarintel" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://youtube.com/@openwarintel" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&#169; 2026 OPENWAR INTELLIGENCE — OPEN SOURCE UNDER MIT LICENSE</div>
+    <div class="footer-social">
+      <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">&#9733;</a>
+      <a href="https://twitter.com/openwarintel" target="_blank" rel="noopener noreferrer" title="X Twitter" aria-label="X Twitter">&#120143;</a>
+      <a href="https://linkedin.com/company/openwar-intelligence" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">in</a>
+      <a href="https://reddit.com/r/openwarintelligence" target="_blank" rel="noopener noreferrer" title="Reddit" aria-label="Reddit">&#9824;</a>
+      <a href="https://youtube.com/@openwarintel" target="_blank" rel="noopener noreferrer" title="YouTube" aria-label="YouTube">&#9654;</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Fade-in observer
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// Animate stats
+function animateNum(el,target,dur){
+  const start=performance.now();
+  const tick=(now)=>{
+    const p=Math.min((now-start)/dur,1);
+    el.textContent=Math.floor(p*target);
+    if(p<1)requestAnimationFrame(tick);
+    else el.textContent=target;
+  };
+  requestAnimationFrame(tick);
+}
+const statObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      animateNum(document.getElementById('statAir'),117,1200);
+      animateNum(document.getElementById('statShip'),49,1000);
+      animateNum(document.getElementById('statNation'),27,800);
+      animateNum(document.getElementById('statFeed'),19,600);
+      statObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+statObs.observe(document.querySelector('.hero-stats'));
+
+// Hero particles
+const hero=document.querySelector('.hero');
+for(let i=0;i<20;i++){
+  const p=document.createElement('div');
+  p.className='particle';
+  p.style.left=Math.random()*100+'%';
+  p.style.top=(60+Math.random()*40)+'%';
+  p.style.animationDelay=Math.random()*8+'s';
+  p.style.animationDuration=(6+Math.random()*6)+'s';
+  hero.appendChild(p);
+}
+
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.borderBottomColor=window.scrollY>100?'rgba(0,255,204,0.2)':'rgba(0,255,204,0.15)';
+});
+
+// Simple analytics: track page view in sessionStorage
+(function(){
+  const views=JSON.parse(sessionStorage.getItem('owi_views')||'[]');
+  views.push({page:'index',time:new Date().toISOString(),ref:document.referrer});
+  sessionStorage.setItem('owi_views',JSON.stringify(views));
+})();
+</script>
+</body>
+</html>

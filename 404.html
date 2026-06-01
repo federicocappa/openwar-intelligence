@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Target Not Found | OpenWar Intelligence</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="openwar-icon.svg">
+<meta name="theme-color" content="#040810">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#040810;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,204,0.008) 2px,rgba(0,255,204,0.008) 4px);}
+.container{position:relative;z-index:1;padding:40px 20px;}
+.error-code{font-family:'Arial Black',sans-serif;font-size:clamp(80px,15vw,180px);font-weight:900;letter-spacing:8px;background:linear-gradient(135deg,#ff3344 0%,#ff6677 50%,#ff3344 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:10px;}
+.error-label{font-family:'Courier New',monospace;font-size:clamp(12px,2vw,16px);letter-spacing:6px;color:#ff3344;text-transform:uppercase;margin-bottom:30px;opacity:0.8;}
+.error-msg{font-size:16px;color:#8899aa;max-width:500px;margin:0 auto 40px;line-height:1.7;}
+.actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn{padding:12px 30px;font-family:monospace;font-size:12px;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all 0.3s;text-decoration:none;}
+.btn-primary{background:linear-gradient(135deg,#00ffcc,#00b4d8);color:#040810;border:none;font-weight:700;}
+.btn-primary:hover{box-shadow:0 0 25px rgba(0,255,204,0.4);transform:translateY(-2px);}
+.btn-secondary{background:transparent;color:#e0e0e0;border:1px solid rgba(0,255,204,0.15);}
+.btn-secondary:hover{border-color:#00ffcc;color:#00ffcc;}
+.radar{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;height:400px;opacity:0.04;pointer-events:none;}
+.radar circle{fill:none;stroke:#00ffcc;stroke-width:1;}
+.radar line{stroke:#00ffcc;stroke-width:1;transform-origin:200px 200px;animation:sweep 4s linear infinite;}
+@keyframes sweep{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<svg class="radar" viewBox="0 0 400 400"><circle cx="200" cy="200" r="50"/><circle cx="200" cy="200" r="100"/><circle cx="200" cy="200" r="150"/><circle cx="200" cy="200" r="199"/><line x1="200" y1="200" x2="200" y2="1"/></svg>
+<div class="container">
+  <div class="error-code">404</div>
+  <div class="error-label">Target Not Acquired</div>
+  <p class="error-msg">The requested intelligence asset could not be located. It may have been moved, decommissioned, or classified above your clearance level.</p>
+  <div class="actions">
+    <a href="index.html" class="btn btn-primary">Return to Command</a>
+    <a href="docs.html" class="btn btn-secondary">Documentation</a>
+    <a href="monitor-guerra.html" class="btn btn-secondary">Launch Dashboard</a>
+  </div>
+</div>
+</body>
+</html>

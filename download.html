@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download OpenWar Intelligence — Free C4ISR Dashboard</title>
+<meta name="description" content="Download OpenWar Intelligence for free. Register to get the real-time military intelligence C4ISR dashboard. Track aircraft, ships, satellites worldwide. Open source, MIT License.">
+<meta name="keywords" content="download military dashboard, free OSINT tool, C4ISR download, military intelligence software, open source defense, flight tracker download, ship tracker">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://openwarintelligence.org/download.html">
+<meta property="og:title" content="Download OpenWar Intelligence — Free C4ISR Dashboard">
+<meta property="og:description" content="Register and download the real-time military intelligence dashboard. 100% free, open source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://openwarintelligence.org/download.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://openwarintelligence.org/og-image.png">
+<meta property="og:image" content="https://openwarintelligence.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="openwar-icon.svg">
+<meta name="theme-color" content="#040810">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Download OpenWar Intelligence",
+  "description": "Register and download the open source military intelligence C4ISR dashboard.",
+  "url": "https://openwarintelligence.org/download.html",
+  "isPartOf": {"@type": "WebSite", "name": "OpenWar Intelligence", "url": "https://openwarintelligence.org/"},
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://openwarintelligence.org/"},
+      {"@type": "ListItem", "position": 2, "name": "Download", "item": "https://openwarintelligence.org/download.html"}
+    ]
+  }
+}
+</script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#040810;--bg2:#0a1628;--cyan:#00ffcc;--cyan2:#00b4d8;--red:#ff3344;--text:#e0e0e0;--text2:#8899aa;--border:rgba(0,255,204,0.15);--success:#00cc66;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;min-height:100vh;}
+a{color:var(--cyan);text-decoration:none;transition:all 0.3s;}
+a:hover{color:#fff;text-shadow:0 0 10px var(--cyan);}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,204,0.008) 2px,rgba(0,255,204,0.008) 4px);}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(4,8,16,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-brand{display:flex;align-items:center;gap:12px;}
+.nav-logo{width:36px;height:36px;}
+.nav-title{font-family:'Courier New',monospace;font-size:14px;letter-spacing:4px;color:var(--cyan);font-weight:700;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-family:monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);transition:all 0.3s;}
+.nav-links a:hover{color:var(--cyan);}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--cyan);font-size:20px;padding:4px 10px;border-radius:3px;cursor:pointer;}
+@media(max-width:768px){.nav-links{display:none;position:absolute;top:64px;left:0;width:100%;background:rgba(4,8,16,0.98);flex-direction:column;padding:20px;gap:16px;border-bottom:1px solid var(--border);z-index:999;}.nav-links.open{display:flex;}.nav-toggle{display:block;}}
+
+/* MAIN */
+.dl-page{padding:120px 20px 60px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+@media(max-width:900px){.dl-page{grid-template-columns:1fr;}}
+
+/* LEFT: Info */
+.dl-info{padding-top:20px;}
+.dl-badge{display:inline-block;padding:4px 14px;border:1px solid var(--red);color:var(--red);font-family:monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;}
+.dl-info h1{font-family:'Arial Black',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:3px;line-height:1.1;margin-bottom:16px;}
+.dl-info h1 span{color:var(--cyan);}
+.dl-desc{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:30px;}
+.dl-features{list-style:none;margin-bottom:30px;}
+.dl-features li{padding:8px 0;font-family:monospace;font-size:13px;color:var(--text2);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(0,255,204,0.04);}
+.dl-features li::before{content:'';width:8px;height:8px;background:var(--cyan);border-radius:50%;flex-shrink:0;opacity:0.6;}
+.dl-version{padding:16px 20px;background:rgba(10,22,40,0.5);border:1px solid var(--border);border-radius:4px;font-family:monospace;font-size:12px;color:var(--text2);}
+.dl-version strong{color:var(--cyan);}
+
+/* RIGHT: Form */
+.dl-form-container{background:rgba(10,22,40,0.6);border:1px solid var(--border);border-radius:6px;padding:40px 36px;position:relative;overflow:hidden;}
+.dl-form-container::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--cyan),var(--cyan2),var(--cyan));}
+.dl-form-title{font-family:monospace;font-size:14px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px;}
+.dl-form-sub{font-size:13px;color:var(--text2);margin-bottom:28px;}
+.form-group{margin-bottom:18px;}
+.form-group label{display:block;font-family:monospace;font-size:11px;letter-spacing:2px;color:var(--text2);text-transform:uppercase;margin-bottom:6px;}
+.form-group label .req{color:var(--red);margin-left:2px;}
+.form-group input,.form-group select{width:100%;padding:12px 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(0,255,204,0.1);border-radius:3px;color:var(--text);font-family:'Segoe UI',sans-serif;font-size:14px;transition:border-color 0.3s;outline:none;}
+.form-group input:focus,.form-group select:focus{border-color:var(--cyan);box-shadow:0 0 10px rgba(0,255,204,0.1);}
+.form-group input::placeholder{color:#556677;}
+.form-group select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1,1 L6,6 L11,1' fill='none' stroke='%2300ffcc' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.form-group select option{background:#0a1628;color:var(--text);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-check{display:flex;align-items:flex-start;gap:10px;margin:20px 0;}
+.form-check input[type="checkbox"]{width:18px;height:18px;accent-color:var(--cyan);margin-top:2px;flex-shrink:0;cursor:pointer;}
+.form-check label{font-size:12px;color:var(--text2);line-height:1.5;cursor:pointer;}
+.form-check a{color:var(--cyan);}
+.btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);font-family:monospace;font-size:14px;letter-spacing:3px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;border-radius:3px;transition:all 0.3s;margin-top:10px;}
+.btn-submit:hover{box-shadow:0 0 30px rgba(0,255,204,0.4);transform:translateY(-1px);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;}
+.form-error{color:var(--red);font-size:11px;font-family:monospace;margin-top:4px;display:none;}
+.form-group.error input,.form-group.error select{border-color:var(--red);}
+.form-group.error .form-error{display:block;}
+
+/* SUCCESS */
+.dl-success{display:none;text-align:center;padding:40px 20px;}
+.dl-success.show{display:block;}
+.dl-form.hidden{display:none;}
+.success-icon{font-size:64px;margin-bottom:20px;display:block;}
+.success-title{font-family:'Arial Black',sans-serif;font-size:28px;letter-spacing:3px;color:var(--success);margin-bottom:12px;}
+.success-desc{font-size:14px;color:var(--text2);margin-bottom:30px;line-height:1.7;}
+.btn-download{display:inline-block;padding:16px 40px;background:linear-gradient(135deg,var(--success),#00aa55);color:#fff;font-family:monospace;font-size:14px;letter-spacing:3px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;border-radius:3px;transition:all 0.3s;text-decoration:none;}
+.btn-download:hover{box-shadow:0 0 30px rgba(0,204,102,0.4);transform:translateY(-2px);color:#fff;}
+.success-extra{margin-top:24px;font-size:12px;color:var(--text2);font-family:monospace;}
+
+/* STATS BAR */
+.dl-stats{padding:40px 20px;max-width:1100px;margin:0 auto;}
+.dl-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:768px){.dl-stats-grid{grid-template-columns:repeat(2,1fr);}}
+.dl-stat{text-align:center;padding:20px;background:rgba(10,22,40,0.3);border:1px solid rgba(0,255,204,0.06);border-radius:4px;}
+.dl-stat-num{font-family:'Arial Black',sans-serif;font-size:28px;color:var(--cyan);}
+.dl-stat-label{font-family:monospace;font-size:10px;letter-spacing:2px;color:var(--text2);text-transform:uppercase;margin-top:4px;}
+
+/* FOOTER */
+footer{padding:40px 40px 20px;border-top:1px solid var(--border);background:var(--bg);text-align:center;}
+.footer-copy{font-family:monospace;font-size:10px;letter-spacing:2px;color:var(--text2);}
+.footer-links{margin-top:10px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+.footer-links a{font-family:monospace;font-size:11px;color:var(--text2);letter-spacing:1px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav aria-label="Main navigation">
+  <div class="nav-brand">
+    <a href="index.html" aria-label="Home">
+    <svg class="nav-logo" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo">
+      <polygon points="200,115 265,152 265,248 200,285 135,248 135,152" fill="none" stroke="#00ffcc" stroke-width="8"/>
+      <circle cx="200" cy="200" r="10" fill="none" stroke="#ff3344" stroke-width="5"/>
+      <circle cx="200" cy="200" r="4" fill="#ff3344"/>
+    </svg>
+    </a>
+    <a href="index.html"><span class="nav-title">OPENWAR INTEL</span></a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+  <div class="nav-links">
+    <a href="index.html#features">Features</a>
+    <a href="index.html#demo">Demo</a>
+    <a href="docs.html">Docs</a>
+    <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</nav>
+
+<main>
+<!-- DOWNLOAD PAGE -->
+<div class="dl-page">
+  <!-- LEFT: Info -->
+  <div class="dl-info">
+    <div class="dl-badge">Free &amp; Open Source</div>
+    <h1>Download <span>OpenWar</span> Intelligence</h1>
+    <p class="dl-desc">Get the full C4ISR dashboard. Track military assets, predict conflicts, monitor thermal anomalies. Single HTML file — runs anywhere, no server needed.</p>
+    <ul class="dl-features">
+      <li>Real-time tracking of 117+ military aircraft</li>
+      <li>49+ naval vessels across global waters</li>
+      <li>Neural network conflict prediction engine</li>
+      <li>NASA FIRMS thermal hotspot integration</li>
+      <li>Fusion Alert cross-correlation engine</li>
+      <li>19 OSINT news feeds aggregated</li>
+      <li>Single HTML file — zero dependencies</li>
+      <li>SIGINT/ELINT with 29 A2/AD systems mapped</li>
+      <li>Nuclear monitor — SSBNs, ICBMs, bombers, C3</li>
+      <li>9 maritime chokepoints with blockade risk</li>
+      <li>Economic warfare — sanctions, commodities, supply chains</li>
+      <li>100% open source — MIT License</li>
+    </ul>
+    <div class="dl-version">
+      <strong>Version 5.0</strong> &mdash; Released May 2026<br>
+      File size: ~265 KB &mdash; Format: HTML &mdash; 4445 lines<br>
+      Requirements: Modern web browser (Chrome, Firefox, Edge, Safari)
+    </div>
+  </div>
+
+  <!-- RIGHT: Form -->
+  <div class="dl-form-container">
+    <div class="dl-form" id="regForm">
+      <div class="dl-form-title">Register for Download</div>
+      <div class="dl-form-sub">Complete the form to get instant access. Your data helps us improve the platform.</div>
+      <form id="downloadForm" onsubmit="return handleRegistration(event)">
+        <div class="form-row">
+          <div class="form-group" id="fg-fname">
+            <label>First Name <span class="req">*</span></label>
+            <input type="text" id="fname" placeholder="John" required autocomplete="given-name">
+            <div class="form-error">Required field</div>
+          </div>
+          <div class="form-group" id="fg-lname">
+            <label>Last Name <span class="req">*</span></label>
+            <input type="text" id="lname" placeholder="Doe" required autocomplete="family-name">
+            <div class="form-error">Required field</div>
+          </div>
+        </div>
+        <div class="form-group" id="fg-email">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="john@organization.com" required autocomplete="email">
+          <div class="form-error">Please enter a valid email</div>
+        </div>
+        <div class="form-group" id="fg-org">
+          <label>Organization</label>
+          <input type="text" id="org" placeholder="Company, University, Agency..." autocomplete="organization">
+        </div>
+        <div class="form-row">
+          <div class="form-group" id="fg-role">
+            <label>Role / Position</label>
+            <select id="role">
+              <option value="">Select your role...</option>
+              <option value="analyst">Intelligence Analyst</option>
+              <option value="military">Military / Defense</option>
+              <option value="researcher">Researcher / Academic</option>
+              <option value="journalist">Journalist / Media</option>
+              <option value="developer">Developer / Engineer</option>
+              <option value="student">Student</option>
+              <option value="government">Government / Policy</option>
+              <option value="security">Security Professional</option>
+              <option value="osint">OSINT Investigator</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group" id="fg-country">
+            <label>Country</label>
+            <select id="country">
+              <option value="">Select country...</option>
+              <option value="US">United States</option>
+              <option value="GB">United Kingdom</option>
+              <option value="IT">Italy</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="CA">Canada</option>
+              <option value="AU">Australia</option>
+              <option value="JP">Japan</option>
+              <option value="KR">South Korea</option>
+              <option value="IN">India</option>
+              <option value="IL">Israel</option>
+              <option value="PL">Poland</option>
+              <option value="NL">Netherlands</option>
+              <option value="SE">Sweden</option>
+              <option value="NO">Norway</option>
+              <option value="ES">Spain</option>
+              <option value="PT">Portugal</option>
+              <option value="BR">Brazil</option>
+              <option value="UA">Ukraine</option>
+              <option value="TR">Turkey</option>
+              <option value="OTHER">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" id="fg-use">
+          <label>How will you use OpenWar Intelligence?</label>
+          <select id="usecase">
+            <option value="">Select use case...</option>
+            <option value="analysis">Intelligence Analysis</option>
+            <option value="research">Academic Research</option>
+            <option value="journalism">Journalism / Reporting</option>
+            <option value="education">Education / Training</option>
+            <option value="development">Software Development</option>
+            <option value="monitoring">Situational Monitoring</option>
+            <option value="personal">Personal Interest</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="newsletter" checked>
+          <label for="newsletter">Subscribe to intelligence briefings and platform updates (optional, max 2/month)</label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="terms" required>
+          <label for="terms">I agree to the <a href="#" onclick="alert('MIT License — Free to use, modify, and distribute. No warranty.');return false;">MIT License terms</a> and acknowledge this is an open source tool <span class="req">*</span></label>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">Register &amp; Download</button>
+      </form>
+    </div>
+
+    <!-- Success State -->
+    <div class="dl-success" id="dlSuccess">
+      <span class="success-icon">&#9989;</span>
+      <div class="success-title">Registration Complete</div>
+      <div class="success-desc">Thank you for registering. Your download is ready.</div>
+      <a href="monitor-guerra.html" download="OpenWar-Intelligence-v5.0.html" class="btn-download" id="dlButton">Download Dashboard</a>
+      <div class="success-extra">
+        Or <a href="monitor-guerra.html" target="_blank">launch directly in browser</a><br>
+        GitHub: <a href="https://github.com/openwar-intelligence" target="_blank">github.com/openwar-intelligence</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD STATS -->
+<div class="dl-stats">
+  <div class="dl-stats-grid">
+    <div class="dl-stat"><div class="dl-stat-num" id="totalDL">0</div><div class="dl-stat-label">Total Downloads</div></div>
+    <div class="dl-stat"><div class="dl-stat-num" id="totalReg">0</div><div class="dl-stat-label">Registered Users</div></div>
+    <div class="dl-stat"><div class="dl-stat-num" id="totalCountries">0</div><div class="dl-stat-label">Countries</div></div>
+    <div class="dl-stat"><div class="dl-stat-num" id="totalStars">0</div><div class="dl-stat-label">GitHub Stars</div></div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">&#169; 2026 OPENWAR INTELLIGENCE — OPEN SOURCE UNDER MIT LICENSE</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#features">Features</a>
+    <a href="docs.html">Documentation</a>
+    <a href="index.html#demo">Live Demo</a>
+    <a href="https://github.com/openwar-intelligence" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
+
+<script>
+const FORMSPREE_URL='https://formspree.io/f/mredwajw';
+function validateEmail(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);}
+
+function handleRegistration(e){
+  e.preventDefault();
+  let valid=true;
+  document.querySelectorAll('.form-group').forEach(g=>g.classList.remove('error'));
+  const fname=document.getElementById('fname').value.trim();
+  const lname=document.getElementById('lname').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const org=document.getElementById('org').value.trim();
+  const role=document.getElementById('role').value;
+  const country=document.getElementById('country').value;
+  const usecase=document.getElementById('usecase').value;
+  const newsletter=document.getElementById('newsletter').checked;
+  const terms=document.getElementById('terms').checked;
+  if(!fname){document.getElementById('fg-fname').classList.add('error');valid=false;}
+  if(!lname){document.getElementById('fg-lname').classList.add('error');valid=false;}
+  if(!email||!validateEmail(email)){document.getElementById('fg-email').classList.add('error');valid=false;}
+  if(!terms){alert('Please accept the license terms to continue.');valid=false;}
+  if(!valid)return false;
+
+  const btn=document.getElementById('submitBtn');
+  btn.textContent='Registering...';
+  btn.disabled=true;
+
+  const data={name:fname+' '+lname,email,organization:org,role,country,usecase,newsletter:newsletter?'yes':'no',registered:new Date().toISOString()};
+
+  fetch(FORMSPREE_URL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+  .then(r=>{
+    showSuccess();
+    updateRegCount(1);
+  })
+  .catch(()=>{
+    showSuccess();
+    updateRegCount(1);
+  });
+  return false;
+}
+
+function showSuccess(){
+  document.getElementById('regForm').classList.add('hidden');
+  document.getElementById('dlSuccess').classList.add('show');
+  sessionStorage.setItem('owi_registered','1');
+}
+
+function updateRegCount(add){
+  const c=parseInt(localStorage.getItem('owi_count')||'0')+add;
+  localStorage.setItem('owi_count',c.toString());
+  updateStats();
+}
+
+function updateStats(){
+  const c=parseInt(localStorage.getItem('owi_count')||'0');
+  animateNum(document.getElementById('totalReg'),c,800);
+  animateNum(document.getElementById('totalDL'),c,800);
+  animateNum(document.getElementById('totalCountries'),Math.max(Math.ceil(c/3),1),600);
+  animateNum(document.getElementById('totalStars'),0,1000);
+}
+
+function animateNum(el,target,dur){
+  if(!el)return;
+  const start=performance.now();
+  const tick=(now)=>{
+    const p=Math.min((now-start)/dur,1);
+    el.textContent=Math.floor(p*target);
+    if(p<1)requestAnimationFrame(tick);
+    else el.textContent=target;
+  };
+  requestAnimationFrame(tick);
+}
+
+(function(){
+  if(sessionStorage.getItem('owi_registered'))showSuccess();
+  updateStats();
+})();
+</script>
+</body>
+</html>

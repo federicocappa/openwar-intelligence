@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OpenWar Intelligence — Social Media Kit</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0e14;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;padding:40px;}
+h1{font-family:'Courier New',monospace;color:#00ffcc;font-size:24px;letter-spacing:6px;text-align:center;margin-bottom:8px;}
+.subtitle{text-align:center;font-family:monospace;font-size:11px;color:#8899aa;letter-spacing:3px;margin-bottom:60px;}
+h2{font-family:monospace;font-size:12px;letter-spacing:4px;color:#ff3344;text-transform:uppercase;margin:50px 0 20px;padding-bottom:8px;border-bottom:1px solid rgba(0,255,204,0.1);}
+.grid{display:flex;flex-wrap:wrap;gap:30px;justify-content:center;}
+.card{background:#0d1520;border:1px solid rgba(0,255,204,0.1);border-radius:4px;overflow:hidden;}
+.card-label{padding:8px 16px;font-family:monospace;font-size:10px;letter-spacing:2px;color:#8899aa;background:rgba(0,0,0,0.3);}
+.bio-box{background:#0d1520;border:1px solid rgba(0,255,204,0.1);border-radius:4px;padding:20px;max-width:500px;font-family:monospace;font-size:13px;line-height:1.8;color:#ccc;}
+.bio-box strong{color:#00ffcc;}
+.tip{font-family:monospace;font-size:10px;color:#556677;margin-top:8px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+<h1>OPENWAR INTELLIGENCE</h1>
+<p class="subtitle">Social Media Brand Kit</p>
+
+<!-- =========== PROFILE PICTURE =========== -->
+<h2>Profile Picture (400x400)</h2>
+<div class="grid">
+<div class="card">
+<div class="card-label">Instagram / Facebook Profile</div>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ppBg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#0a1628"/><stop offset="100%" stop-color="#040810"/></radialGradient>
+    <filter id="ppG"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#ppBg)"/>
+  <circle cx="200" cy="170" r="120" fill="none" stroke="#00ffcc" stroke-width="0.8" opacity="0.1"/>
+  <circle cx="200" cy="170" r="80" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.08"/>
+  <line x1="200" y1="40" x2="200" y2="300" stroke="#00ffcc" stroke-width="0.4" opacity="0.08"/>
+  <line x1="70" y1="170" x2="330" y2="170" stroke="#00ffcc" stroke-width="0.4" opacity="0.08"/>
+  <polygon points="200,100 255,130 255,210 200,240 145,210 145,130" fill="none" stroke="#00ffcc" stroke-width="2.5" filter="url(#ppG)"/>
+  <circle cx="200" cy="170" r="35" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.2"/>
+  <ellipse cx="200" cy="170" rx="35" ry="12" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.12"/>
+  <ellipse cx="200" cy="170" rx="12" ry="35" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.12"/>
+  <circle cx="200" cy="170" r="8" fill="none" stroke="#ff3344" stroke-width="2" filter="url(#ppG)"/>
+  <circle cx="200" cy="170" r="3" fill="#ff3344"/>
+  <path d="M158,125 L158,115 L168,115" fill="none" stroke="#ff3344" stroke-width="1.2" opacity="0.6"/>
+  <path d="M242,125 L242,115 L232,115" fill="none" stroke="#ff3344" stroke-width="1.2" opacity="0.6"/>
+  <path d="M158,215 L158,225 L168,225" fill="none" stroke="#ff3344" stroke-width="1.2" opacity="0.6"/>
+  <path d="M242,215 L242,225 L232,225" fill="none" stroke="#ff3344" stroke-width="1.2" opacity="0.6"/>
+  <text x="200" y="310" text-anchor="middle" fill="#fff" font-family="'Arial Black',sans-serif" font-size="30" font-weight="900" letter-spacing="6">OPENWAR</text>
+  <text x="200" y="338" text-anchor="middle" fill="#00ffcc" font-family="'Courier New',monospace" font-size="11" letter-spacing="8" opacity="0.8">INTELLIGENCE</text>
+  <text x="200" y="365" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="8" letter-spacing="3" opacity="0.5">GLOBAL C4ISR</text>
+</svg>
+</div>
+</div>
+
+<!-- =========== COVER / BANNER =========== -->
+<h2>Facebook Cover (820x312) / Instagram Header</h2>
+<div class="grid">
+<div class="card">
+<div class="card-label">Facebook Cover / X Banner</div>
+<svg width="820" height="312" viewBox="0 0 820 312" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cvBg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#040810"/><stop offset="50%" stop-color="#0a1628"/><stop offset="100%" stop-color="#040810"/></linearGradient>
+    <filter id="cvG"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="820" height="312" fill="url(#cvBg)"/>
+  <!-- Grid -->
+  <pattern id="cvGrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40,0L0,0L0,40" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.06"/></pattern>
+  <rect width="820" height="312" fill="url(#cvGrid)"/>
+  <!-- Radar rings left -->
+  <circle cx="160" cy="156" r="120" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.08"/>
+  <circle cx="160" cy="156" r="80" fill="none" stroke="#00ffcc" stroke-width="0.5" opacity="0.06"/>
+  <circle cx="160" cy="156" r="40" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.04"/>
+  <!-- Radar sweep -->
+  <line x1="160" y1="36" x2="160" y2="276" stroke="#00ffcc" stroke-width="0.3" opacity="0.06"/>
+  <line x1="40" y1="156" x2="280" y2="156" stroke="#00ffcc" stroke-width="0.3" opacity="0.06"/>
+  <!-- Hex logo center-left -->
+  <polygon points="160,96 210,121 210,191 160,216 110,191 110,121" fill="none" stroke="#00ffcc" stroke-width="1.8" filter="url(#cvG)" opacity="0.7"/>
+  <circle cx="160" cy="156" r="6" fill="none" stroke="#ff3344" stroke-width="1.5" filter="url(#cvG)"/>
+  <circle cx="160" cy="156" r="2.5" fill="#ff3344"/>
+  <!-- Globe wireframe -->
+  <ellipse cx="160" cy="156" rx="28" ry="28" fill="none" stroke="#00ffcc" stroke-width="0.5" opacity="0.15"/>
+  <ellipse cx="160" cy="156" rx="28" ry="10" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.1"/>
+  <ellipse cx="160" cy="156" rx="10" ry="28" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.1"/>
+  <!-- Brand text -->
+  <text x="340" y="138" fill="#ffffff" font-family="'Arial Black','Impact',sans-serif" font-size="56" font-weight="900" letter-spacing="8">OPENWAR</text>
+  <text x="345" y="172" fill="#00ffcc" font-family="'Courier New',monospace" font-size="18" letter-spacing="12" opacity="0.85">INTELLIGENCE</text>
+  <text x="345" y="205" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="13" opacity="0.7">Real-Time Global C4ISR Dashboard | Open Source</text>
+  <!-- Decorative line -->
+  <line x1="340" y1="220" x2="600" y2="220" stroke="#00ffcc" stroke-width="0.5" opacity="0.15"/>
+  <!-- Stats row -->
+  <text x="345" y="248" fill="#00ffcc" font-family="monospace" font-size="18" font-weight="700">117</text>
+  <text x="380" y="248" fill="#556677" font-family="monospace" font-size="10" letter-spacing="1">AIRCRAFT</text>
+  <text x="465" y="248" fill="#00ffcc" font-family="monospace" font-size="18" font-weight="700">49</text>
+  <text x="490" y="248" fill="#556677" font-family="monospace" font-size="10" letter-spacing="1">SHIPS</text>
+  <text x="555" y="248" fill="#00ffcc" font-family="monospace" font-size="18" font-weight="700">27</text>
+  <text x="580" y="248" fill="#556677" font-family="monospace" font-size="10" letter-spacing="1">NATIONS</text>
+  <text x="660" y="248" fill="#00ffcc" font-family="monospace" font-size="18" font-weight="700">19</text>
+  <text x="685" y="248" fill="#556677" font-family="monospace" font-size="10" letter-spacing="1">OSINT FEEDS</text>
+  <!-- Corner brackets -->
+  <path d="M20,30 L20,15 L35,15" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.3"/>
+  <path d="M800,30 L800,15 L785,15" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.3"/>
+  <path d="M20,282 L20,297 L35,297" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.3"/>
+  <path d="M800,282 L800,297 L785,297" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.3"/>
+  <!-- Classification -->
+  <text x="410" y="290" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="8" letter-spacing="3" opacity="0.3">UNCLASSIFIED // OPEN SOURCE</text>
+  <!-- Right decorative elements -->
+  <circle cx="720" cy="80" r="3" fill="none" stroke="#ff3344" stroke-width="1" opacity="0.3"/>
+  <circle cx="720" cy="80" r="1" fill="#ff3344" opacity="0.4"/>
+  <circle cx="760" cy="130" r="2" fill="#00ffcc" opacity="0.2"/>
+  <circle cx="700" cy="200" r="2.5" fill="none" stroke="#00ffcc" stroke-width="0.8" opacity="0.2"/>
+</svg>
+</div>
+</div>
+
+<!-- =========== POST TEMPLATES =========== -->
+<h2>Post Templates (1080x1080)</h2>
+<div class="grid">
+
+<!-- Post 1: Feature Announcement -->
+<div class="card">
+<div class="card-label">Post 1 — Feature Announcement</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="p1bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#040810"/><stop offset="100%" stop-color="#0a1628"/></linearGradient></defs>
+  <rect width="1080" height="1080" fill="url(#p1bg)"/>
+  <pattern id="p1grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60,0L0,0L0,60" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.04"/></pattern>
+  <rect width="1080" height="1080" fill="url(#p1grid)"/>
+  <!-- Top bar -->
+  <rect x="0" y="0" width="1080" height="4" fill="#00ffcc" opacity="0.6"/>
+  <text x="540" y="80" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="14" letter-spacing="6">NEW FEATURE</text>
+  <!-- Hex icon -->
+  <polygon points="540,200 620,246 620,338 540,384 460,338 460,246" fill="none" stroke="#00ffcc" stroke-width="3" opacity="0.8"/>
+  <circle cx="540" cy="292" r="30" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
+  <text x="540" y="305" text-anchor="middle" fill="#00ffcc" font-size="40">🧠</text>
+  <!-- Title -->
+  <text x="540" y="480" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">NEURAL NETWORK</text>
+  <text x="540" y="540" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">PREDICTION</text>
+  <!-- Desc -->
+  <text x="540" y="620" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="24">Pure JS neural network trained on 37</text>
+  <text x="540" y="655" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="24">historical events. Online learning every 60s.</text>
+  <!-- Divider -->
+  <line x1="340" y1="710" x2="740" y2="710" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
+  <!-- Stats -->
+  <text x="390" y="780" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="36" font-weight="700">12-24-1</text>
+  <text x="390" y="810" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">ARCHITECTURE</text>
+  <text x="690" y="780" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="36" font-weight="700">24h</text>
+  <text x="690" y="810" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">PREDICTION</text>
+  <!-- Bottom brand -->
+  <line x1="0" y1="900" x2="1080" y2="900" stroke="#00ffcc" stroke-width="0.5" opacity="0.1"/>
+  <text x="540" y="960" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="28" letter-spacing="6" opacity="0.7">OPENWAR</text>
+  <text x="540" y="995" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="6" opacity="0.5">INTELLIGENCE</text>
+  <text x="540" y="1040" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#openwarintel #osint #c4isr</text>
+</svg>
+</div>
+
+<!-- Post 2: Stats -->
+<div class="card">
+<div class="card-label">Post 2 — Stats / Numbers</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#040810"/>
+  <pattern id="p2grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60,0L0,0L0,60" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.04"/></pattern>
+  <rect width="1080" height="1080" fill="url(#p2grid)"/>
+  <rect x="0" y="0" width="1080" height="4" fill="#ff3344" opacity="0.6"/>
+  <text x="540" y="100" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="36" font-weight="900" letter-spacing="6">BY THE NUMBERS</text>
+  <line x1="380" y1="130" x2="700" y2="130" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
+  <!-- Stat boxes -->
+  <rect x="100" y="200" width="380" height="180" rx="4" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1"/>
+  <text x="290" y="290" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="72">117</text>
+  <text x="290" y="340" text-anchor="middle" fill="#8899aa" font-family="monospace" font-size="16" letter-spacing="4">MILITARY AIRCRAFT</text>
+  <rect x="600" y="200" width="380" height="180" rx="4" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1"/>
+  <text x="790" y="290" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="72">49</text>
+  <text x="790" y="340" text-anchor="middle" fill="#8899aa" font-family="monospace" font-size="16" letter-spacing="4">NAVAL VESSELS</text>
+  <rect x="100" y="430" width="380" height="180" rx="4" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1"/>
+  <text x="290" y="520" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="72">27</text>
+  <text x="290" y="570" text-anchor="middle" fill="#8899aa" font-family="monospace" font-size="16" letter-spacing="4">NATIONS</text>
+  <rect x="600" y="430" width="380" height="180" rx="4" fill="none" stroke="rgba(0,255,204,0.15)" stroke-width="1"/>
+  <text x="790" y="520" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="72">19</text>
+  <text x="790" y="570" text-anchor="middle" fill="#8899aa" font-family="monospace" font-size="16" letter-spacing="4">OSINT FEEDS</text>
+  <rect x="100" y="660" width="880" height="120" rx="4" fill="none" stroke="rgba(255,51,68,0.2)" stroke-width="1"/>
+  <text x="540" y="720" text-anchor="middle" fill="#ff3344" font-family="'Arial Black',sans-serif" font-size="48">OPEN SOURCE</text>
+  <text x="540" y="755" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="3">FREE FOREVER — MIT LICENSE</text>
+  <!-- Bottom -->
+  <line x1="0" y1="860" x2="1080" y2="860" stroke="#00ffcc" stroke-width="0.5" opacity="0.1"/>
+  <text x="540" y="930" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="28" letter-spacing="6" opacity="0.7">OPENWAR</text>
+  <text x="540" y="965" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="6" opacity="0.5">INTELLIGENCE</text>
+  <text x="540" y="1030" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#openwarintel #military #dashboard</text>
+</svg>
+</div>
+
+<!-- Post 3: Fusion Alert -->
+<div class="card">
+<div class="card-label">Post 3 — Fusion Alert</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#040810"/>
+  <pattern id="p3grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60,0L0,0L0,60" fill="none" stroke="#ff3344" stroke-width="0.3" opacity="0.03"/></pattern>
+  <rect width="1080" height="1080" fill="url(#p3grid)"/>
+  <rect x="0" y="0" width="1080" height="4" fill="#ff3344" opacity="0.8"/>
+  <text x="540" y="80" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="14" letter-spacing="6">INTELLIGENCE FEATURE</text>
+  <!-- Big sonar visual -->
+  <circle cx="540" cy="380" r="200" fill="none" stroke="#ff3344" stroke-width="1" opacity="0.08"/>
+  <circle cx="540" cy="380" r="150" fill="none" stroke="#ff3344" stroke-width="1" opacity="0.12"/>
+  <circle cx="540" cy="380" r="100" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.18"/>
+  <circle cx="540" cy="380" r="50" fill="none" stroke="#ff3344" stroke-width="2" opacity="0.25"/>
+  <circle cx="540" cy="380" r="15" fill="#ff3344" opacity="0.6"/>
+  <circle cx="540" cy="380" r="6" fill="#ffffff" opacity="0.8"/>
+  <!-- Signal labels -->
+  <text x="380" y="250" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">AIR SIGNAL</text>
+  <text x="650" y="280" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">SHIP SIGNAL</text>
+  <text x="350" y="500" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">ML-PREDICT</text>
+  <text x="660" y="480" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">THERMAL</text>
+  <text x="420" y="560" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">A2/AD</text>
+  <text x="610" y="560" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="2" opacity="0.5">AIRLIFT</text>
+  <!-- Title -->
+  <text x="540" y="700" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">FUSION ALERT</text>
+  <text x="540" y="760" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">ENGINE</text>
+  <text x="540" y="830" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="22">Cross-data correlation with 9 signal types.</text>
+  <text x="540" y="865" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="22">Sonar-pulse alerts on the map.</text>
+  <!-- Bottom -->
+  <line x1="0" y1="920" x2="1080" y2="920" stroke="#ff3344" stroke-width="0.5" opacity="0.15"/>
+  <text x="540" y="980" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="28" letter-spacing="6" opacity="0.7">OPENWAR</text>
+  <text x="540" y="1015" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="6" opacity="0.5">INTELLIGENCE</text>
+  <text x="540" y="1055" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#fusionalert #sigint #openwarintel</text>
+</svg>
+</div>
+
+<!-- Post 4: Thermal/FIRMS -->
+<div class="card">
+<div class="card-label">Post 4 — Thermal Intelligence</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#040810"/>
+  <rect x="0" y="0" width="1080" height="4" fill="#ff6600" opacity="0.7"/>
+  <text x="540" y="80" text-anchor="middle" fill="#ff6600" font-family="monospace" font-size="14" letter-spacing="6">SATELLITE INTELLIGENCE</text>
+  <!-- Heat circles -->
+  <circle cx="300" cy="350" r="80" fill="#ff3300" opacity="0.06"/>
+  <circle cx="300" cy="350" r="50" fill="#ff6600" opacity="0.08"/>
+  <circle cx="300" cy="350" r="20" fill="#ffaa00" opacity="0.15"/>
+  <circle cx="300" cy="350" r="6" fill="#ffffff" opacity="0.4"/>
+  <circle cx="540" cy="300" r="100" fill="#ff3300" opacity="0.05"/>
+  <circle cx="540" cy="300" r="60" fill="#ff6600" opacity="0.07"/>
+  <circle cx="540" cy="300" r="25" fill="#ffaa00" opacity="0.12"/>
+  <circle cx="540" cy="300" r="8" fill="#ffffff" opacity="0.35"/>
+  <circle cx="750" cy="380" r="70" fill="#ff3300" opacity="0.06"/>
+  <circle cx="750" cy="380" r="40" fill="#ff6600" opacity="0.08"/>
+  <circle cx="750" cy="380" r="15" fill="#ffaa00" opacity="0.15"/>
+  <circle cx="750" cy="380" r="5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="450" cy="450" r="60" fill="#ff3300" opacity="0.05"/>
+  <circle cx="450" cy="450" r="30" fill="#ff6600" opacity="0.07"/>
+  <circle cx="450" cy="450" r="10" fill="#ffaa00" opacity="0.12"/>
+  <circle cx="650" cy="250" r="50" fill="#ff3300" opacity="0.04"/>
+  <circle cx="650" cy="250" r="25" fill="#ff6600" opacity="0.06"/>
+  <circle cx="650" cy="250" r="8" fill="#ffaa00" opacity="0.1"/>
+  <!-- Text labels -->
+  <text x="300" y="440" text-anchor="middle" fill="#ff6600" font-family="monospace" font-size="12" letter-spacing="1" opacity="0.5">VIIRS T1</text>
+  <text x="540" y="420" text-anchor="middle" fill="#ff6600" font-family="monospace" font-size="12" letter-spacing="1" opacity="0.5">VIIRS T2</text>
+  <text x="750" y="460" text-anchor="middle" fill="#ff6600" font-family="monospace" font-size="12" letter-spacing="1" opacity="0.5">VIIRS T3</text>
+  <!-- Title -->
+  <text x="540" y="640" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">THERMAL</text>
+  <text x="540" y="700" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">INTELLIGENCE</text>
+  <text x="540" y="770" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="22">NASA FIRMS satellite hotspot detection.</text>
+  <text x="540" y="805" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="22">Sentinel Hub + Copernicus imagery links.</text>
+  <!-- Sources -->
+  <text x="290" y="880" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="1" opacity="0.5">NASA FIRMS</text>
+  <text x="440" y="880" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="1" opacity="0.5">SENTINEL-2</text>
+  <text x="610" y="880" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="1" opacity="0.5">COPERNICUS</text>
+  <text x="780" y="880" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="1" opacity="0.5">PLANET LABS</text>
+  <!-- Bottom -->
+  <line x1="0" y1="920" x2="1080" y2="920" stroke="#ff6600" stroke-width="0.5" opacity="0.15"/>
+  <text x="540" y="980" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="28" letter-spacing="6" opacity="0.7">OPENWAR</text>
+  <text x="540" y="1015" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="6" opacity="0.5">INTELLIGENCE</text>
+  <text x="540" y="1055" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#thermalintel #nasafirms #openwarintel</text>
+</svg>
+</div>
+
+<!-- Post 5: Open Source Launch -->
+<div class="card">
+<div class="card-label">Post 5 — Launch Announcement</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#040810"/>
+  <pattern id="p5grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60,0L0,0L0,60" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.04"/></pattern>
+  <rect width="1080" height="1080" fill="url(#p5grid)"/>
+  <rect x="0" y="0" width="1080" height="6" fill="#00ffcc" opacity="0.8"/>
+  <!-- Big hex -->
+  <polygon points="540,180 660,249 660,387 540,456 420,387 420,249" fill="none" stroke="#00ffcc" stroke-width="3" opacity="0.5"/>
+  <polygon points="540,210 640,262 640,374 540,426 440,374 440,262" fill="rgba(0,255,204,0.02)" stroke="#00ffcc" stroke-width="1" opacity="0.2"/>
+  <circle cx="540" cy="318" r="40" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <circle cx="540" cy="318" r="12" fill="none" stroke="#ff3344" stroke-width="2"/>
+  <circle cx="540" cy="318" r="5" fill="#ff3344"/>
+  <!-- Globe -->
+  <ellipse cx="540" cy="318" rx="40" ry="40" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.15"/>
+  <ellipse cx="540" cy="318" rx="40" ry="14" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.1"/>
+  <ellipse cx="540" cy="318" rx="14" ry="40" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.1"/>
+  <!-- Title -->
+  <text x="540" y="560" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="16" letter-spacing="6">NOW AVAILABLE</text>
+  <text x="540" y="640" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="56" font-weight="900" letter-spacing="4">OPENWAR</text>
+  <text x="540" y="700" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="56" font-weight="900" letter-spacing="4">IS LIVE</text>
+  <text x="540" y="780" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="24">Global military intelligence dashboard.</text>
+  <text x="540" y="820" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="24">100% open source. Zero backend.</text>
+  <!-- CTA -->
+  <rect x="360" y="870" width="360" height="60" rx="4" fill="none" stroke="#00ffcc" stroke-width="2"/>
+  <text x="540" y="908" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="16" letter-spacing="4">DOWNLOAD NOW</text>
+  <!-- Bottom -->
+  <text x="540" y="1000" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">github.com/openwar-intelligence</text>
+  <text x="540" y="1050" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#openwarintel #opensource #launch</text>
+</svg>
+</div>
+
+<!-- Post 6: Community / Contribute -->
+<div class="card">
+<div class="card-label">Post 6 — Community / Contribute</div>
+<svg width="540" height="540" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" fill="#040810"/>
+  <rect x="0" y="0" width="1080" height="4" fill="#00ffcc" opacity="0.6"/>
+  <text x="540" y="80" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="6">JOIN THE MISSION</text>
+  <!-- Connected nodes visual -->
+  <circle cx="540" cy="340" r="30" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.6"/>
+  <circle cx="540" cy="340" r="10" fill="#00ffcc" opacity="0.3"/>
+  <circle cx="380" cy="240" r="16" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="380" cy="240" r="5" fill="#00ffcc" opacity="0.2"/>
+  <circle cx="700" cy="240" r="16" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="700" cy="240" r="5" fill="#00ffcc" opacity="0.2"/>
+  <circle cx="380" cy="440" r="16" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="380" cy="440" r="5" fill="#00ffcc" opacity="0.2"/>
+  <circle cx="700" cy="440" r="16" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="700" cy="440" r="5" fill="#00ffcc" opacity="0.2"/>
+  <circle cx="300" cy="340" r="12" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.3"/>
+  <circle cx="780" cy="340" r="12" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.3"/>
+  <!-- Lines -->
+  <line x1="540" y1="340" x2="380" y2="240" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <line x1="540" y1="340" x2="700" y2="240" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <line x1="540" y1="340" x2="380" y2="440" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <line x1="540" y1="340" x2="700" y2="440" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <line x1="540" y1="340" x2="300" y2="340" stroke="#00ffcc" stroke-width="0.8" opacity="0.1"/>
+  <line x1="540" y1="340" x2="780" y2="340" stroke="#00ffcc" stroke-width="0.8" opacity="0.1"/>
+  <line x1="380" y1="240" x2="700" y2="240" stroke="#00ffcc" stroke-width="0.5" opacity="0.08"/>
+  <line x1="380" y1="440" x2="700" y2="440" stroke="#00ffcc" stroke-width="0.5" opacity="0.08"/>
+  <!-- Title -->
+  <text x="540" y="600" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">CONTRIBUTE</text>
+  <text x="540" y="660" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="48" font-weight="900" letter-spacing="4">TO OPENWAR</text>
+  <!-- Roles -->
+  <text x="270" y="760" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="16" letter-spacing="2">Developers</text>
+  <text x="540" y="760" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="16" letter-spacing="2">Analysts</text>
+  <text x="810" y="760" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="16" letter-spacing="2">Researchers</text>
+  <text x="270" y="790" text-anchor="middle" fill="#556677" font-family="monospace" font-size="12">Add features &amp; fix bugs</text>
+  <text x="540" y="790" text-anchor="middle" fill="#556677" font-family="monospace" font-size="12">Improve data sources</text>
+  <text x="810" y="790" text-anchor="middle" fill="#556677" font-family="monospace" font-size="12">Expand coverage</text>
+  <!-- Bottom -->
+  <line x1="0" y1="860" x2="1080" y2="860" stroke="#00ffcc" stroke-width="0.5" opacity="0.1"/>
+  <text x="540" y="920" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="28" letter-spacing="6" opacity="0.7">OPENWAR</text>
+  <text x="540" y="955" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="13" letter-spacing="6" opacity="0.5">INTELLIGENCE</text>
+  <text x="540" y="1000" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">github.com/openwar-intelligence</text>
+  <text x="540" y="1050" text-anchor="middle" fill="#556677" font-family="monospace" font-size="11" letter-spacing="2">#openwarintel #opensource #contribute</text>
+</svg>
+</div>
+</div>
+
+<!-- =========== STORY TEMPLATES =========== -->
+<h2>Instagram Story Templates (1080x1920)</h2>
+<div class="grid">
+
+<!-- Story 1 -->
+<div class="card">
+<div class="card-label">Story 1 — Launch</div>
+<svg width="270" height="480" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1920" fill="#040810"/>
+  <pattern id="s1grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60,0L0,0L0,60" fill="none" stroke="#00ffcc" stroke-width="0.3" opacity="0.04"/></pattern>
+  <rect width="1080" height="1920" fill="url(#s1grid)"/>
+  <rect x="0" y="0" width="1080" height="6" fill="#00ffcc"/>
+  <!-- Logo hex -->
+  <polygon points="540,400 640,458 640,574 540,632 440,574 440,458" fill="none" stroke="#00ffcc" stroke-width="3" opacity="0.7"/>
+  <circle cx="540" cy="516" r="40" fill="none" stroke="#00ffcc" stroke-width="0.8" opacity="0.2"/>
+  <ellipse cx="540" cy="516" rx="40" ry="14" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.1"/>
+  <ellipse cx="540" cy="516" rx="14" ry="40" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.1"/>
+  <circle cx="540" cy="516" r="12" fill="none" stroke="#ff3344" stroke-width="2"/>
+  <circle cx="540" cy="516" r="5" fill="#ff3344"/>
+  <!-- Radar rings -->
+  <circle cx="540" cy="516" r="180" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.06"/>
+  <circle cx="540" cy="516" r="130" fill="none" stroke="#00ffcc" stroke-width="0.5" opacity="0.05"/>
+  <!-- Brand -->
+  <text x="540" y="780" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="72" font-weight="900" letter-spacing="8">OPENWAR</text>
+  <text x="540" y="840" text-anchor="middle" fill="#00ffcc" font-family="'Courier New',monospace" font-size="24" letter-spacing="12" opacity="0.85">INTELLIGENCE</text>
+  <line x1="300" y1="880" x2="780" y2="880" stroke="#00ffcc" stroke-width="1" opacity="0.15"/>
+  <!-- Description -->
+  <text x="540" y="960" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="28">Real-time global military</text>
+  <text x="540" y="1000" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="28">intelligence dashboard</text>
+  <!-- Stats -->
+  <text x="270" y="1150" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="56">117</text>
+  <text x="270" y="1190" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">AIRCRAFT</text>
+  <text x="540" y="1150" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="56">49</text>
+  <text x="540" y="1190" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">SHIPS</text>
+  <text x="810" y="1150" text-anchor="middle" fill="#00ffcc" font-family="'Arial Black',sans-serif" font-size="56">27</text>
+  <text x="810" y="1190" text-anchor="middle" fill="#556677" font-family="monospace" font-size="14" letter-spacing="2">NATIONS</text>
+  <!-- CTA -->
+  <rect x="280" y="1350" width="520" height="80" rx="4" fill="none" stroke="#00ffcc" stroke-width="2"/>
+  <text x="540" y="1400" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="20" letter-spacing="4">LINK IN BIO</text>
+  <!-- Swipe -->
+  <text x="540" y="1600" text-anchor="middle" fill="#556677" font-family="monospace" font-size="16" letter-spacing="4">OPEN SOURCE | MIT LICENSE</text>
+  <!-- Bottom brand bar -->
+  <rect x="0" y="1850" width="1080" height="70" fill="rgba(0,255,204,0.03)"/>
+  <text x="540" y="1895" text-anchor="middle" fill="#00ffcc" font-family="monospace" font-size="14" letter-spacing="6" opacity="0.5">@OPENWARINTEL</text>
+</svg>
+</div>
+
+<!-- Story 2 -->
+<div class="card">
+<div class="card-label">Story 2 — Alert Feature</div>
+<svg width="270" height="480" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1920" fill="#040810"/>
+  <rect x="0" y="0" width="1080" height="6" fill="#ff3344"/>
+  <!-- Sonar effect -->
+  <circle cx="540" cy="600" r="250" fill="none" stroke="#ff3344" stroke-width="1" opacity="0.06"/>
+  <circle cx="540" cy="600" r="200" fill="none" stroke="#ff3344" stroke-width="1" opacity="0.09"/>
+  <circle cx="540" cy="600" r="150" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.12"/>
+  <circle cx="540" cy="600" r="100" fill="none" stroke="#ff3344" stroke-width="2" opacity="0.18"/>
+  <circle cx="540" cy="600" r="50" fill="none" stroke="#ff3344" stroke-width="2.5" opacity="0.25"/>
+  <circle cx="540" cy="600" r="20" fill="#ff3344" opacity="0.5"/>
+  <circle cx="540" cy="600" r="8" fill="#ffffff" opacity="0.7"/>
+  <text x="540" y="440" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="18" letter-spacing="8">CRITICAL ALERT</text>
+  <!-- Signal converging lines -->
+  <line x1="200" y1="350" x2="490" y2="560" stroke="#00ffcc" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+  <line x1="880" y1="380" x2="590" y2="560" stroke="#00ffcc" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+  <line x1="300" y1="850" x2="500" y2="650" stroke="#00ffcc" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+  <line x1="800" y1="800" x2="580" y2="640" stroke="#00ffcc" stroke-width="1" opacity="0.15" stroke-dasharray="8,8"/>
+  <text x="170" y="340" fill="#00ffcc" font-family="monospace" font-size="16" opacity="0.4">AIR</text>
+  <text x="850" y="370" fill="#00ffcc" font-family="monospace" font-size="16" opacity="0.4">SHIP</text>
+  <text x="240" y="870" fill="#00ffcc" font-family="monospace" font-size="16" opacity="0.4">ML-PRED</text>
+  <text x="770" y="820" fill="#00ffcc" font-family="monospace" font-size="16" opacity="0.4">THERMAL</text>
+  <!-- Title -->
+  <text x="540" y="1050" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="64" font-weight="900" letter-spacing="4">FUSION</text>
+  <text x="540" y="1130" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="64" font-weight="900" letter-spacing="4">ALERT</text>
+  <text x="540" y="1200" text-anchor="middle" fill="#ffffff" font-family="'Arial Black',sans-serif" font-size="64" font-weight="900" letter-spacing="4">ENGINE</text>
+  <!-- Desc -->
+  <text x="540" y="1320" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="26">9 signal types converge.</text>
+  <text x="540" y="1365" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="26">3 alert levels trigger.</text>
+  <text x="540" y="1410" text-anchor="middle" fill="#8899aa" font-family="'Segoe UI',sans-serif" font-size="26">Sonar pulse on the map.</text>
+  <!-- CTA -->
+  <rect x="280" y="1520" width="520" height="80" rx="4" fill="none" stroke="#ff3344" stroke-width="2"/>
+  <text x="540" y="1570" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="20" letter-spacing="4">TRY IT NOW</text>
+  <!-- Bottom -->
+  <rect x="0" y="1850" width="1080" height="70" fill="rgba(255,51,68,0.03)"/>
+  <text x="540" y="1895" text-anchor="middle" fill="#ff3344" font-family="monospace" font-size="14" letter-spacing="6" opacity="0.5">@OPENWARINTEL</text>
+</svg>
+</div>
+</div>
+
+<!-- =========== BIO TEXT =========== -->
+<h2>Bio Text — Instagram & Facebook</h2>
+<div class="bio-box">
+  <strong>OPENWAR INTELLIGENCE</strong><br>
+  <br>
+  Global C4ISR Dashboard | Open Source<br>
+  Real-time military intelligence platform<br>
+  <br>
+  ✈️ 117+ Aircraft | 🚢 49+ Ships | 🛰 15+ Satellites<br>
+  🧠 Neural Network Prediction<br>
+  ⚡ Fusion Alert Engine<br>
+  🔥 NASA FIRMS Thermal Intel<br>
+  <br>
+  100% Open Source | MIT License<br>
+  <br>
+  ⬇️ Download & Contribute<br>
+  🔗 github.com/openwar-intelligence
+</div>
+<p class="tip" style="margin-top:16px;">Copy the bio text above for Instagram and Facebook profiles.</p>
+
+<h2>Suggested Hashtag Sets</h2>
+<div class="bio-box">
+  <strong>Primary:</strong> #openwarintel #osint #c4isr #militaryintelligence #opensource<br><br>
+  <strong>Features:</strong> #fusionalert #sigint #thermalintel #neuralnetwork #nasafirms<br><br>
+  <strong>Community:</strong> #geopolitics #defense #cybersecurity #infosec #datascience<br><br>
+  <strong>Tech:</strong> #javascript #leafletjs #webdev #singlefileapp #nobackend
+</div>
+
+</body>
+</html>

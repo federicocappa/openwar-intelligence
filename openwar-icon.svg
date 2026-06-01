@@ -1,0 +1,37 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </radialGradient>
+    <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffcc"/>
+      <stop offset="100%" stop-color="#00b4d8"/>
+    </linearGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="gs"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="400" height="400" rx="40" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="150" fill="none" stroke="#00ffcc" stroke-width="1" opacity="0.12"/>
+  <circle cx="200" cy="200" r="110" fill="none" stroke="#00ffcc" stroke-width="0.8" opacity="0.1"/>
+  <circle cx="200" cy="200" r="70" fill="none" stroke="#00ffcc" stroke-width="0.6" opacity="0.08"/>
+  <line x1="200" y1="40" x2="200" y2="360" stroke="#00ffcc" stroke-width="0.5" opacity="0.1"/>
+  <line x1="40" y1="200" x2="360" y2="200" stroke="#00ffcc" stroke-width="0.5" opacity="0.1"/>
+  <path d="M120,110 L120,95 L135,95" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.5"/>
+  <path d="M280,110 L280,95 L265,95" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.5"/>
+  <path d="M120,290 L120,305 L135,305" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.5"/>
+  <path d="M280,290 L280,305 L265,305" fill="none" stroke="#00ffcc" stroke-width="2" opacity="0.5"/>
+  <polygon points="200,115 265,152 265,248 200,285 135,248 135,152" fill="none" stroke="url(#cg)" stroke-width="2.5" filter="url(#g)" opacity="0.9"/>
+  <ellipse cx="200" cy="200" rx="45" ry="45" fill="none" stroke="#00ffcc" stroke-width="0.7" opacity="0.2"/>
+  <ellipse cx="200" cy="200" rx="45" ry="16" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.13"/>
+  <ellipse cx="200" cy="200" rx="16" ry="45" fill="none" stroke="#00ffcc" stroke-width="0.4" opacity="0.13"/>
+  <circle cx="200" cy="200" r="10" fill="none" stroke="#ff3344" stroke-width="2" filter="url(#gs)" opacity="0.9"/>
+  <circle cx="200" cy="200" r="4" fill="#ff3344" filter="url(#gs)" opacity="0.8"/>
+  <circle cx="200" cy="200" r="1.5" fill="#fff" opacity="0.9"/>
+  <path d="M160,135 L160,122 L173,122" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.6"/>
+  <path d="M240,135 L240,122 L227,122" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.6"/>
+  <path d="M160,265 L160,278 L173,278" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.6"/>
+  <path d="M240,265 L240,278 L227,278" fill="none" stroke="#ff3344" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="155" cy="145" r="3" fill="#00ffcc" opacity="0.5"/>
+  <circle cx="250" cy="148" r="2.5" fill="#00ffcc" opacity="0.4"/>
+</svg>

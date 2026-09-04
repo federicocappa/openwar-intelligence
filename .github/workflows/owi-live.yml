@@ -1,0 +1,51 @@
+name: OWI Live (aircraft feed)
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"     # ogni 10 minuti (GitHub puo' ritardare di qualche minuto)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: owi-live
+  cancel-in-progress: true
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Recupera i campioni del giorno dal branch live
+        run: |
+          mkdir -p /tmp/pub/samples
+          if git fetch --depth=1 origin live:refs/remotes/origin/live 2>/dev/null; then
+            git archive origin/live samples 2>/dev/null | tar -x -C /tmp/pub || echo "nessun campione sul branch live"
+          else
+            echo "branch live non ancora presente"
+          fi
+          ls -la /tmp/pub/samples || true
+
+      - name: Raccolta feed
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python owi-brain/live.py --out /tmp/pub --samples /tmp/pub/samples
+
+      - name: Pubblica sul branch live (storia riscritta: nessun accumulo nel repo)
+        run: |
+          cd /tmp/pub
+          git init -q -b live
+          git config user.name "owi-live"
+          git config user.email "live@openwarintelligence.org"
+          git add -A
+          git commit -q -m "live $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -f -q "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" live:live
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

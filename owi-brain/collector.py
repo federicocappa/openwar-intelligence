@@ -5,6 +5,8 @@ Fonti (tutte senza chiave):
   - GDELT DOC API         volume articoli "colpi" per zona (velocita' notizie + ground truth)
   - threat-board.json     punteggi OWI del run precedente (dal sito o dal repo)
 """
+import gzip
+import io
 import json
 import os
 import sys
@@ -22,6 +24,8 @@ UA = {"User-Agent": "OWI-brain/1.0 (+https://openwarintelligence.org)"}
 ADSB_URL = "https://api.adsb.lol/v2/mil"
 GDELT_URL = "https://api.gdeltproject.org/api/v2/doc/doc"
 THREAT_URL = os.environ.get("OWI_THREAT_URL", "https://openwarintelligence.org/data/threat-board.json")
+LIVE_SAMPLES_URL = os.environ.get("OWI_LIVE_SAMPLES_URL",
+    "https://raw.githubusercontent.com/federicocappa/openwar-intelligence/live/samples/{date}.jsonl.gz")
 SAMPLES = int(os.environ.get("OWI_SAMPLES", "4"))
 INTERVAL_MIN = float(os.environ.get("OWI_INTERVAL_MIN", "5"))
 
@@ -84,6 +88,33 @@ def collect_aircraft(run_id):
     return total
 
 
+def collect_live_samples(days=2):
+    """Unisce alla memoria i campioni raccolti ogni 10 minuti dal workflow live (branch `live`).
+    Dedup per (ts, hex) contro cio' che e' gia' in memoria per quel giorno."""
+    total = 0
+    for k in range(days):
+        day = store.today_str(store.utcnow() - timedelta(days=k))
+        url = LIVE_SAMPLES_URL.format(date=day)
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
+                blob = r.read()
+        except Exception as e:  # noqa: BLE001
+            print(f"  live {day}: non disponibile ({e})")
+            continue
+        rows = []
+        with gzip.open(io.BytesIO(blob), "rt", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    rows.append(json.loads(line))
+        seen = {(r["ts"], r["hex"]) for r in store.iter_rows("aircraft_obs", since_date=day) if r["ts"][:10] == day}
+        new = [r for r in rows if (r["ts"], r["hex"]) not in seen]
+        store.append("aircraft_obs", new, date=day)
+        total += len(new)
+        print(f"  live {day}: {len(rows)} campioni, {len(new)} nuovi in memoria")
+    return total
+
+
 def collect_gdelt(days_back=3):
     """timelinevol restituisce % del volume globale per giorno; prendiamo gli ultimi giorni
     (il valore di ieri si stabilizza solo a fine giornata, quindi ri-scriviamo 3 giorni)."""
@@ -128,8 +159,10 @@ def collect_threat_scores():
 
 
 def run(run_id):
-    print("[collector] velivoli")
+    print("[collector] velivoli (campioni diretti)")
     n = collect_aircraft(run_id)
+    print("[collector] velivoli (feed live ogni 10 min)")
+    n += collect_live_samples()
     print("[collector] GDELT")
     collect_gdelt()
     print("[collector] threat-board")

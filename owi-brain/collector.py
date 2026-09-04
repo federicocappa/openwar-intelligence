@@ -9,6 +9,7 @@ import json
 import os
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import timedelta
@@ -25,16 +26,23 @@ SAMPLES = int(os.environ.get("OWI_SAMPLES", "4"))
 INTERVAL_MIN = float(os.environ.get("OWI_INTERVAL_MIN", "5"))
 
 
-def http_json(url, timeout=40, retries=2):
+def http_json(url, timeout=40, retries=2, backoff=(3, 6, 12)):
+    """GET JSON con retry. Sui 429 (GDELT limita gli IP condivisi di GitHub) aspetta di piu'."""
     last = None
     for i in range(retries + 1):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
                 raw = r.read().decode("utf-8", "replace").strip()
                 return json.loads(raw) if raw else None
+        except urllib.error.HTTPError as e:
+            last = e
+            wait = backoff[min(i, len(backoff) - 1)]
+            if e.code == 429:
+                wait = max(wait, 25 * (i + 1))
+            time.sleep(wait)
         except Exception as e:  # noqa: BLE001
             last = e
-            time.sleep(3 * (i + 1))
+            time.sleep(backoff[min(i, len(backoff) - 1)])
     print(f"  [warn] {url[:80]} -> {last}", file=sys.stderr)
     return None
 
@@ -83,7 +91,7 @@ def collect_gdelt(days_back=3):
     n = 0
     for z in ZONES:
         q = urllib.parse.urlencode(dict(query=z["gdelt"], mode="timelinevol", timespan=f"{days_back + 1}d", format="json"))
-        d = http_json(f"{GDELT_URL}?{q}", timeout=60)
+        d = http_json(f"{GDELT_URL}?{q}", timeout=60, retries=3)
         rows = []
         try:
             for pt in d["timeline"][0]["data"]:
@@ -94,7 +102,7 @@ def collect_gdelt(days_back=3):
         if rows:
             store.append("gdelt_daily", rows)
             n += len(rows)
-        time.sleep(1.5)  # cortesia verso GDELT
+        time.sleep(8)  # GDELT: ~1 richiesta ogni 5 s per IP, gli IP dei runner sono condivisi
     print(f"  GDELT: {n} punti/giorno scritti")
     return n
 

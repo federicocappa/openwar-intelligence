@@ -1,0 +1,45 @@
+name: OWI Brain (I&W daily)
+
+on:
+  schedule:
+    - cron: "20 4 * * *"      # 04:20 UTC ogni giorno. Per aumentare: "20 */6 * * *"
+  workflow_dispatch:           # bottone "Run workflow" per lanciarlo a mano
+
+permissions:
+  contents: write
+
+concurrency:
+  group: owi-brain
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Raccolta + analisi
+        working-directory: owi-brain
+        env:
+          OWI_SAMPLES: "4"          # campioni adsb.lol per run
+          OWI_INTERVAL_MIN: "5"     # minuti fra i campioni
+        run: python run_all.py
+
+      - name: Commit memoria e report
+        run: |
+          git config user.name "owi-brain"
+          git config user.email "brain@openwarintelligence.org"
+          git add owi-brain/memory owi-brain/out owi-brain/model.json 2>/dev/null || true
+          git add owi-brain/memory owi-brain/out
+          if git diff --cached --quiet; then
+            echo "nessuna modifica"
+          else
+            git commit -m "brain: run $(date -u +%Y-%m-%dT%H:%MZ)"
+            git pull --rebase
+            git push
+          fi

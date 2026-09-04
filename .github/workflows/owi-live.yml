@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Recupera i campioni del giorno dal branch live
+      - name: "Recupera i campioni del giorno dal branch live"
         run: |
           mkdir -p /tmp/pub/samples
           if git fetch --depth=1 origin live:refs/remotes/origin/live 2>/dev/null; then
@@ -38,7 +38,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python owi-brain/live.py --out /tmp/pub --samples /tmp/pub/samples
 
-      - name: Pubblica sul branch live (storia riscritta: nessun accumulo nel repo)
+      - name: "Pubblica sul branch live (storia riscritta, nessun accumulo nel repo)"
         run: |
           cd /tmp/pub
           git init -q -b live

@@ -38,13 +38,11 @@ FIRMS_RADIUS_KM = 888
 FIRMS_MAX = 2500
 
 RSS_FEEDS = [
-    ("Reuters World", "https://feeds.reuters.com/Reuters/worldNews", "NEWS"),
     ("BBC World", "https://feeds.bbci.co.uk/news/world/rss.xml", "NEWS"),
     ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "NEWS"),
     ("Guardian World", "https://www.theguardian.com/world/rss", "NEWS"),
     ("Defense News", "https://www.defensenews.com/arc/outboundfeeds/rss/", "OSINT"),
     ("Military Times", "https://www.militarytimes.com/arc/outboundfeeds/rss/", "OSINT"),
-    ("Janes Defence", "https://www.janes.com/feeds/news", "OSINT"),
     ("Breaking Defense", "https://breakingdefense.com/feed/", "OSINT"),
     ("War on the Rocks", "https://warontherocks.com/feed/", "OSINT"),
     ("The War Zone", "https://www.thedrive.com/the-war-zone/feed", "OSINT"),
@@ -52,10 +50,8 @@ RSS_FEEDS = [
     ("ISW", "https://understandingwar.org/feed", "OSINT"),
     ("Arms Control", "https://www.armscontrol.org/rss.xml", "OSINT"),
     ("Bulletin Atomic", "https://thebulletin.org/feed/", "OSINT"),
-    ("SIPRI", "https://www.sipri.org/rss.xml", "OSINT"),
     ("Liveuamap", "https://liveuamap.com/rss", "OSINT"),
     ("Oryx OSINT", "https://www.oryxspioenkop.com/feeds/posts/default?alt=rss", "OSINT"),
-    ("CriticalThreats", "https://www.criticalthreats.org/rss.xml", "OSINT"),
     ("Long War Journal", "https://www.longwarjournal.org/feed", "OSINT"),
 ]
 MIL_KEYWORDS = ("military", "war", "conflict", "nato", "army", "navy", "missile", "drone", "bomb", "strike", "troops",

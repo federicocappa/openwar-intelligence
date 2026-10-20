@@ -1,22 +1,22 @@
 {
  "schema": "owi-iw/1",
- "run_id": "2026-10-19T10:02Z",
- "date": "2026-10-19",
- "generated_at": "2026-10-19T10:12Z",
+ "run_id": "2026-10-20T09:30Z",
+ "date": "2026-10-20",
+ "generated_at": "2026-10-20T09:40Z",
  "memory": {
-  "days": 40,
-  "observations": 739354,
-  "airframes": 12132,
-  "profiled": 8585,
-  "baseline_days": 39
+  "days": 41,
+  "observations": 760633,
+  "airframes": 12223,
+  "profiled": 8673,
+  "baseline_days": 40
  },
  "model": {
   "mode": "rule-based",
-  "labeled_rows": 76,
+  "labeled_rows": 80,
   "positives": 2,
   "needed_rows": 60,
   "needed_positives": 10,
-  "reason_it": "dati insufficienti: 76/60 giorni-zona etichettati, 2/10 eventi positivi"
+  "reason_it": "dati insufficienti: 80/60 giorni-zona etichettati, 2/10 eventi positivi"
  },
  "method_it": "Indicatori I&W valutati contro la baseline storica di ogni teatro (z-score, finestra 45 giorni). Punteggio = somma pesata degli z-score attivi. Il modello appreso si attiva solo con dati sufficienti e solo se batte la regola su holdout temporale; l'etichetta e' un proxy (spike GDELT o salto Threat Board entro 72h).",
  "indicators_catalog": [
@@ -89,20 +89,276 @@
  ],
  "zones": [
   {
-   "id": "arctic",
-   "name_it": "Artico",
-   "lat": 75.0,
-   "lon": 40.0,
-   "radius_km": 1300,
-   "rule_score": 9.1,
+   "id": "korea",
+   "name_it": "Corea / DPRK",
+   "lat": 38.0,
+   "lon": 127.0,
+   "radius_km": 380,
+   "rule_score": 11.1,
    "indicators": [
     {
      "id": "tanker_surge",
      "name_it": "Surge di aerocisterne",
      "value": 0.0,
-     "baseline_mean": 0.08,
+     "baseline_mean": 0.25,
+     "baseline_std": 0.49,
+     "baseline_days": 40,
+     "z": -0.5,
+     "active": false,
+     "weight": 3.0,
+     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
+    },
+    {
+     "id": "awacs_coverage",
+     "name_it": "Copertura AWACS/C2",
+     "value": 0.0,
+     "baseline_mean": 0.25,
+     "baseline_std": 0.59,
+     "baseline_days": 40,
+     "z": -0.42,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
+    },
+    {
+     "id": "isr_surge",
+     "name_it": "Surge ISR",
+     "value": 1.0,
+     "baseline_mean": 2.62,
+     "baseline_std": 2.01,
+     "baseline_days": 40,
+     "z": -0.81,
+     "active": false,
+     "weight": 2.0,
+     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
+    },
+    {
+     "id": "fighter_mass",
+     "name_it": "Massa di caccia",
+     "value": 1.0,
+     "baseline_mean": 0.1,
+     "baseline_std": 0.3,
+     "baseline_days": 40,
+     "z": 1.8,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
+    },
+    {
+     "id": "bomber_presence",
+     "name_it": "Bombardieri strategici",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
+    },
+    {
+     "id": "transport_inflow",
+     "name_it": "Afflusso di trasporti",
+     "value": 1.0,
+     "baseline_mean": 1.15,
+     "baseline_std": 1.29,
+     "baseline_days": 40,
+     "z": -0.12,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
+    },
+    {
+     "id": "staging_mass",
+     "name_it": "Massa in staging",
+     "value": 20.0,
+     "baseline_mean": 11.93,
+     "baseline_std": 6.31,
+     "baseline_days": 40,
+     "z": 1.28,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
+    },
+    {
+     "id": "new_actors",
+     "name_it": "Nuovi attori",
+     "value": 3.0,
+     "baseline_mean": 2.75,
+     "baseline_std": 1.08,
+     "baseline_days": 40,
+     "z": 0.15,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
+    },
+    {
+     "id": "night_ops",
+     "name_it": "Attivita' notturna",
+     "value": 0.0,
+     "baseline_mean": 0.14,
+     "baseline_std": 0.12,
+     "baseline_days": 40,
+     "z": -0.27,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
+    },
+    {
+     "id": "news_velocity",
+     "name_it": "Velocita' notizie (colpi)",
+     "value": 0.08,
+     "baseline_mean": 0.04,
+     "baseline_std": 0.06,
+     "baseline_days": 40,
+     "z": 0.08,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
+    },
+    {
+     "id": "threat_delta",
+     "name_it": "Salto Threat Board",
+     "value": 0.0,
+     "baseline_mean": null,
+     "baseline_std": null,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
+    }
+   ],
+   "counts": {
+    "helicopter": 7,
+    "all": 13,
+    "approach_all": 20,
+    "isr": 1,
+    "transport": 1,
+    "fighter": 1,
+    "bomber": 0,
+    "tanker": 0,
+    "awacs": 0
+   },
+   "nations": [
+    "KOR",
+    "UNK",
+    "USA"
+   ],
+   "strike_packages": [],
+   "orbits": [],
+   "anomalies": [
+    {
+     "hex": "000001",
+     "callsign": "PS12A",
+     "type_code": "",
+     "role": "unknown",
+     "nation": "UNK",
+     "zone": "korea",
+     "lat": 35.7227,
+     "lon": 128.5821,
+     "home_base": null,
+     "n_days": 39,
+     "reasons_it": [
+      "mai visto in korea (abituale: iran-gulf, ukraine, nato-baltic, myanmar)"
+     ]
+    },
+    {
+     "hex": "87cd03",
+     "callsign": "PLUTO31",
+     "type_code": "C68A",
+     "role": "unknown",
+     "nation": "JPN",
+     "zone": "korea",
+     "lat": 34.7923,
+     "lon": 133.914,
+     "home_base": "Yokota AB",
+     "n_days": 14,
+     "reasons_it": [
+      "mai visto in korea (abituale: nessun teatro)"
+     ]
+    },
+    {
+     "hex": "ae6497",
+     "callsign": "CARD69",
+     "type_code": "H60",
+     "role": "helicopter",
+     "nation": "USA",
+     "zone": "korea",
+     "lat": 37.3016,
+     "lon": 127.3622,
+     "home_base": "Osan AB",
+     "n_days": 4,
+     "reasons_it": [
+      "orario inconsueto (09Z, 0/20 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae5aaf",
+     "callsign": "DRAGN51",
+     "type_code": "V22",
+     "role": "helicopter",
+     "nation": "USA",
+     "zone": "korea",
+     "lat": 33.8976,
+     "lon": 133.6031,
+     "home_base": "Kadena AB",
+     "n_days": 4,
+     "reasons_it": [
+      "orario inconsueto (01Z, 1/23 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae621f",
+     "callsign": "HOIST88",
+     "type_code": "H60",
+     "role": "helicopter",
+     "nation": "USA",
+     "zone": "korea",
+     "lat": 37.0406,
+     "lon": 127.1991,
+     "home_base": "Camp Humphreys",
+     "n_days": 3,
+     "reasons_it": [
+      "orario inconsueto (00Z, 0/10 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae4e50",
+     "callsign": "DRAGN51",
+     "type_code": "V22",
+     "role": "helicopter",
+     "nation": "USA",
+     "zone": "korea",
+     "lat": 34.4978,
+     "lon": 133.4267,
+     "home_base": "Kadena AB",
+     "n_days": 3,
+     "reasons_it": [
+      "mai visto in korea (abituale: taiwan)"
+     ]
+    }
+   ],
+   "model_p": null,
+   "score": 11.1,
+   "level": "quiet",
+   "active_indicators": []
+  },
+  {
+   "id": "arctic",
+   "name_it": "Artico",
+   "lat": 75.0,
+   "lon": 40.0,
+   "radius_km": 1300,
+   "rule_score": 6.3,
+   "indicators": [
+    {
+     "id": "tanker_surge",
+     "name_it": "Surge di aerocisterne",
+     "value": 0.0,
+     "baseline_mean": 0.07,
      "baseline_std": 0.27,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.15,
      "active": false,
      "weight": 3.0,
@@ -114,7 +370,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -123,11 +379,11 @@
     {
      "id": "isr_surge",
      "name_it": "Surge ISR",
-     "value": 1.0,
+     "value": 4.0,
      "baseline_mean": 1.95,
-     "baseline_std": 1.45,
-     "baseline_days": 39,
-     "z": -0.65,
+     "baseline_std": 1.43,
+     "baseline_days": 40,
+     "z": 1.43,
      "active": false,
      "weight": 2.0,
      "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
@@ -135,11 +391,11 @@
     {
      "id": "fighter_mass",
      "name_it": "Massa di caccia",
-     "value": 1.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 2.0,
+     "value": 0.0,
+     "baseline_mean": 0.03,
+     "baseline_std": 0.16,
+     "baseline_days": 40,
+     "z": -0.05,
      "active": false,
      "weight": 2.5,
      "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
@@ -150,7 +406,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -160,10 +416,10 @@
      "id": "transport_inflow",
      "name_it": "Afflusso di trasporti",
      "value": 2.0,
-     "baseline_mean": 1.54,
-     "baseline_std": 1.55,
-     "baseline_days": 39,
-     "z": 0.3,
+     "baseline_mean": 1.55,
+     "baseline_std": 1.54,
+     "baseline_days": 40,
+     "z": 0.29,
      "active": false,
      "weight": 1.5,
      "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
@@ -171,11 +427,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 6.0,
-     "baseline_mean": 18.21,
-     "baseline_std": 9.14,
-     "baseline_days": 39,
-     "z": -1.34,
+     "value": 14.0,
+     "baseline_mean": 18.18,
+     "baseline_std": 9.02,
+     "baseline_days": 40,
+     "z": -0.46,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -183,11 +439,11 @@
     {
      "id": "new_actors",
      "name_it": "Nuovi attori",
-     "value": 3.0,
-     "baseline_mean": 3.13,
-     "baseline_std": 1.58,
-     "baseline_days": 39,
-     "z": -0.07,
+     "value": 4.0,
+     "baseline_mean": 3.15,
+     "baseline_std": 1.56,
+     "baseline_days": 40,
+     "z": 0.48,
      "active": false,
      "weight": 1.0,
      "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
@@ -198,7 +454,7 @@
      "value": 0.0,
      "baseline_mean": 0.09,
      "baseline_std": 0.16,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.17,
      "active": false,
      "weight": 1.0,
@@ -210,7 +466,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.0,
      "active": false,
      "weight": 1.5,
@@ -222,7 +478,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -230,12 +486,12 @@
     }
    ],
    "counts": {
+    "approach_all": 14,
     "transport": 2,
-    "all": 6,
-    "approach_all": 6,
-    "isr": 1,
-    "helicopter": 2,
-    "fighter": 1,
+    "all": 8,
+    "isr": 4,
+    "helicopter": 1,
+    "fighter": 0,
     "bomber": 0,
     "tanker": 0,
     "awacs": 0
@@ -243,286 +499,60 @@
    "nations": [
     "FIN",
     "NOR",
-    "UK"
-   ],
-   "strike_packages": [],
-   "orbits": [],
-   "anomalies": [
-    {
-     "hex": "ae1199",
-     "callsign": "RCH5086",
-     "type_code": "C17",
-     "role": "transport",
-     "nation": "USA",
-     "zone": "arctic",
-     "lat": 55.833,
-     "lon": 4.8194,
-     "home_base": null,
-     "n_days": 21,
-     "reasons_it": [
-      "mai visto in arctic (abituale: ukraine, nato-baltic, lebanon-syria)"
-     ]
-    }
-   ],
-   "model_p": null,
-   "score": 9.1,
-   "level": "quiet",
-   "active_indicators": []
-  },
-  {
-   "id": "lebanon-syria",
-   "name_it": "Siria / Libano",
-   "lat": 34.3,
-   "lon": 36.5,
-   "radius_km": 320,
-   "rule_score": 8.3,
-   "indicators": [
-    {
-     "id": "tanker_surge",
-     "name_it": "Surge di aerocisterne",
-     "value": 0.0,
-     "baseline_mean": 1.38,
-     "baseline_std": 1.16,
-     "baseline_days": 39,
-     "z": -1.18,
-     "active": false,
-     "weight": 3.0,
-     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
-    },
-    {
-     "id": "awacs_coverage",
-     "name_it": "Copertura AWACS/C2",
-     "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
-    },
-    {
-     "id": "isr_surge",
-     "name_it": "Surge ISR",
-     "value": 1.0,
-     "baseline_mean": 1.13,
-     "baseline_std": 1.0,
-     "baseline_days": 39,
-     "z": -0.12,
-     "active": false,
-     "weight": 2.0,
-     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
-    },
-    {
-     "id": "fighter_mass",
-     "name_it": "Massa di caccia",
-     "value": 1.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 2.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
-    },
-    {
-     "id": "bomber_presence",
-     "name_it": "Bombardieri strategici",
-     "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
-    },
-    {
-     "id": "transport_inflow",
-     "name_it": "Afflusso di trasporti",
-     "value": 0.0,
-     "baseline_mean": 3.18,
-     "baseline_std": 2.15,
-     "baseline_days": 39,
-     "z": -1.48,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
-    },
-    {
-     "id": "staging_mass",
-     "name_it": "Massa in staging",
-     "value": 7.0,
-     "baseline_mean": 14.51,
-     "baseline_std": 5.78,
-     "baseline_days": 39,
-     "z": -1.3,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
-    },
-    {
-     "id": "new_actors",
-     "name_it": "Nuovi attori",
-     "value": 2.0,
-     "baseline_mean": 5.74,
-     "baseline_std": 2.12,
-     "baseline_days": 39,
-     "z": -1.56,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
-    },
-    {
-     "id": "night_ops",
-     "name_it": "Attivita' notturna",
-     "value": 0.0,
-     "baseline_mean": 0.19,
-     "baseline_std": 0.23,
-     "baseline_days": 39,
-     "z": -0.38,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
-    },
-    {
-     "id": "news_velocity",
-     "name_it": "Velocita' notizie (colpi)",
-     "value": 0.0,
-     "baseline_mean": 0.03,
-     "baseline_std": 0.04,
-     "baseline_days": 39,
-     "z": -0.05,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
-    },
-    {
-     "id": "threat_delta",
-     "name_it": "Salto Threat Board",
-     "value": 0.0,
-     "baseline_mean": null,
-     "baseline_std": null,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
-    }
-   ],
-   "counts": {
-    "all": 6,
-    "isr": 1,
-    "approach_all": 7,
-    "fighter": 1,
-    "bomber": 0,
-    "tanker": 0,
-    "awacs": 0,
-    "transport": 0,
-    "helicopter": 0
-   },
-   "nations": [
     "UNK",
     "USA"
    ],
    "strike_packages": [],
    "orbits": [
     {
-     "hex": "adfeca",
-     "callsign": "VEGAS29",
+     "hex": "43c91d",
+     "callsign": "FALCN01",
      "role": "isr",
-     "nation": "USA",
-     "zone": "lebanon-syria",
-     "lat": 31.778,
-     "lon": 35.921,
-     "samples": 2
+     "nation": "UK",
+     "zone": "arctic",
+     "lat": 57.993,
+     "lon": -2.347,
+     "samples": 4
     }
    ],
    "anomalies": [
     {
-     "hex": "3b770d",
-     "callsign": "CTM005",
-     "type_code": "FA7X",
-     "role": "vip",
+     "hex": "3b7739",
+     "callsign": "FNY5153",
+     "type_code": "E121",
+     "role": "unknown",
      "nation": "FRA",
-     "zone": "lebanon-syria",
-     "lat": 33.0668,
-     "lon": 31.2832,
+     "zone": "arctic",
+     "lat": 57.2969,
+     "lon": 0.5199,
      "home_base": null,
-     "n_days": 20,
+     "n_days": 14,
      "reasons_it": [
-      "mai visto in lebanon-syria (abituale: nessun teatro)",
-      "orario inconsueto (02Z, 3/227 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "3b76ae",
-     "callsign": "",
-     "type_code": "A332",
-     "role": "tanker_mrtt",
-     "nation": "FRA",
-     "zone": "lebanon-syria",
-     "lat": 33.6343,
-     "lon": 30.2166,
-     "home_base": "BA 113 Saint-Dizier",
-     "n_days": 7,
-     "reasons_it": [
-      "mai visto in lebanon-syria (abituale: nessun teatro)",
-      "orario inconsueto (02Z, 0/93 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "7434c8",
-     "callsign": "SHAHD253",
-     "type_code": "C208",
-     "role": "unknown",
-     "nation": "UNK",
-     "zone": "lebanon-syria",
-     "lat": 32.1662,
-     "lon": 36.0016,
-     "home_base": "Muwaffaq Salti AB",
-     "n_days": 8,
-     "reasons_it": [
-      "orario inconsueto (10Z, 1/25 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "74368c",
-     "callsign": "RAAD35",
-     "type_code": "AT8T",
-     "role": "unknown",
-     "nation": "UNK",
-     "zone": "lebanon-syria",
-     "lat": 32.2201,
-     "lon": 35.8615,
-     "home_base": "Muwaffaq Salti AB",
-     "n_days": 5,
-     "reasons_it": [
-      "orario inconsueto (10Z, 0/35 osservazioni storiche)"
+      "mai visto in arctic (abituale: nessun teatro)"
      ]
     }
    ],
    "model_p": null,
-   "score": 8.3,
+   "score": 6.3,
    "level": "quiet",
    "active_indicators": []
   },
   {
-   "id": "ukraine",
-   "name_it": "Ucraina",
-   "lat": 48.5,
-   "lon": 35.0,
-   "radius_km": 650,
-   "rule_score": 7.1,
+   "id": "nato-baltic",
+   "name_it": "NATO / Baltico",
+   "lat": 58.0,
+   "lon": 24.0,
+   "radius_km": 550,
+   "rule_score": 4.9,
    "indicators": [
     {
      "id": "tanker_surge",
      "name_it": "Surge di aerocisterne",
      "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
+     "baseline_mean": 0.5,
+     "baseline_std": 0.68,
+     "baseline_days": 40,
+     "z": -0.71,
      "active": false,
      "weight": 3.0,
      "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
@@ -531,10 +561,10 @@
      "id": "awacs_coverage",
      "name_it": "Copertura AWACS/C2",
      "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
+     "baseline_mean": 0.07,
+     "baseline_std": 0.27,
+     "baseline_days": 40,
+     "z": -0.15,
      "active": false,
      "weight": 2.5,
      "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
@@ -542,11 +572,11 @@
     {
      "id": "isr_surge",
      "name_it": "Surge ISR",
-     "value": 1.0,
-     "baseline_mean": 0.13,
-     "baseline_std": 0.34,
-     "baseline_days": 39,
-     "z": 1.74,
+     "value": 6.0,
+     "baseline_mean": 3.23,
+     "baseline_std": 2.26,
+     "baseline_days": 40,
+     "z": 1.23,
      "active": false,
      "weight": 2.0,
      "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
@@ -557,7 +587,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -569,7 +599,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -578,11 +608,11 @@
     {
      "id": "transport_inflow",
      "name_it": "Afflusso di trasporti",
-     "value": 0.0,
-     "baseline_mean": 0.13,
-     "baseline_std": 0.41,
-     "baseline_days": 39,
-     "z": -0.26,
+     "value": 9.0,
+     "baseline_mean": 8.3,
+     "baseline_std": 4.42,
+     "baseline_days": 40,
+     "z": 0.16,
      "active": false,
      "weight": 1.5,
      "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
@@ -590,11 +620,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 45.0,
-     "baseline_mean": 71.64,
-     "baseline_std": 24.97,
-     "baseline_days": 39,
-     "z": -1.07,
+     "value": 73.0,
+     "baseline_mean": 173.57,
+     "baseline_std": 71.41,
+     "baseline_days": 40,
+     "z": -1.41,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -602,11 +632,11 @@
     {
      "id": "new_actors",
      "name_it": "Nuovi attori",
-     "value": 1.0,
-     "baseline_mean": 0.41,
-     "baseline_std": 0.75,
-     "baseline_days": 39,
-     "z": 0.79,
+     "value": 9.0,
+     "baseline_mean": 8.2,
+     "baseline_std": 3.2,
+     "baseline_days": 40,
+     "z": 0.25,
      "active": false,
      "weight": 1.0,
      "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
@@ -615,10 +645,10 @@
      "id": "night_ops",
      "name_it": "Attivita' notturna",
      "value": 0.0,
-     "baseline_mean": 0.02,
-     "baseline_std": 0.09,
-     "baseline_days": 39,
-     "z": -0.04,
+     "baseline_mean": 0.01,
+     "baseline_std": 0.02,
+     "baseline_days": 40,
+     "z": -0.02,
      "active": false,
      "weight": 1.0,
      "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
@@ -626,235 +656,11 @@
     {
      "id": "news_velocity",
      "name_it": "Velocita' notizie (colpi)",
-     "value": 0.04,
-     "baseline_mean": 0.04,
-     "baseline_std": 0.05,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
-    },
-    {
-     "id": "threat_delta",
-     "name_it": "Salto Threat Board",
-     "value": 0.0,
-     "baseline_mean": null,
-     "baseline_std": null,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
-    }
-   ],
-   "counts": {
-    "approach_all": 45,
-    "isr": 1,
-    "all": 1,
-    "fighter": 0,
-    "bomber": 0,
-    "tanker": 0,
-    "awacs": 0,
-    "transport": 0,
-    "helicopter": 0
-   },
-   "nations": [
-    "USA"
-   ],
-   "strike_packages": [],
-   "orbits": [],
-   "anomalies": [
-    {
-     "hex": "8953e3",
-     "callsign": "V8OAS",
-     "type_code": "B788",
-     "role": "unknown",
-     "nation": "UNK",
-     "zone": "ukraine",
-     "lat": 40.7813,
-     "lon": 45.6532,
-     "home_base": null,
-     "n_days": 11,
-     "reasons_it": [
-      "orario inconsueto (00Z, 9/188 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "4b8c4b",
-     "callsign": "TRK9",
-     "type_code": "GLF5",
-     "role": "isr_biz",
-     "nation": "TUR",
-     "zone": "ukraine",
-     "lat": 40.9253,
-     "lon": 31.4712,
-     "home_base": "Ali Al Salem AB",
-     "n_days": 7,
-     "reasons_it": [
-      "orario inconsueto (10Z, 3/73 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "4b9030",
-     "callsign": "TRK23",
-     "type_code": "GLF5",
-     "role": "isr_biz",
-     "nation": "TUR",
-     "zone": "ukraine",
-     "lat": 40.2439,
-     "lon": 32.6274,
-     "home_base": null,
-     "n_days": 6,
-     "reasons_it": [
-      "orario inconsueto (04Z, 0/46 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "4b82ab",
-     "callsign": "EM415",
-     "type_code": "B429",
-     "role": "helicopter",
-     "nation": "TUR",
-     "zone": "ukraine",
-     "lat": 41.0245,
-     "lon": 28.6207,
-     "home_base": null,
-     "n_days": 3,
-     "reasons_it": [
-      "orario inconsueto (07Z, 0/25 osservazioni storiche)"
-     ]
-    }
-   ],
-   "model_p": null,
-   "score": 7.1,
-   "level": "quiet",
-   "active_indicators": []
-  },
-  {
-   "id": "korea",
-   "name_it": "Corea / DPRK",
-   "lat": 38.0,
-   "lon": 127.0,
-   "radius_km": 380,
-   "rule_score": 4.2,
-   "indicators": [
-    {
-     "id": "tanker_surge",
-     "name_it": "Surge di aerocisterne",
-     "value": 0.0,
-     "baseline_mean": 0.26,
-     "baseline_std": 0.5,
-     "baseline_days": 39,
-     "z": -0.51,
-     "active": false,
-     "weight": 3.0,
-     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
-    },
-    {
-     "id": "awacs_coverage",
-     "name_it": "Copertura AWACS/C2",
-     "value": 0.0,
-     "baseline_mean": 0.23,
-     "baseline_std": 0.58,
-     "baseline_days": 39,
-     "z": -0.4,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
-    },
-    {
-     "id": "isr_surge",
-     "name_it": "Surge ISR",
-     "value": 2.0,
-     "baseline_mean": 2.62,
-     "baseline_std": 2.03,
-     "baseline_days": 39,
-     "z": -0.3,
-     "active": false,
-     "weight": 2.0,
-     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
-    },
-    {
-     "id": "fighter_mass",
-     "name_it": "Massa di caccia",
-     "value": 0.0,
-     "baseline_mean": 0.1,
-     "baseline_std": 0.31,
-     "baseline_days": 39,
-     "z": -0.21,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
-    },
-    {
-     "id": "bomber_presence",
-     "name_it": "Bombardieri strategici",
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
-    },
-    {
-     "id": "transport_inflow",
-     "name_it": "Afflusso di trasporti",
-     "value": 1.0,
-     "baseline_mean": 1.15,
-     "baseline_std": 1.31,
-     "baseline_days": 39,
-     "z": -0.12,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
-    },
-    {
-     "id": "staging_mass",
-     "name_it": "Massa in staging",
-     "value": 22.0,
-     "baseline_mean": 11.67,
-     "baseline_std": 6.18,
-     "baseline_days": 39,
-     "z": 1.67,
-     "active": true,
-     "weight": 1.5,
-     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
-    },
-    {
-     "id": "new_actors",
-     "name_it": "Nuovi attori",
-     "value": 2.0,
-     "baseline_mean": 2.74,
-     "baseline_std": 1.09,
-     "baseline_days": 39,
-     "z": -0.45,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
-    },
-    {
-     "id": "night_ops",
-     "name_it": "Attivita' notturna",
-     "value": 0.0,
-     "baseline_mean": 0.14,
-     "baseline_std": 0.12,
-     "baseline_days": 39,
-     "z": -0.28,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
-    },
-    {
-     "id": "news_velocity",
-     "name_it": "Velocita' notizie (colpi)",
-     "value": 0.0,
-     "baseline_mean": 0.04,
-     "baseline_std": 0.06,
-     "baseline_days": 39,
-     "z": -0.09,
      "active": false,
      "weight": 1.5,
      "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
@@ -865,7 +671,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -873,45 +679,166 @@
     }
    ],
    "counts": {
-    "isr": 2,
-    "all": 14,
-    "helicopter": 7,
-    "approach_all": 22,
-    "transport": 1,
+    "approach_all": 73,
+    "transport": 9,
+    "all": 24,
+    "isr": 6,
+    "helicopter": 2,
     "fighter": 0,
     "bomber": 0,
     "tanker": 0,
     "awacs": 0
    },
    "nations": [
-    "KOR",
+    "DEU",
+    "DNK",
+    "FIN",
+    "POL",
+    "ROU",
+    "UK",
+    "UKR",
+    "UNK",
     "USA"
    ],
    "strike_packages": [],
-   "orbits": [],
+   "orbits": [
+    {
+     "hex": "3b7567",
+     "callsign": "TTAL91",
+     "role": "tanker",
+     "nation": "FRA",
+     "zone": "nato-baltic",
+     "lat": 52.625,
+     "lon": 17.487,
+     "samples": 3
+    }
+   ],
    "anomalies": [
     {
-     "hex": "ae5aaf",
-     "callsign": "DRAGON51",
-     "type_code": "V22",
+     "hex": "498489",
+     "callsign": "CEF2921",
+     "type_code": "C295",
+     "role": "transport",
+     "nation": "CZE",
+     "zone": "nato-baltic",
+     "lat": 50.127,
+     "lon": 14.5529,
+     "home_base": "Grafenwoehr",
+     "n_days": 22,
+     "reasons_it": [
+      "orario inconsueto (04Z, 10/332 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "43c5eb",
+     "callsign": "RONIN03",
+     "type_code": "A400",
+     "role": "transport",
+     "nation": "UK",
+     "zone": "nato-baltic",
+     "lat": 52.7528,
+     "lon": 9.2446,
+     "home_base": "HMNB Portsmouth",
+     "n_days": 22,
+     "reasons_it": [
+      "orario inconsueto (07Z, 4/281 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "47812b",
+     "callsign": "",
+     "type_code": "EH10",
+     "role": "helicopter",
+     "nation": "NOR",
+     "zone": "nato-baltic",
+     "lat": 59.6795,
+     "lon": 11.1252,
+     "home_base": "Rygge AB",
+     "n_days": 20,
+     "reasons_it": [
+      "orario inconsueto (04Z, 2/94 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "45f457",
+     "callsign": "PR52",
+     "type_code": "",
+     "role": "unknown",
+     "nation": "DNK",
+     "zone": "nato-baltic",
+     "lat": 56.2292,
+     "lon": 8.9565,
+     "home_base": null,
+     "n_days": 19,
+     "reasons_it": [
+      "orario inconsueto (03Z, 0/115 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "33fca2",
+     "callsign": "IAM3180",
+     "type_code": "GLF6",
+     "role": "transport",
+     "nation": "ITA",
+     "zone": "nato-baltic",
+     "lat": 51.9886,
+     "lon": 10.7867,
+     "home_base": null,
+     "n_days": 19,
+     "reasons_it": [
+      "mai visto in nato-baltic (abituale: iran-gulf, myanmar)"
+     ]
+    },
+    {
+     "hex": "498422",
+     "callsign": "CEF3122",
+     "type_code": "A319",
+     "role": "transport",
+     "nation": "CZE",
+     "zone": "nato-baltic",
+     "lat": 50.085,
+     "lon": 14.4691,
+     "home_base": "BA 113 Saint-Dizier",
+     "n_days": 17,
+     "reasons_it": [
+      "orario inconsueto (04Z, 8/225 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae4847",
+     "callsign": "CROSS68",
+     "type_code": "H60",
      "role": "helicopter",
      "nation": "USA",
-     "zone": "korea",
-     "lat": 32.9692,
-     "lon": 131.7237,
-     "home_base": "Kadena AB",
-     "n_days": 3,
+     "zone": "nato-baltic",
+     "lat": 56.8054,
+     "lon": 24.8585,
+     "home_base": "Adazi Military Base",
+     "n_days": 13,
      "reasons_it": [
-      "mai visto in korea (abituale: taiwan)"
+      "orario inconsueto (09Z, 0/66 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "43c5da",
+     "callsign": "RONIN04",
+     "type_code": "A400",
+     "role": "transport",
+     "nation": "UK",
+     "zone": "nato-baltic",
+     "lat": 52.7464,
+     "lon": 9.2649,
+     "home_base": "Camp Bondsteel",
+     "n_days": 13,
+     "reasons_it": [
+      "orario inconsueto (07Z, 2/56 osservazioni storiche)"
      ]
     }
    ],
    "model_p": null,
-   "score": 4.2,
+   "score": 4.9,
    "level": "quiet",
-   "active_indicators": [
-    "Massa in staging"
-   ]
+   "active_indicators": []
   },
   {
    "id": "taiwan",
@@ -919,7 +846,7 @@
    "lat": 24.0,
    "lon": 120.5,
    "radius_km": 450,
-   "rule_score": 4.0,
+   "rule_score": 2.5,
    "indicators": [
     {
      "id": "tanker_surge",
@@ -927,7 +854,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 3.0,
@@ -939,7 +866,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -951,7 +878,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.0,
@@ -963,7 +890,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -975,7 +902,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -987,7 +914,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -996,11 +923,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 18.0,
-     "baseline_mean": 10.79,
-     "baseline_std": 5.78,
-     "baseline_days": 39,
-     "z": 1.25,
+     "value": 15.0,
+     "baseline_mean": 11.05,
+     "baseline_std": 5.93,
+     "baseline_days": 40,
+     "z": 0.67,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -1011,8 +938,8 @@
      "value": 1.0,
      "baseline_mean": 0.62,
      "baseline_std": 0.54,
-     "baseline_days": 39,
-     "z": 0.49,
+     "baseline_days": 40,
+     "z": 0.47,
      "active": false,
      "weight": 1.0,
      "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
@@ -1023,7 +950,7 @@
      "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.16,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.05,
      "active": false,
      "weight": 1.0,
@@ -1032,11 +959,11 @@
     {
      "id": "news_velocity",
      "name_it": "Velocita' notizie (colpi)",
-     "value": 0.01,
+     "value": 0.0,
      "baseline_mean": 0.01,
      "baseline_std": 0.01,
-     "baseline_days": 39,
-     "z": 0.01,
+     "baseline_days": 40,
+     "z": -0.01,
      "active": false,
      "weight": 1.5,
      "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
@@ -1047,7 +974,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1055,7 +982,7 @@
     }
    ],
    "counts": {
-    "approach_all": 18,
+    "approach_all": 15,
     "all": 1,
     "fighter": 0,
     "bomber": 0,
@@ -1069,323 +996,27 @@
     "TWN"
    ],
    "strike_packages": [],
-   "orbits": [
-    {
-     "hex": "7cfa97",
-     "callsign": "BFLO50",
-     "role": "isr",
-     "nation": "AUS",
-     "zone": "taiwan",
-     "lat": 26.627,
-     "lon": 128.081,
-     "samples": 3
-    }
-   ],
+   "orbits": [],
    "anomalies": [
     {
-     "hex": "ae03e6",
-     "callsign": "CNV3955",
-     "type_code": "C130",
-     "role": "transport",
-     "nation": "USA",
-     "zone": "taiwan",
-     "lat": 26.7215,
-     "lon": 128.0721,
-     "home_base": null,
-     "n_days": 11,
-     "reasons_it": [
-      "orario inconsueto (04Z, 4/96 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "87cc3b",
+     "hex": "af4f4d",
      "callsign": "",
-     "type_code": "KC2",
+     "type_code": "B762",
      "role": "unknown",
-     "nation": "JPN",
-     "zone": "taiwan",
-     "lat": 25.3243,
-     "lon": 125.9591,
-     "home_base": "Yokota AB",
-     "n_days": 9,
-     "reasons_it": [
-      "mai visto in taiwan (abituale: korea)"
-     ]
-    }
-   ],
-   "model_p": null,
-   "score": 4.0,
-   "level": "quiet",
-   "active_indicators": []
-  },
-  {
-   "id": "nato-baltic",
-   "name_it": "NATO / Baltico",
-   "lat": 58.0,
-   "lon": 24.0,
-   "radius_km": 550,
-   "rule_score": 2.7,
-   "indicators": [
-    {
-     "id": "tanker_surge",
-     "name_it": "Surge di aerocisterne",
-     "value": 0.0,
-     "baseline_mean": 0.51,
-     "baseline_std": 0.68,
-     "baseline_days": 39,
-     "z": -0.72,
-     "active": false,
-     "weight": 3.0,
-     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
-    },
-    {
-     "id": "awacs_coverage",
-     "name_it": "Copertura AWACS/C2",
-     "value": 0.0,
-     "baseline_mean": 0.08,
-     "baseline_std": 0.27,
-     "baseline_days": 39,
-     "z": -0.15,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
-    },
-    {
-     "id": "isr_surge",
-     "name_it": "Surge ISR",
-     "value": 5.0,
-     "baseline_mean": 3.18,
-     "baseline_std": 2.27,
-     "baseline_days": 39,
-     "z": 0.8,
-     "active": false,
-     "weight": 2.0,
-     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
-    },
-    {
-     "id": "fighter_mass",
-     "name_it": "Massa di caccia",
-     "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
-    },
-    {
-     "id": "bomber_presence",
-     "name_it": "Bombardieri strategici",
-     "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 2.5,
-     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
-    },
-    {
-     "id": "transport_inflow",
-     "name_it": "Afflusso di trasporti",
-     "value": 7.0,
-     "baseline_mean": 8.26,
-     "baseline_std": 4.47,
-     "baseline_days": 39,
-     "z": -0.28,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
-    },
-    {
-     "id": "staging_mass",
-     "name_it": "Massa in staging",
-     "value": 64.0,
-     "baseline_mean": 174.26,
-     "baseline_std": 72.21,
-     "baseline_days": 39,
-     "z": -1.53,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
-    },
-    {
-     "id": "new_actors",
-     "name_it": "Nuovi attori",
-     "value": 7.0,
-     "baseline_mean": 8.23,
-     "baseline_std": 3.24,
-     "baseline_days": 39,
-     "z": -0.38,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
-    },
-    {
-     "id": "night_ops",
-     "name_it": "Attivita' notturna",
-     "value": 0.0,
-     "baseline_mean": 0.01,
-     "baseline_std": 0.02,
-     "baseline_days": 39,
-     "z": -0.02,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
-    },
-    {
-     "id": "news_velocity",
-     "name_it": "Velocita' notizie (colpi)",
-     "value": 0.0,
-     "baseline_mean": 0.0,
-     "baseline_std": 0.0,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 1.5,
-     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
-    },
-    {
-     "id": "threat_delta",
-     "name_it": "Salto Threat Board",
-     "value": 0.0,
-     "baseline_mean": null,
-     "baseline_std": null,
-     "baseline_days": 39,
-     "z": 0.0,
-     "active": false,
-     "weight": 1.0,
-     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
-    }
-   ],
-   "counts": {
-    "approach_all": 64,
-    "transport": 7,
-    "all": 18,
-    "isr": 5,
-    "fighter": 0,
-    "bomber": 0,
-    "tanker": 0,
-    "awacs": 0,
-    "helicopter": 0
-   },
-   "nations": [
-    "DEU",
-    "FIN",
-    "ITA",
-    "POL",
-    "ROU",
-    "UNK",
-    "USA"
-   ],
-   "strike_packages": [],
-   "orbits": [
-    {
-     "hex": "467891",
-     "callsign": "T22",
-     "role": "isr",
-     "nation": "FIN",
-     "zone": "nato-baltic",
-     "lat": 61.884,
-     "lon": 24.954,
-     "samples": 2
-    }
-   ],
-   "anomalies": [
-    {
-     "hex": "3f7b3c",
-     "callsign": "GAF647",
-     "type_code": "GL5T",
-     "role": "vip",
-     "nation": "DEU",
-     "zone": "nato-baltic",
-     "lat": 52.1852,
-     "lon": 11.6019,
-     "home_base": "Kleine Brogel AB",
-     "n_days": 26,
-     "reasons_it": [
-      "orario inconsueto (02Z, 12/328 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "48da8f",
-     "callsign": "PLF693",
-     "type_code": "W3",
-     "role": "transport",
-     "nation": "POL",
-     "zone": "nato-baltic",
-     "lat": 54.5658,
-     "lon": 18.7009,
-     "home_base": "Redzikowo",
-     "n_days": 19,
-     "reasons_it": [
-      "orario inconsueto (10Z, 3/140 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "ae0133",
-     "callsign": "DUKE26",
-     "type_code": "C560",
-     "role": "isr",
      "nation": "USA",
-     "zone": "nato-baltic",
-     "lat": 54.8829,
-     "lon": 9.6358,
-     "home_base": "Landstuhl",
-     "n_days": 18,
-     "reasons_it": [
-      "orario inconsueto (06Z, 7/151 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "4aecd1",
-     "callsign": "SVF656",
-     "type_code": "GLEX",
-     "role": "transport",
-     "nation": "ROU",
-     "zone": "nato-baltic",
-     "lat": 59.6069,
-     "lon": 17.8924,
+     "zone": "taiwan",
+     "lat": 26.3343,
+     "lon": 127.7963,
      "home_base": null,
-     "n_days": 16,
+     "n_days": 6,
      "reasons_it": [
-      "orario inconsueto (04Z, 7/221 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "43c6f4",
-     "callsign": "RRR9910",
-     "type_code": "A332",
-     "role": "tanker_mrtt",
-     "nation": "UK",
-     "zone": "nato-baltic",
-     "lat": 53.0385,
-     "lon": 8.9247,
-     "home_base": "RAF Waddington",
-     "n_days": 12,
-     "reasons_it": [
-      "mai visto in nato-baltic (abituale: arctic)"
-     ]
-    },
-    {
-     "hex": "3fefdb",
-     "callsign": "DMMGL",
-     "type_code": "PISI",
-     "role": "unknown",
-     "nation": "DEU",
-     "zone": "nato-baltic",
-     "lat": 53.3776,
-     "lon": 9.013,
-     "home_base": null,
-     "n_days": 4,
-     "reasons_it": [
-      "orario inconsueto (08Z, 0/20 osservazioni storiche)"
+      "mai visto in taiwan (abituale: nessun teatro)",
+      "orario inconsueto (08Z, 0/23 osservazioni storiche)"
      ]
     }
    ],
    "model_p": null,
-   "score": 2.7,
+   "score": 2.5,
    "level": "quiet",
    "active_indicators": []
   },
@@ -1395,16 +1026,16 @@
    "lat": 27.0,
    "lon": 52.0,
    "radius_km": 750,
-   "rule_score": 2.3,
+   "rule_score": 0.8,
    "indicators": [
     {
      "id": "tanker_surge",
      "name_it": "Surge di aerocisterne",
-     "value": 1.0,
-     "baseline_mean": 8.21,
-     "baseline_std": 3.16,
-     "baseline_days": 39,
-     "z": -2.28,
+     "value": 5.0,
+     "baseline_mean": 8.05,
+     "baseline_std": 3.27,
+     "baseline_days": 40,
+     "z": -0.93,
      "active": false,
      "weight": 3.0,
      "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
@@ -1415,7 +1046,7 @@
      "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.16,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.05,
      "active": false,
      "weight": 2.5,
@@ -1424,11 +1055,11 @@
     {
      "id": "isr_surge",
      "name_it": "Surge ISR",
-     "value": 2.0,
-     "baseline_mean": 2.59,
-     "baseline_std": 1.79,
-     "baseline_days": 39,
-     "z": -0.33,
+     "value": 3.0,
+     "baseline_mean": 2.6,
+     "baseline_std": 1.77,
+     "baseline_days": 40,
+     "z": 0.23,
      "active": false,
      "weight": 2.0,
      "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
@@ -1439,7 +1070,7 @@
      "value": 0.0,
      "baseline_mean": 0.05,
      "baseline_std": 0.22,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.1,
      "active": false,
      "weight": 2.5,
@@ -1451,7 +1082,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1460,11 +1091,11 @@
     {
      "id": "transport_inflow",
      "name_it": "Afflusso di trasporti",
-     "value": 14.0,
-     "baseline_mean": 14.0,
-     "baseline_std": 6.32,
-     "baseline_days": 39,
-     "z": 0.0,
+     "value": 7.0,
+     "baseline_mean": 14.22,
+     "baseline_std": 6.4,
+     "baseline_days": 40,
+     "z": -1.13,
      "active": false,
      "weight": 1.5,
      "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
@@ -1472,11 +1103,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 6.0,
-     "baseline_mean": 4.03,
-     "baseline_std": 2.11,
-     "baseline_days": 39,
-     "z": 0.94,
+     "value": 2.0,
+     "baseline_mean": 4.17,
+     "baseline_std": 2.29,
+     "baseline_days": 40,
+     "z": -0.95,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -1484,11 +1115,11 @@
     {
      "id": "new_actors",
      "name_it": "Nuovi attori",
-     "value": 9.0,
-     "baseline_mean": 9.03,
-     "baseline_std": 2.65,
-     "baseline_days": 39,
-     "z": -0.01,
+     "value": 7.0,
+     "baseline_mean": 9.07,
+     "baseline_std": 2.63,
+     "baseline_days": 40,
+     "z": -0.69,
      "active": false,
      "weight": 1.0,
      "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
@@ -1497,10 +1128,10 @@
      "id": "night_ops",
      "name_it": "Attivita' notturna",
      "value": 0.03,
-     "baseline_mean": 0.17,
+     "baseline_mean": 0.16,
      "baseline_std": 0.09,
-     "baseline_days": 39,
-     "z": -0.27,
+     "baseline_days": 40,
+     "z": -0.26,
      "active": false,
      "weight": 1.0,
      "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
@@ -1511,7 +1142,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -1523,7 +1154,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1531,12 +1162,12 @@
     }
    ],
    "counts": {
-    "all": 64,
-    "transport": 14,
-    "isr": 2,
-    "approach_all": 6,
-    "helicopter": 4,
-    "tanker": 1,
+    "all": 61,
+    "transport": 7,
+    "tanker": 5,
+    "helicopter": 1,
+    "isr": 3,
+    "approach_all": 2,
     "fighter": 0,
     "bomber": 0,
     "awacs": 0
@@ -1544,111 +1175,329 @@
    "nations": [
     "ARE",
     "FRA",
-    "IND",
+    "IRQ",
     "KWT",
-    "QAT",
-    "RUS",
-    "SAU",
+    "TUR",
     "UNK",
     "USA"
    ],
    "strike_packages": [],
-   "orbits": [],
+   "orbits": [
+    {
+     "hex": "896c06",
+     "callsign": "BLLIED 1",
+     "role": "isr",
+     "nation": "ARE",
+     "zone": "iran-gulf",
+     "lat": 24.306,
+     "lon": 55.398,
+     "samples": 3
+    },
+    {
+     "hex": "ae6258",
+     "callsign": "OVRLD01",
+     "role": "isr",
+     "nation": "USA",
+     "zone": "iran-gulf",
+     "lat": 25.379,
+     "lon": 55.78,
+     "samples": 2
+    },
+    {
+     "hex": "3b75dd",
+     "callsign": "CTM021",
+     "role": "tanker",
+     "nation": "FRA",
+     "zone": "iran-gulf",
+     "lat": 24.558,
+     "lon": 53.954,
+     "samples": 2
+    }
+   ],
    "anomalies": [
     {
-     "hex": "adfea0",
-     "callsign": "X",
-     "type_code": "C130",
-     "role": "transport",
-     "nation": "USA",
-     "zone": "iran-gulf",
-     "lat": 28.848,
-     "lon": 47.4894,
-     "home_base": null,
-     "n_days": 3,
-     "reasons_it": [
-      "mai visto in iran-gulf (abituale: ukraine)",
-      "orario inconsueto (06Z, 0/32 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "aed555",
+     "hex": "ae0151",
      "callsign": "",
-     "type_code": "B762",
-     "role": "unknown",
+     "type_code": "K35R",
+     "role": "tanker",
      "nation": "USA",
      "zone": "iran-gulf",
-     "lat": 24.6625,
-     "lon": 53.7794,
-     "home_base": "Al Minhad AB",
-     "n_days": 25,
-     "reasons_it": [
-      "orario inconsueto (01Z, 17/357 osservazioni storiche)"
-     ]
-    },
-    {
-     "hex": "80078e",
-     "callsign": "IFC1516",
-     "type_code": "C17",
-     "role": "transport",
-     "nation": "IND",
-     "zone": "iran-gulf",
-     "lat": 22.6868,
-     "lon": 58.7275,
-     "home_base": "Agra AB",
-     "n_days": 12,
-     "reasons_it": [
-      "mai visto in iran-gulf (abituale: nessun teatro)"
-     ]
-    },
-    {
-     "hex": "80078f",
-     "callsign": "IFC1506",
-     "type_code": "C17",
-     "role": "transport",
-     "nation": "IND",
-     "zone": "iran-gulf",
-     "lat": 22.7344,
-     "lon": 58.3564,
-     "home_base": "Agra AB",
-     "n_days": 11,
-     "reasons_it": [
-      "mai visto in iran-gulf (abituale: nessun teatro)"
-     ]
-    },
-    {
-     "hex": "06a249",
-     "callsign": "LHOB01",
-     "type_code": "C17",
-     "role": "transport",
-     "nation": "QAT",
-     "zone": "iran-gulf",
-     "lat": 25.3793,
-     "lon": 51.5113,
+     "lat": 25.2121,
+     "lon": 55.9885,
      "home_base": null,
-     "n_days": 4,
+     "n_days": 5,
      "reasons_it": [
-      "orario inconsueto (03Z, 0/46 osservazioni storiche)"
+      "mai visto in iran-gulf (abituale: nessun teatro)",
+      "orario inconsueto (00Z, 0/42 osservazioni storiche)"
      ]
     },
     {
-     "hex": "ae6aaf",
-     "callsign": "",
-     "type_code": "V22",
-     "role": "helicopter",
+     "hex": "3b770d",
+     "callsign": "CTM005",
+     "type_code": "FA7X",
+     "role": "vip",
+     "nation": "FRA",
+     "zone": "iran-gulf",
+     "lat": 24.4472,
+     "lon": 54.627,
+     "home_base": null,
+     "n_days": 21,
+     "reasons_it": [
+      "orario inconsueto (06Z, 10/249 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae6258",
+     "callsign": "OVRLD01",
+     "type_code": "Q4",
+     "role": "isr",
      "nation": "USA",
      "zone": "iran-gulf",
-     "lat": 25.0219,
-     "lon": 55.3479,
-     "home_base": "Al Dhafra AB",
-     "n_days": 4,
+     "lat": 25.3244,
+     "lon": 56.1401,
+     "home_base": "Muwaffaq Salti AB",
+     "n_days": 9,
      "reasons_it": [
-      "orario inconsueto (04Z, 0/21 osservazioni storiche)"
+      "orario inconsueto (07Z, 0/27 osservazioni storiche)"
      ]
     }
    ],
    "model_p": null,
-   "score": 2.3,
+   "score": 0.8,
+   "level": "quiet",
+   "active_indicators": []
+  },
+  {
+   "id": "ukraine",
+   "name_it": "Ucraina",
+   "lat": 48.5,
+   "lon": 35.0,
+   "radius_km": 650,
+   "rule_score": 0.0,
+   "indicators": [
+    {
+     "id": "tanker_surge",
+     "name_it": "Surge di aerocisterne",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 3.0,
+     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
+    },
+    {
+     "id": "awacs_coverage",
+     "name_it": "Copertura AWACS/C2",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
+    },
+    {
+     "id": "isr_surge",
+     "name_it": "Surge ISR",
+     "value": 0.0,
+     "baseline_mean": 0.15,
+     "baseline_std": 0.36,
+     "baseline_days": 40,
+     "z": -0.3,
+     "active": false,
+     "weight": 2.0,
+     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
+    },
+    {
+     "id": "fighter_mass",
+     "name_it": "Massa di caccia",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
+    },
+    {
+     "id": "bomber_presence",
+     "name_it": "Bombardieri strategici",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
+    },
+    {
+     "id": "transport_inflow",
+     "name_it": "Afflusso di trasporti",
+     "value": 0.0,
+     "baseline_mean": 0.12,
+     "baseline_std": 0.4,
+     "baseline_days": 40,
+     "z": -0.25,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
+    },
+    {
+     "id": "staging_mass",
+     "name_it": "Massa in staging",
+     "value": 46.0,
+     "baseline_mean": 71.75,
+     "baseline_std": 24.65,
+     "baseline_days": 40,
+     "z": -1.04,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
+    },
+    {
+     "id": "new_actors",
+     "name_it": "Nuovi attori",
+     "value": 0.0,
+     "baseline_mean": 0.42,
+     "baseline_std": 0.75,
+     "baseline_days": 40,
+     "z": -0.57,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
+    },
+    {
+     "id": "night_ops",
+     "name_it": "Attivita' notturna",
+     "value": 0.0,
+     "baseline_mean": 0.02,
+     "baseline_std": 0.08,
+     "baseline_days": 40,
+     "z": -0.03,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
+    },
+    {
+     "id": "news_velocity",
+     "name_it": "Velocita' notizie (colpi)",
+     "value": 0.0,
+     "baseline_mean": 0.04,
+     "baseline_std": 0.05,
+     "baseline_days": 40,
+     "z": -0.07,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
+    },
+    {
+     "id": "threat_delta",
+     "name_it": "Salto Threat Board",
+     "value": 0.0,
+     "baseline_mean": null,
+     "baseline_std": null,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
+    }
+   ],
+   "counts": {
+    "approach_all": 46,
+    "fighter": 0,
+    "bomber": 0,
+    "tanker": 0,
+    "awacs": 0,
+    "isr": 0,
+    "transport": 0,
+    "helicopter": 0,
+    "all": 0
+   },
+   "nations": [],
+   "strike_packages": [],
+   "orbits": [
+    {
+     "hex": "4b82db",
+     "callsign": "HANDE05",
+     "role": "isr",
+     "nation": "TUR",
+     "zone": "ukraine",
+     "lat": 40.107,
+     "lon": 32.742,
+     "samples": 4
+    }
+   ],
+   "anomalies": [
+    {
+     "hex": "ae0677",
+     "callsign": "RCH241",
+     "type_code": "C17",
+     "role": "transport",
+     "nation": "USA",
+     "zone": "ukraine",
+     "lat": 48.0002,
+     "lon": 18.467,
+     "home_base": null,
+     "n_days": 5,
+     "reasons_it": [
+      "mai visto in ukraine (abituale: nessun teatro)",
+      "orario inconsueto (05Z, 2/68 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae1178",
+     "callsign": "RCH4983",
+     "type_code": "C17",
+     "role": "transport",
+     "nation": "USA",
+     "zone": "ukraine",
+     "lat": 41.8013,
+     "lon": 23.6912,
+     "home_base": null,
+     "n_days": 20,
+     "reasons_it": [
+      "orario inconsueto (05Z, 2/195 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "ae07f4",
+     "callsign": "RCH567",
+     "type_code": "C17",
+     "role": "transport",
+     "nation": "USA",
+     "zone": "ukraine",
+     "lat": 48.3349,
+     "lon": 17.8724,
+     "home_base": null,
+     "n_days": 12,
+     "reasons_it": [
+      "mai visto in ukraine (abituale: nessun teatro)"
+     ]
+    },
+    {
+     "hex": "4ba674",
+     "callsign": "TRK8",
+     "type_code": "A319",
+     "role": "transport",
+     "nation": "TUR",
+     "zone": "ukraine",
+     "lat": 41.0786,
+     "lon": 40.3594,
+     "home_base": null,
+     "n_days": 7,
+     "reasons_it": [
+      "orario inconsueto (05Z, 0/88 osservazioni storiche)"
+     ]
+    }
+   ],
+   "model_p": null,
+   "score": 0.0,
    "level": "quiet",
    "active_indicators": []
   },
@@ -1663,11 +1512,11 @@
     {
      "id": "tanker_surge",
      "name_it": "Surge di aerocisterne",
-     "value": 3.0,
-     "baseline_mean": 8.05,
-     "baseline_std": 3.87,
-     "baseline_days": 39,
-     "z": -1.3,
+     "value": 5.0,
+     "baseline_mean": 8.0,
+     "baseline_std": 3.84,
+     "baseline_days": 40,
+     "z": -0.78,
      "active": false,
      "weight": 3.0,
      "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
@@ -1678,7 +1527,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1688,10 +1537,10 @@
      "id": "isr_surge",
      "name_it": "Surge ISR",
      "value": 1.0,
-     "baseline_mean": 2.03,
-     "baseline_std": 1.91,
-     "baseline_days": 39,
-     "z": -0.54,
+     "baseline_mean": 2.12,
+     "baseline_std": 1.99,
+     "baseline_days": 40,
+     "z": -0.57,
      "active": false,
      "weight": 2.0,
      "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
@@ -1702,7 +1551,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1714,7 +1563,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1723,11 +1572,11 @@
     {
      "id": "transport_inflow",
      "name_it": "Afflusso di trasporti",
-     "value": 0.0,
-     "baseline_mean": 4.28,
-     "baseline_std": 2.6,
-     "baseline_days": 39,
-     "z": -1.65,
+     "value": 3.0,
+     "baseline_mean": 4.22,
+     "baseline_std": 2.59,
+     "baseline_days": 40,
+     "z": -0.47,
      "active": false,
      "weight": 1.5,
      "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
@@ -1735,11 +1584,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 4.0,
-     "baseline_mean": 5.54,
-     "baseline_std": 3.03,
-     "baseline_days": 39,
-     "z": -0.51,
+     "value": 2.0,
+     "baseline_mean": 5.55,
+     "baseline_std": 3.0,
+     "baseline_days": 40,
+     "z": -1.19,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -1748,9 +1597,9 @@
      "id": "new_actors",
      "name_it": "Nuovi attori",
      "value": 4.0,
-     "baseline_mean": 4.46,
-     "baseline_std": 1.86,
-     "baseline_days": 39,
+     "baseline_mean": 4.47,
+     "baseline_std": 1.84,
+     "baseline_days": 40,
      "z": -0.22,
      "active": false,
      "weight": 1.0,
@@ -1759,11 +1608,11 @@
     {
      "id": "night_ops",
      "name_it": "Attivita' notturna",
-     "value": 0.0,
+     "value": 0.08,
      "baseline_mean": 0.22,
      "baseline_std": 0.19,
-     "baseline_days": 39,
-     "z": -0.44,
+     "baseline_days": 40,
+     "z": -0.27,
      "active": false,
      "weight": 1.0,
      "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
@@ -1771,11 +1620,11 @@
     {
      "id": "news_velocity",
      "name_it": "Velocita' notizie (colpi)",
-     "value": 0.03,
+     "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.03,
-     "baseline_days": 39,
-     "z": 0.01,
+     "baseline_days": 40,
+     "z": -0.06,
      "active": false,
      "weight": 1.5,
      "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
@@ -1786,7 +1635,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1794,25 +1643,82 @@
     }
    ],
    "counts": {
-    "all": 7,
-    "approach_all": 4,
-    "tanker": 3,
+    "tanker": 5,
+    "all": 15,
     "isr": 1,
+    "transport": 3,
+    "approach_all": 2,
     "fighter": 0,
     "bomber": 0,
     "awacs": 0,
-    "transport": 0,
     "helicopter": 0
    },
    "nations": [
-    "FRA",
     "ISR",
     "UK",
+    "UNK",
     "USA"
    ],
    "strike_packages": [],
-   "orbits": [],
-   "anomalies": [],
+   "orbits": [
+    {
+     "hex": "738a69",
+     "callsign": "IRON",
+     "role": "isr",
+     "nation": "ISR",
+     "zone": "gaza",
+     "lat": 32.488,
+     "lon": 34.476,
+     "samples": 5
+    }
+   ],
+   "anomalies": [
+    {
+     "hex": "ae035d",
+     "callsign": "",
+     "type_code": "K35R",
+     "role": "tanker",
+     "nation": "USA",
+     "zone": "gaza",
+     "lat": 31.5419,
+     "lon": 34.6552,
+     "home_base": "Palmachim AB",
+     "n_days": 19,
+     "reasons_it": [
+      "orario inconsueto (06Z, 2/89 osservazioni storiche)"
+     ]
+    },
+    {
+     "hex": "7434c1",
+     "callsign": "SHAHD267",
+     "type_code": "C208",
+     "role": "unknown",
+     "nation": "UNK",
+     "zone": "gaza",
+     "lat": 31.8055,
+     "lon": 35.9775,
+     "home_base": "Muwaffaq Salti AB",
+     "n_days": 10,
+     "reasons_it": [
+      "mai visto in gaza (abituale: lebanon-syria)"
+     ]
+    },
+    {
+     "hex": "ae013e",
+     "callsign": "",
+     "type_code": "K35R",
+     "role": "tanker",
+     "nation": "USA",
+     "zone": "gaza",
+     "lat": 32.0697,
+     "lon": 34.7849,
+     "home_base": "Aksaz Naval Base",
+     "n_days": 6,
+     "reasons_it": [
+      "orario inconsueto (00Z, 1/32 osservazioni storiche)"
+     ]
+    }
+   ],
    "model_p": null,
    "score": 0.0,
    "level": "quiet",
@@ -1832,7 +1738,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 3.0,
@@ -1844,7 +1750,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1856,7 +1762,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.0,
@@ -1868,7 +1774,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1880,7 +1786,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -1892,7 +1798,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -1904,7 +1810,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -1916,7 +1822,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1928,7 +1834,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1940,7 +1846,7 @@
      "value": 0.0,
      "baseline_mean": 0.13,
      "baseline_std": 0.23,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.26,
      "active": false,
      "weight": 1.5,
@@ -1952,7 +1858,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -1993,7 +1899,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 3.0,
@@ -2005,7 +1911,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2017,7 +1923,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.0,
@@ -2029,7 +1935,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2041,7 +1947,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2053,7 +1959,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -2065,7 +1971,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -2077,7 +1983,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2089,7 +1995,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2101,7 +2007,7 @@
      "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.04,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.05,
      "active": false,
      "weight": 1.5,
@@ -2113,7 +2019,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2141,6 +2047,170 @@
    "active_indicators": []
   },
   {
+   "id": "lebanon-syria",
+   "name_it": "Siria / Libano",
+   "lat": 34.3,
+   "lon": 36.5,
+   "radius_km": 320,
+   "rule_score": 0.0,
+   "indicators": [
+    {
+     "id": "tanker_surge",
+     "name_it": "Surge di aerocisterne",
+     "value": 0.0,
+     "baseline_mean": 1.38,
+     "baseline_std": 1.15,
+     "baseline_days": 40,
+     "z": -1.17,
+     "active": false,
+     "weight": 3.0,
+     "why_it": "Le cisterne in orbita sono il collo di bottiglia di ogni pacchetto d'attacco a lungo raggio: piu' cisterne del normale = piu' caccia armati in attesa."
+    },
+    {
+     "id": "awacs_coverage",
+     "name_it": "Copertura AWACS/C2",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Un radar volante in stazione fuori dal normale indica gestione dello spazio aereo per un'operazione, non addestramento."
+    },
+    {
+     "id": "isr_surge",
+     "name_it": "Surge ISR",
+     "value": 1.0,
+     "baseline_mean": 1.23,
+     "baseline_std": 1.17,
+     "baseline_days": 40,
+     "z": -0.19,
+     "active": false,
+     "weight": 2.0,
+     "why_it": "Piu' piattaforme di sorveglianza del solito: raccolta di target e valutazione difese prima di colpire."
+    },
+    {
+     "id": "fighter_mass",
+     "name_it": "Massa di caccia",
+     "value": 0.0,
+     "baseline_mean": 0.03,
+     "baseline_std": 0.16,
+     "baseline_days": 40,
+     "z": -0.05,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Caccia in numero anomalo nel teatro: pattugliamento offensivo o scorta a un pacchetto."
+    },
+    {
+     "id": "bomber_presence",
+     "name_it": "Bombardieri strategici",
+     "value": 0.0,
+     "baseline_mean": 0.0,
+     "baseline_std": 0.0,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 2.5,
+     "why_it": "Bombardieri nel teatro sono rari: segnale deliberato o preparazione di un colpo a distanza."
+    },
+    {
+     "id": "transport_inflow",
+     "name_it": "Afflusso di trasporti",
+     "value": 1.0,
+     "baseline_mean": 3.1,
+     "baseline_std": 2.18,
+     "baseline_days": 40,
+     "z": -0.96,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
+    },
+    {
+     "id": "staging_mass",
+     "name_it": "Massa in staging",
+     "value": 10.0,
+     "baseline_mean": 14.45,
+     "baseline_std": 5.72,
+     "baseline_days": 40,
+     "z": -0.78,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
+    },
+    {
+     "id": "new_actors",
+     "name_it": "Nuovi attori",
+     "value": 2.0,
+     "baseline_mean": 5.72,
+     "baseline_std": 2.1,
+     "baseline_days": 40,
+     "z": -1.56,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
+    },
+    {
+     "id": "night_ops",
+     "name_it": "Attivita' notturna",
+     "value": 0.0,
+     "baseline_mean": 0.19,
+     "baseline_std": 0.23,
+     "baseline_days": 40,
+     "z": -0.37,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
+    },
+    {
+     "id": "news_velocity",
+     "name_it": "Velocita' notizie (colpi)",
+     "value": 0.0,
+     "baseline_mean": 0.03,
+     "baseline_std": 0.04,
+     "baseline_days": 40,
+     "z": -0.05,
+     "active": false,
+     "weight": 1.5,
+     "why_it": "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."
+    },
+    {
+     "id": "threat_delta",
+     "name_it": "Salto Threat Board",
+     "value": 0.0,
+     "baseline_mean": null,
+     "baseline_std": null,
+     "baseline_days": 40,
+     "z": 0.0,
+     "active": false,
+     "weight": 1.0,
+     "why_it": "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."
+    }
+   ],
+   "counts": {
+    "all": 7,
+    "approach_all": 10,
+    "transport": 1,
+    "isr": 1,
+    "fighter": 0,
+    "bomber": 0,
+    "tanker": 0,
+    "awacs": 0,
+    "helicopter": 0
+   },
+   "nations": [
+    "ISR",
+    "UNK"
+   ],
+   "strike_packages": [],
+   "orbits": [],
+   "anomalies": [],
+   "model_p": null,
+   "score": 0.0,
+   "level": "quiet",
+   "active_indicators": []
+  },
+  {
    "id": "myanmar",
    "name_it": "Myanmar",
    "lat": 19.5,
@@ -2154,7 +2224,7 @@
      "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.16,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.05,
      "active": false,
      "weight": 3.0,
@@ -2166,7 +2236,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2178,7 +2248,7 @@
      "value": 0.0,
      "baseline_mean": 0.03,
      "baseline_std": 0.16,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.05,
      "active": false,
      "weight": 2.0,
@@ -2190,7 +2260,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2202,7 +2272,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2212,10 +2282,10 @@
      "id": "transport_inflow",
      "name_it": "Afflusso di trasporti",
      "value": 0.0,
-     "baseline_mean": 0.18,
-     "baseline_std": 0.39,
-     "baseline_days": 39,
-     "z": -0.36,
+     "baseline_mean": 0.17,
+     "baseline_std": 0.38,
+     "baseline_days": 40,
+     "z": -0.35,
      "active": false,
      "weight": 1.5,
      "why_it": "Ponte logistico verso il teatro: munizioni, personale, ricambi. Precede di giorni un'operazione sostenuta."
@@ -2223,11 +2293,11 @@
     {
      "id": "staging_mass",
      "name_it": "Massa in staging",
-     "value": 20.0,
-     "baseline_mean": 22.18,
-     "baseline_std": 13.09,
-     "baseline_days": 39,
-     "z": -0.17,
+     "value": 19.0,
+     "baseline_mean": 22.15,
+     "baseline_std": 12.92,
+     "baseline_days": 40,
+     "z": -0.24,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -2236,10 +2306,10 @@
      "id": "new_actors",
      "name_it": "Nuovi attori",
      "value": 0.0,
-     "baseline_mean": 1.13,
-     "baseline_std": 0.8,
-     "baseline_days": 39,
-     "z": -1.06,
+     "baseline_mean": 1.1,
+     "baseline_std": 0.81,
+     "baseline_days": 40,
+     "z": -1.05,
      "active": false,
      "weight": 1.0,
      "why_it": "Bandiere nuove nel teatro: allargamento della coalizione o intervento di un terzo."
@@ -2250,8 +2320,8 @@
      "value": 0.0,
      "baseline_mean": 0.1,
      "baseline_std": 0.28,
-     "baseline_days": 39,
-     "z": -0.2,
+     "baseline_days": 40,
+     "z": -0.19,
      "active": false,
      "weight": 1.0,
      "why_it": "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."
@@ -2262,7 +2332,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": -0.0,
      "active": false,
      "weight": 1.5,
@@ -2274,7 +2344,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2282,7 +2352,7 @@
     }
    ],
    "counts": {
-    "approach_all": 20,
+    "approach_all": 19,
     "fighter": 0,
     "bomber": 0,
     "tanker": 0,
@@ -2294,18 +2364,7 @@
    },
    "nations": [],
    "strike_packages": [],
-   "orbits": [
-    {
-     "hex": "881c06",
-     "callsign": "SVY303",
-     "role": "isr",
-     "nation": "UNK",
-     "zone": "myanmar",
-     "lat": 13.899,
-     "lon": 100.603,
-     "samples": 2
-    }
-   ],
+   "orbits": [],
    "anomalies": [],
    "model_p": null,
    "score": 0.0,
@@ -2326,7 +2385,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 3.0,
@@ -2338,7 +2397,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2350,7 +2409,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.0,
@@ -2362,7 +2421,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2374,7 +2433,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 2.5,
@@ -2386,7 +2445,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -2396,10 +2455,10 @@
      "id": "staging_mass",
      "name_it": "Massa in staging",
      "value": 0.0,
-     "baseline_mean": 0.9,
+     "baseline_mean": 0.88,
      "baseline_std": 0.94,
-     "baseline_days": 39,
-     "z": -0.95,
+     "baseline_days": 40,
+     "z": -0.93,
      "active": false,
      "weight": 1.5,
      "why_it": "Velivoli che si accumulano nell'anello di avvicinamento (basi avanzate) senza entrare nel teatro."
@@ -2410,7 +2469,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2422,7 +2481,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2434,7 +2493,7 @@
      "value": 0.0,
      "baseline_mean": 0.0,
      "baseline_std": 0.0,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.5,
@@ -2446,7 +2505,7 @@
      "value": 0.0,
      "baseline_mean": null,
      "baseline_std": null,
-     "baseline_days": 39,
+     "baseline_days": 40,
      "z": 0.0,
      "active": false,
      "weight": 1.0,
@@ -2476,16 +2535,78 @@
  ],
  "global_strike_packages": [
   {
-   "ts": "2026-10-19T09:49:11Z",
+   "ts": "2026-10-20T09:30:43Z",
    "zone": null,
-   "anchor_tanker": "TARTN19",
-   "lat": 55.7909,
-   "lon": 0.1603,
-   "fighters": 5,
+   "anchor_tanker": "RRR9920",
+   "lat": 55.899,
+   "lon": 0.842,
+   "fighters": 6,
    "bombers": 0,
    "c2": [
-    "SARAB12",
-    "SARAB11",
+    "FALCN01",
+    "SARAB11"
+   ],
+   "nations": [
+    "UK",
+    "USA"
+   ],
+   "members": [
+    {
+     "hex": "43c6f4",
+     "callsign": "RRR9920",
+     "role": "tanker_mrtt"
+    },
+    {
+     "hex": "43c791",
+     "callsign": "WARLOR12",
+     "role": "fighter"
+    },
+    {
+     "hex": "43caf0",
+     "callsign": "",
+     "role": "fighter"
+    },
+    {
+     "hex": "43c7a7",
+     "callsign": "WOLF0011",
+     "role": "fighter"
+    },
+    {
+     "hex": "43c6d2",
+     "callsign": "",
+     "role": "fighter"
+    },
+    {
+     "hex": "43c744",
+     "callsign": "",
+     "role": "fighter"
+    },
+    {
+     "hex": "43c6dd",
+     "callsign": "GUNFTR32",
+     "role": "fighter"
+    },
+    {
+     "hex": "43c91d",
+     "callsign": "FALCN01",
+     "role": "isr"
+    },
+    {
+     "hex": "43c966",
+     "callsign": "SARAB11",
+     "role": "isr"
+    }
+   ]
+  },
+  {
+   "ts": "2026-10-20T09:20:11Z",
+   "zone": null,
+   "anchor_tanker": "TARTN29",
+   "lat": 55.0432,
+   "lon": 2.5121,
+   "fighters": 6,
+   "bombers": 0,
+   "c2": [
     "REDARROW"
    ],
    "nations": [
@@ -2496,47 +2617,42 @@
    ],
    "members": [
     {
-     "hex": "43c6f9",
-     "callsign": "TARTN19",
+     "hex": "43c6fa",
+     "callsign": "TARTN29",
      "role": "tanker_mrtt"
     },
     {
-     "hex": "43c77f",
-     "callsign": "WTN1",
+     "hex": "43c6dd",
+     "callsign": "GUNFTR32",
      "role": "fighter"
     },
     {
-     "hex": "43c738",
-     "callsign": "JEDI0011",
+     "hex": "43c60b",
+     "callsign": "WARLOR11",
      "role": "fighter"
     },
     {
-     "hex": "43c7a3",
-     "callsign": "CHAOS012",
+     "hex": "43c791",
+     "callsign": "WARLOR12",
      "role": "fighter"
     },
     {
-     "hex": "43c7ab",
-     "callsign": "COBRA22",
-     "role": "fighter"
-    },
-    {
-     "hex": "43c706",
+     "hex": "43c6d2",
      "callsign": "",
      "role": "fighter"
     },
     {
-     "hex": "43c968",
-     "callsign": "SARAB12",
-     "role": "isr"
+     "hex": "43caf0",
+     "callsign": "",
+     "role": "fighter"
     },
     {
-     "hex": "43c967",
-     "callsign": "SARAB11",
-     "role": "isr"
+     "hex": "43c7a7",
+     "callsign": "WOLF0011",
+     "role": "fighter"
     },
     {
-     "hex": "43c0ee",
+     "hex": "43c456",
      "callsign": "REDARROW",
      "role": "isr"
     }
@@ -2545,231 +2661,231 @@
  ],
  "global_anomalies": [
   {
+   "hex": "af4f4d",
+   "callsign": "",
+   "type_code": "B762",
+   "role": "unknown",
+   "nation": "USA",
+   "zone": "taiwan",
+   "lat": 26.3343,
+   "lon": 127.7963,
+   "home_base": null,
+   "n_days": 6,
+   "reasons_it": [
+    "mai visto in taiwan (abituale: nessun teatro)",
+    "orario inconsueto (08Z, 0/23 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "ae0151",
+   "callsign": "",
+   "type_code": "K35R",
+   "role": "tanker",
+   "nation": "USA",
+   "zone": "iran-gulf",
+   "lat": 25.2121,
+   "lon": 55.9885,
+   "home_base": null,
+   "n_days": 5,
+   "reasons_it": [
+    "mai visto in iran-gulf (abituale: nessun teatro)",
+    "orario inconsueto (00Z, 0/42 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "ae0677",
+   "callsign": "RCH241",
+   "type_code": "C17",
+   "role": "transport",
+   "nation": "USA",
+   "zone": "ukraine",
+   "lat": 48.0002,
+   "lon": 18.467,
+   "home_base": null,
+   "n_days": 5,
+   "reasons_it": [
+    "mai visto in ukraine (abituale: nessun teatro)",
+    "orario inconsueto (05Z, 2/68 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "000001",
+   "callsign": "PS12A",
+   "type_code": "",
+   "role": "unknown",
+   "nation": "UNK",
+   "zone": "korea",
+   "lat": 35.7227,
+   "lon": 128.5821,
+   "home_base": null,
+   "n_days": 39,
+   "reasons_it": [
+    "mai visto in korea (abituale: iran-gulf, ukraine, nato-baltic, myanmar)"
+   ]
+  },
+  {
+   "hex": "498489",
+   "callsign": "CEF2921",
+   "type_code": "C295",
+   "role": "transport",
+   "nation": "CZE",
+   "zone": "nato-baltic",
+   "lat": 50.127,
+   "lon": 14.5529,
+   "home_base": "Grafenwoehr",
+   "n_days": 22,
+   "reasons_it": [
+    "orario inconsueto (04Z, 10/332 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "43c5eb",
+   "callsign": "RONIN03",
+   "type_code": "A400",
+   "role": "transport",
+   "nation": "UK",
+   "zone": "nato-baltic",
+   "lat": 52.7528,
+   "lon": 9.2446,
+   "home_base": "HMNB Portsmouth",
+   "n_days": 22,
+   "reasons_it": [
+    "orario inconsueto (07Z, 4/281 osservazioni storiche)"
+   ]
+  },
+  {
    "hex": "3b770d",
    "callsign": "CTM005",
    "type_code": "FA7X",
    "role": "vip",
    "nation": "FRA",
-   "zone": "lebanon-syria",
-   "lat": 33.0668,
-   "lon": 31.2832,
-   "home_base": null,
-   "n_days": 20,
-   "reasons_it": [
-    "mai visto in lebanon-syria (abituale: nessun teatro)",
-    "orario inconsueto (02Z, 3/227 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "3b76ae",
-   "callsign": "",
-   "type_code": "A332",
-   "role": "tanker_mrtt",
-   "nation": "FRA",
-   "zone": "lebanon-syria",
-   "lat": 33.6343,
-   "lon": 30.2166,
-   "home_base": "BA 113 Saint-Dizier",
-   "n_days": 7,
-   "reasons_it": [
-    "mai visto in lebanon-syria (abituale: nessun teatro)",
-    "orario inconsueto (02Z, 0/93 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "adfea0",
-   "callsign": "X",
-   "type_code": "C130",
-   "role": "transport",
-   "nation": "USA",
    "zone": "iran-gulf",
-   "lat": 28.848,
-   "lon": 47.4894,
-   "home_base": null,
-   "n_days": 3,
-   "reasons_it": [
-    "mai visto in iran-gulf (abituale: ukraine)",
-    "orario inconsueto (06Z, 0/32 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "3f7b3c",
-   "callsign": "GAF647",
-   "type_code": "GL5T",
-   "role": "vip",
-   "nation": "DEU",
-   "zone": "nato-baltic",
-   "lat": 52.1852,
-   "lon": 11.6019,
-   "home_base": "Kleine Brogel AB",
-   "n_days": 26,
-   "reasons_it": [
-    "orario inconsueto (02Z, 12/328 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "aed555",
-   "callsign": "",
-   "type_code": "B762",
-   "role": "unknown",
-   "nation": "USA",
-   "zone": "iran-gulf",
-   "lat": 24.6625,
-   "lon": 53.7794,
-   "home_base": "Al Minhad AB",
-   "n_days": 25,
-   "reasons_it": [
-    "orario inconsueto (01Z, 17/357 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "ae1199",
-   "callsign": "RCH5086",
-   "type_code": "C17",
-   "role": "transport",
-   "nation": "USA",
-   "zone": "arctic",
-   "lat": 55.833,
-   "lon": 4.8194,
+   "lat": 24.4472,
+   "lon": 54.627,
    "home_base": null,
    "n_days": 21,
    "reasons_it": [
-    "mai visto in arctic (abituale: ukraine, nato-baltic, lebanon-syria)"
+    "orario inconsueto (06Z, 10/249 osservazioni storiche)"
    ]
   },
   {
-   "hex": "48da8f",
-   "callsign": "PLF693",
-   "type_code": "W3",
-   "role": "transport",
-   "nation": "POL",
+   "hex": "47812b",
+   "callsign": "",
+   "type_code": "EH10",
+   "role": "helicopter",
+   "nation": "NOR",
    "zone": "nato-baltic",
-   "lat": 54.5658,
-   "lon": 18.7009,
-   "home_base": "Redzikowo",
+   "lat": 59.6795,
+   "lon": 11.1252,
+   "home_base": "Rygge AB",
+   "n_days": 20,
+   "reasons_it": [
+    "orario inconsueto (04Z, 2/94 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "ae1178",
+   "callsign": "RCH4983",
+   "type_code": "C17",
+   "role": "transport",
+   "nation": "USA",
+   "zone": "ukraine",
+   "lat": 41.8013,
+   "lon": 23.6912,
+   "home_base": null,
+   "n_days": 20,
+   "reasons_it": [
+    "orario inconsueto (05Z, 2/195 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "45f457",
+   "callsign": "PR52",
+   "type_code": "",
+   "role": "unknown",
+   "nation": "DNK",
+   "zone": "nato-baltic",
+   "lat": 56.2292,
+   "lon": 8.9565,
+   "home_base": null,
    "n_days": 19,
    "reasons_it": [
-    "orario inconsueto (10Z, 3/140 osservazioni storiche)"
+    "orario inconsueto (03Z, 0/115 osservazioni storiche)"
    ]
   },
   {
-   "hex": "ae0133",
-   "callsign": "DUKE26",
-   "type_code": "C560",
-   "role": "isr",
-   "nation": "USA",
-   "zone": "nato-baltic",
-   "lat": 54.8829,
-   "lon": 9.6358,
-   "home_base": "Landstuhl",
-   "n_days": 18,
-   "reasons_it": [
-    "orario inconsueto (06Z, 7/151 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "4aecd1",
-   "callsign": "SVF656",
-   "type_code": "GLEX",
-   "role": "transport",
-   "nation": "ROU",
-   "zone": "nato-baltic",
-   "lat": 59.6069,
-   "lon": 17.8924,
-   "home_base": null,
-   "n_days": 16,
-   "reasons_it": [
-    "orario inconsueto (04Z, 7/221 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "43c6f4",
-   "callsign": "RRR9910",
-   "type_code": "A332",
-   "role": "tanker_mrtt",
-   "nation": "UK",
-   "zone": "nato-baltic",
-   "lat": 53.0385,
-   "lon": 8.9247,
-   "home_base": "RAF Waddington",
-   "n_days": 12,
-   "reasons_it": [
-    "mai visto in nato-baltic (abituale: arctic)"
-   ]
-  },
-  {
-   "hex": "80078e",
-   "callsign": "IFC1516",
-   "type_code": "C17",
-   "role": "transport",
-   "nation": "IND",
-   "zone": "iran-gulf",
-   "lat": 22.6868,
-   "lon": 58.7275,
-   "home_base": "Agra AB",
-   "n_days": 12,
-   "reasons_it": [
-    "mai visto in iran-gulf (abituale: nessun teatro)"
-   ]
-  },
-  {
-   "hex": "8953e3",
-   "callsign": "V8OAS",
-   "type_code": "B788",
-   "role": "unknown",
-   "nation": "UNK",
-   "zone": "ukraine",
-   "lat": 40.7813,
-   "lon": 45.6532,
-   "home_base": null,
-   "n_days": 11,
-   "reasons_it": [
-    "orario inconsueto (00Z, 9/188 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "ae03e6",
-   "callsign": "CNV3955",
-   "type_code": "C130",
-   "role": "transport",
-   "nation": "USA",
-   "zone": "taiwan",
-   "lat": 26.7215,
-   "lon": 128.0721,
-   "home_base": null,
-   "n_days": 11,
-   "reasons_it": [
-    "orario inconsueto (04Z, 4/96 osservazioni storiche)"
-   ]
-  },
-  {
-   "hex": "80078f",
-   "callsign": "IFC1506",
-   "type_code": "C17",
-   "role": "transport",
-   "nation": "IND",
-   "zone": "iran-gulf",
-   "lat": 22.7344,
-   "lon": 58.3564,
-   "home_base": "Agra AB",
-   "n_days": 11,
-   "reasons_it": [
-    "mai visto in iran-gulf (abituale: nessun teatro)"
-   ]
-  },
-  {
-   "hex": "87cc3b",
+   "hex": "ae035d",
    "callsign": "",
-   "type_code": "KC2",
+   "type_code": "K35R",
+   "role": "tanker",
+   "nation": "USA",
+   "zone": "gaza",
+   "lat": 31.5419,
+   "lon": 34.6552,
+   "home_base": "Palmachim AB",
+   "n_days": 19,
+   "reasons_it": [
+    "orario inconsueto (06Z, 2/89 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "33fca2",
+   "callsign": "IAM3180",
+   "type_code": "GLF6",
+   "role": "transport",
+   "nation": "ITA",
+   "zone": "nato-baltic",
+   "lat": 51.9886,
+   "lon": 10.7867,
+   "home_base": null,
+   "n_days": 19,
+   "reasons_it": [
+    "mai visto in nato-baltic (abituale: iran-gulf, myanmar)"
+   ]
+  },
+  {
+   "hex": "498422",
+   "callsign": "CEF3122",
+   "type_code": "A319",
+   "role": "transport",
+   "nation": "CZE",
+   "zone": "nato-baltic",
+   "lat": 50.085,
+   "lon": 14.4691,
+   "home_base": "BA 113 Saint-Dizier",
+   "n_days": 17,
+   "reasons_it": [
+    "orario inconsueto (04Z, 8/225 osservazioni storiche)"
+   ]
+  },
+  {
+   "hex": "87cd03",
+   "callsign": "PLUTO31",
+   "type_code": "C68A",
    "role": "unknown",
    "nation": "JPN",
-   "zone": "taiwan",
-   "lat": 25.3243,
-   "lon": 125.9591,
+   "zone": "korea",
+   "lat": 34.7923,
+   "lon": 133.914,
    "home_base": "Yokota AB",
-   "n_days": 9,
+   "n_days": 14,
    "reasons_it": [
-    "mai visto in taiwan (abituale: korea)"
+    "mai visto in korea (abituale: nessun teatro)"
+   ]
+  },
+  {
+   "hex": "3b7739",
+   "callsign": "FNY5153",
+   "type_code": "E121",
+   "role": "unknown",
+   "nation": "FRA",
+   "zone": "arctic",
+   "lat": 57.2969,
+   "lon": 0.5199,
+   "home_base": null,
+   "n_days": 14,
+   "reasons_it": [
+    "mai visto in arctic (abituale: nessun teatro)"
    ]
   }
  ],
@@ -2780,19 +2896,19 @@
    "type_code": "",
    "role": "unknown",
    "nation": "UNK",
-   "n_obs": 2051,
-   "n_days": 38,
+   "n_obs": 2102,
+   "n_days": 39,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": null,
-   "home_dist_km": 497,
+   "home_dist_km": 525,
    "usual_callsigns": [
     "ZABEEL04",
     "VTFSB",
     "VTFSG"
    ],
    "zones": {
-    "iran-gulf": 0.2,
+    "iran-gulf": 0.19,
     "ukraine": 0.05,
     "nato-baltic": 0.03,
     "myanmar": 0.03
@@ -2800,31 +2916,31 @@
    "hours": {
     "0": 80,
     "1": 94,
-    "2": 106,
-    "3": 106,
-    "4": 107,
-    "5": 100,
+    "2": 109,
+    "3": 110,
+    "4": 111,
+    "5": 104,
     "6": 105,
     "7": 89,
     "8": 78,
-    "9": 82,
-    "10": 100,
-    "11": 84,
-    "12": 85,
-    "13": 85,
+    "9": 84,
+    "10": 102,
+    "11": 86,
+    "12": 88,
+    "13": 87,
     "14": 90,
-    "15": 110,
-    "16": 93,
-    "17": 80,
+    "15": 112,
+    "16": 98,
+    "17": 81,
     "18": 83,
     "19": 56,
-    "20": 57,
-    "21": 60,
-    "22": 61,
-    "23": 60
+    "20": 58,
+    "21": 66,
+    "22": 66,
+    "23": 65
    },
    "dows": {
-    "0": 256,
+    "0": 307,
     "1": 316,
     "2": 373,
     "3": 382,
@@ -2839,10 +2955,10 @@
    "type_code": "A320",
    "role": "unknown",
    "nation": "UNK",
-   "n_obs": 382,
-   "n_days": 36,
+   "n_obs": 386,
+   "n_days": 37,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": null,
    "home_dist_km": 318,
    "usual_callsigns": [
@@ -2857,8 +2973,8 @@
     "gaza": 0.01
    },
    "hours": {
-    "0": 9,
-    "1": 24,
+    "0": 11,
+    "1": 26,
     "2": 8,
     "3": 15,
     "4": 25,
@@ -2883,7 +2999,7 @@
     "23": 5
    },
    "dows": {
-    "0": 118,
+    "0": 122,
     "1": 33,
     "2": 34,
     "3": 28,
@@ -2898,10 +3014,10 @@
    "type_code": "EC35",
    "role": "helicopter",
    "nation": "SWE",
-   "n_obs": 173,
-   "n_days": 35,
+   "n_obs": 177,
+   "n_days": 36,
    "first_seen": "2026-09-04",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": null,
    "home_dist_km": 287,
    "usual_callsigns": [
@@ -2912,14 +3028,14 @@
    },
    "hours": {
     "4": 4,
-    "5": 11,
+    "5": 12,
     "6": 6,
     "7": 3,
     "8": 12,
     "9": 16,
     "10": 12,
-    "11": 23,
-    "12": 17,
+    "11": 25,
+    "12": 18,
     "13": 14,
     "14": 13,
     "15": 10,
@@ -2932,7 +3048,7 @@
     "22": 1
    },
    "dows": {
-    "0": 17,
+    "0": 21,
     "1": 26,
     "2": 29,
     "3": 30,
@@ -2947,10 +3063,10 @@
    "type_code": "C130",
    "role": "transport",
    "nation": "USA",
-   "n_obs": 321,
-   "n_days": 35,
+   "n_obs": 322,
+   "n_days": 36,
    "first_seen": "2026-09-12",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": null,
    "home_dist_km": 3146,
    "usual_callsigns": [
@@ -2969,7 +3085,7 @@
     "12": 20,
     "13": 2,
     "14": 12,
-    "15": 7,
+    "15": 8,
     "16": 17,
     "18": 18,
     "19": 29,
@@ -2979,13 +3095,118 @@
     "23": 36
    },
    "dows": {
-    "0": 56,
+    "0": 57,
     "1": 34,
     "2": 37,
     "3": 60,
     "4": 53,
     "5": 45,
     "6": 36
+   }
+  },
+  {
+   "hex": "ae206d",
+   "reg": "06-0500",
+   "type_code": "GLF5",
+   "role": "isr_biz",
+   "nation": "USA",
+   "n_obs": 399,
+   "n_days": 34,
+   "first_seen": "2026-09-11",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 411,
+   "usual_callsigns": [
+    "SAM142",
+    "SAM173",
+    "SAM063"
+   ],
+   "zones": {
+    "korea": 0.01
+   },
+   "hours": {
+    "0": 17,
+    "1": 6,
+    "2": 11,
+    "3": 10,
+    "4": 10,
+    "5": 3,
+    "6": 6,
+    "7": 6,
+    "8": 4,
+    "9": 5,
+    "10": 6,
+    "11": 10,
+    "12": 20,
+    "13": 14,
+    "14": 14,
+    "15": 27,
+    "16": 40,
+    "17": 36,
+    "18": 36,
+    "19": 17,
+    "20": 28,
+    "21": 26,
+    "22": 22,
+    "23": 25
+   },
+   "dows": {
+    "0": 78,
+    "1": 64,
+    "2": 26,
+    "3": 60,
+    "4": 26,
+    "5": 52,
+    "6": 93
+   }
+  },
+  {
+   "hex": "7cf864",
+   "reg": "A39-001",
+   "type_code": "A332",
+   "role": "tanker_mrtt",
+   "nation": "AUS",
+   "n_obs": 287,
+   "n_days": 34,
+   "first_seen": "2026-09-11",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 610,
+   "usual_callsigns": [
+    "ASY786",
+    "DRGN66",
+    "ASY799"
+   ],
+   "zones": {},
+   "hours": {
+    "0": 28,
+    "1": 30,
+    "2": 31,
+    "3": 21,
+    "4": 25,
+    "5": 10,
+    "6": 7,
+    "7": 20,
+    "8": 18,
+    "9": 21,
+    "10": 14,
+    "11": 7,
+    "12": 1,
+    "18": 3,
+    "19": 2,
+    "20": 7,
+    "21": 11,
+    "22": 10,
+    "23": 21
+   },
+   "dows": {
+    "0": 56,
+    "1": 23,
+    "2": 68,
+    "3": 34,
+    "4": 44,
+    "5": 31,
+    "6": 31
    }
   },
   {
@@ -3036,122 +3257,17 @@
    }
   },
   {
-   "hex": "ae206d",
-   "reg": "06-0500",
-   "type_code": "GLF5",
-   "role": "isr_biz",
-   "nation": "USA",
-   "n_obs": 388,
-   "n_days": 33,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
-   "home_base": null,
-   "home_dist_km": 411,
-   "usual_callsigns": [
-    "SAM142",
-    "SAM173",
-    "SAM063"
-   ],
-   "zones": {
-    "korea": 0.01
-   },
-   "hours": {
-    "0": 17,
-    "1": 6,
-    "2": 11,
-    "3": 10,
-    "4": 10,
-    "5": 3,
-    "6": 6,
-    "7": 6,
-    "8": 4,
-    "9": 5,
-    "10": 6,
-    "11": 10,
-    "12": 20,
-    "13": 14,
-    "14": 14,
-    "15": 24,
-    "16": 35,
-    "17": 36,
-    "18": 36,
-    "19": 17,
-    "20": 26,
-    "21": 25,
-    "22": 22,
-    "23": 25
-   },
-   "dows": {
-    "0": 67,
-    "1": 64,
-    "2": 26,
-    "3": 60,
-    "4": 26,
-    "5": 52,
-    "6": 93
-   }
-  },
-  {
-   "hex": "7cf864",
-   "reg": "A39-001",
-   "type_code": "A332",
-   "role": "tanker_mrtt",
-   "nation": "AUS",
-   "n_obs": 282,
-   "n_days": 33,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
-   "home_base": null,
-   "home_dist_km": 541,
-   "usual_callsigns": [
-    "ASY786",
-    "DRGN66",
-    "ASY799"
-   ],
-   "zones": {},
-   "hours": {
-    "0": 28,
-    "1": 30,
-    "2": 31,
-    "3": 21,
-    "4": 24,
-    "5": 10,
-    "6": 5,
-    "7": 18,
-    "8": 18,
-    "9": 21,
-    "10": 14,
-    "11": 7,
-    "12": 1,
-    "18": 3,
-    "19": 2,
-    "20": 7,
-    "21": 11,
-    "22": 10,
-    "23": 21
-   },
-   "dows": {
-    "0": 51,
-    "1": 23,
-    "2": 68,
-    "3": 34,
-    "4": 44,
-    "5": 31,
-    "6": 31
-   }
-  },
-  {
    "hex": "ae63be",
    "reg": "20-46082",
    "type_code": "B762",
    "role": "unknown",
    "nation": "USA",
-   "n_obs": 440,
-   "n_days": 33,
+   "n_obs": 446,
+   "n_days": 34,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": "Al Minhad AB",
-   "home_dist_km": 46,
+   "home_dist_km": 47,
    "usual_callsigns": [
     "FLYER54",
     "FLYER46",
@@ -3178,16 +3294,16 @@
     "14": 18,
     "15": 16,
     "16": 16,
-    "17": 23,
-    "18": 27,
+    "17": 27,
+    "18": 28,
     "19": 27,
     "20": 20,
-    "21": 21,
+    "21": 22,
     "22": 27,
     "23": 22
    },
    "dows": {
-    "0": 60,
+    "0": 66,
     "1": 70,
     "2": 74,
     "3": 92,
@@ -3202,10 +3318,10 @@
    "type_code": "C172",
    "role": "transport",
    "nation": "USA",
-   "n_obs": 639,
-   "n_days": 33,
+   "n_obs": 652,
+   "n_days": 34,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": "Peterson SFB",
    "home_dist_km": 16,
    "usual_callsigns": [
@@ -3221,11 +3337,11 @@
     "5": 10,
     "6": 1,
     "12": 11,
-    "13": 57,
+    "13": 60,
     "14": 55,
-    "15": 31,
-    "16": 62,
-    "17": 49,
+    "15": 33,
+    "16": 67,
+    "17": 52,
     "18": 25,
     "19": 67,
     "20": 39,
@@ -3234,13 +3350,195 @@
     "23": 37
    },
    "dows": {
-    "0": 83,
+    "0": 96,
     "1": 48,
     "2": 108,
     "3": 73,
     "4": 102,
     "5": 102,
     "6": 123
+   }
+  },
+  {
+   "hex": "3b7b94",
+   "reg": "F-ZBPW",
+   "type_code": "EC45",
+   "role": "helicopter",
+   "nation": "FRA",
+   "n_obs": 245,
+   "n_days": 34,
+   "first_seen": "2026-09-13",
+   "last_seen": "2026-10-19",
+   "home_base": "Landstuhl",
+   "home_dist_km": 128,
+   "usual_callsigns": [
+    "DRAGO67",
+    "DRAGONW"
+   ],
+   "zones": {},
+   "hours": {
+    "6": 1,
+    "7": 9,
+    "8": 15,
+    "9": 23,
+    "10": 25,
+    "11": 22,
+    "12": 29,
+    "13": 25,
+    "14": 23,
+    "15": 19,
+    "16": 24,
+    "17": 9,
+    "18": 12,
+    "19": 9
+   },
+   "dows": {
+    "0": 42,
+    "1": 26,
+    "2": 46,
+    "3": 36,
+    "4": 28,
+    "5": 36,
+    "6": 31
+   }
+  },
+  {
+   "hex": "a88e47",
+   "reg": "N650RX",
+   "type_code": "GLEX",
+   "role": "unknown",
+   "nation": "USA",
+   "n_obs": 530,
+   "n_days": 33,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 632,
+   "usual_callsigns": [
+    "LATTE18"
+   ],
+   "zones": {
+    "taiwan": 0.0
+   },
+   "hours": {
+    "0": 34,
+    "1": 36,
+    "2": 31,
+    "3": 19,
+    "4": 28,
+    "5": 36,
+    "6": 36,
+    "7": 45,
+    "8": 28,
+    "9": 16,
+    "10": 14,
+    "11": 14,
+    "12": 13,
+    "13": 3,
+    "14": 8,
+    "15": 4,
+    "16": 7,
+    "17": 5,
+    "18": 2,
+    "19": 8,
+    "20": 46,
+    "21": 43,
+    "22": 24,
+    "23": 30
+   },
+   "dows": {
+    "0": 45,
+    "1": 37,
+    "2": 46,
+    "3": 84,
+    "4": 118,
+    "5": 86,
+    "6": 114
+   }
+  },
+  {
+   "hex": "ae26aa",
+   "reg": "6584",
+   "type_code": "AS65",
+   "role": "helicopter",
+   "nation": "USA",
+   "n_obs": 277,
+   "n_days": 33,
+   "first_seen": "2026-09-11",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 1338,
+   "usual_callsigns": [
+    "C6584"
+   ],
+   "zones": {},
+   "hours": {
+    "0": 15,
+    "1": 15,
+    "2": 9,
+    "3": 1,
+    "5": 1,
+    "6": 1,
+    "13": 6,
+    "14": 38,
+    "15": 53,
+    "16": 31,
+    "17": 30,
+    "18": 30,
+    "19": 8,
+    "20": 4,
+    "21": 10,
+    "22": 3,
+    "23": 22
+   },
+   "dows": {
+    "0": 33,
+    "1": 28,
+    "2": 61,
+    "3": 63,
+    "4": 36,
+    "5": 31,
+    "6": 25
+   }
+  },
+  {
+   "hex": "a8b6be",
+   "reg": "N6601K",
+   "type_code": "C172",
+   "role": "transport",
+   "nation": "USA",
+   "n_obs": 583,
+   "n_days": 33,
+   "first_seen": "2026-09-11",
+   "last_seen": "2026-10-19",
+   "home_base": "Peterson SFB",
+   "home_dist_km": 24,
+   "usual_callsigns": [
+    "N6601K"
+   ],
+   "zones": {},
+   "hours": {
+    "0": 24,
+    "13": 31,
+    "14": 53,
+    "15": 26,
+    "16": 64,
+    "17": 49,
+    "18": 53,
+    "19": 73,
+    "20": 61,
+    "21": 56,
+    "22": 38,
+    "23": 55
+   },
+   "dows": {
+    "0": 54,
+    "1": 72,
+    "2": 68,
+    "3": 76,
+    "4": 89,
+    "5": 84,
+    "6": 140
    }
   },
   {
@@ -3293,145 +3591,53 @@
    }
   },
   {
-   "hex": "3b7b94",
-   "reg": "F-ZBPW",
+   "hex": "3b7ba7",
+   "reg": "F-ZAJB",
    "type_code": "EC45",
    "role": "helicopter",
    "nation": "FRA",
-   "n_obs": 242,
+   "n_obs": 214,
    "n_days": 33,
-   "first_seen": "2026-09-13",
-   "last_seen": "2026-10-18",
-   "home_base": "Landstuhl",
-   "home_dist_km": 129,
+   "first_seen": "2026-09-14",
+   "last_seen": "2026-10-19",
+   "home_base": "HMNB Portsmouth",
+   "home_dist_km": 179,
    "usual_callsigns": [
-    "DRAGO67",
-    "DRAGONW"
+    "DRAG76"
    ],
    "zones": {},
    "hours": {
+    "0": 10,
+    "1": 3,
+    "4": 2,
+    "5": 2,
     "6": 1,
-    "7": 9,
-    "8": 15,
-    "9": 23,
-    "10": 25,
-    "11": 22,
-    "12": 27,
-    "13": 24,
-    "14": 23,
-    "15": 19,
-    "16": 24,
-    "17": 9,
-    "18": 12,
-    "19": 9
+    "7": 4,
+    "8": 13,
+    "9": 28,
+    "10": 15,
+    "11": 12,
+    "12": 12,
+    "13": 22,
+    "14": 14,
+    "15": 13,
+    "16": 11,
+    "17": 7,
+    "18": 16,
+    "19": 15,
+    "20": 3,
+    "21": 3,
+    "22": 4,
+    "23": 4
    },
    "dows": {
-    "0": 39,
-    "1": 26,
-    "2": 46,
-    "3": 36,
-    "4": 28,
-    "5": 36,
-    "6": 31
-   }
-  },
-  {
-   "hex": "a88e47",
-   "reg": "N650RX",
-   "type_code": "GLEX",
-   "role": "unknown",
-   "nation": "USA",
-   "n_obs": 526,
-   "n_days": 32,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-16",
-   "home_base": null,
-   "home_dist_km": 632,
-   "usual_callsigns": [
-    "LATTE18"
-   ],
-   "zones": {
-    "taiwan": 0.0
-   },
-   "hours": {
-    "0": 34,
-    "1": 36,
-    "2": 31,
-    "3": 19,
-    "4": 28,
-    "5": 36,
-    "6": 36,
-    "7": 45,
-    "8": 28,
-    "9": 16,
-    "10": 14,
-    "11": 13,
-    "12": 11,
-    "13": 2,
-    "14": 8,
-    "15": 4,
-    "16": 7,
-    "17": 5,
-    "18": 2,
-    "19": 8,
-    "20": 46,
-    "21": 43,
-    "22": 24,
-    "23": 30
-   },
-   "dows": {
-    "0": 41,
-    "1": 37,
-    "2": 46,
-    "3": 84,
-    "4": 118,
-    "5": 86,
-    "6": 114
-   }
-  },
-  {
-   "hex": "ae26aa",
-   "reg": "6584",
-   "type_code": "AS65",
-   "role": "helicopter",
-   "nation": "USA",
-   "n_obs": 271,
-   "n_days": 32,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-16",
-   "home_base": null,
-   "home_dist_km": 1339,
-   "usual_callsigns": [
-    "C6584"
-   ],
-   "zones": {},
-   "hours": {
-    "0": 15,
-    "1": 15,
-    "2": 9,
-    "3": 1,
-    "5": 1,
-    "6": 1,
-    "13": 6,
-    "14": 38,
-    "15": 53,
-    "16": 31,
-    "17": 29,
-    "18": 25,
-    "19": 8,
-    "20": 4,
-    "21": 10,
-    "22": 3,
-    "23": 22
-   },
-   "dows": {
-    "0": 27,
-    "1": 28,
-    "2": 61,
-    "3": 63,
-    "4": 36,
-    "5": 31,
-    "6": 25
+    "0": 32,
+    "1": 43,
+    "2": 29,
+    "3": 30,
+    "4": 27,
+    "5": 33,
+    "6": 20
    }
   },
   {
@@ -3478,43 +3684,104 @@
    }
   },
   {
-   "hex": "a8b6be",
-   "reg": "N6601K",
-   "type_code": "C172",
-   "role": "transport",
-   "nation": "USA",
-   "n_obs": 579,
+   "hex": "e49555",
+   "reg": "3604",
+   "type_code": "E550",
+   "role": "unknown",
+   "nation": "BRA",
+   "n_obs": 321,
    "n_days": 32,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
-   "home_base": "Peterson SFB",
-   "home_dist_km": 24,
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 6809,
    "usual_callsigns": [
-    "N6601K"
+    "GEIV04"
    ],
    "zones": {},
    "hours": {
-    "0": 24,
-    "13": 31,
-    "14": 53,
-    "15": 26,
-    "16": 64,
-    "17": 49,
-    "18": 53,
-    "19": 73,
-    "20": 60,
-    "21": 53,
-    "22": 38,
-    "23": 55
+    "10": 5,
+    "11": 13,
+    "12": 41,
+    "13": 59,
+    "14": 52,
+    "15": 24,
+    "16": 24,
+    "17": 31,
+    "18": 35,
+    "19": 17,
+    "20": 9,
+    "21": 3,
+    "22": 4,
+    "23": 4
    },
    "dows": {
-    "0": 50,
-    "1": 72,
-    "2": 68,
-    "3": 76,
-    "4": 89,
-    "5": 84,
-    "6": 140
+    "0": 55,
+    "1": 68,
+    "2": 48,
+    "3": 60,
+    "4": 53,
+    "5": 22,
+    "6": 15
+   }
+  },
+  {
+   "hex": "ae1197",
+   "reg": "03-3114",
+   "type_code": "C17",
+   "role": "transport",
+   "nation": "USA",
+   "n_obs": 501,
+   "n_days": 32,
+   "first_seen": "2026-09-13",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 2724,
+   "usual_callsigns": [
+    "RCH705",
+    "RCH5013",
+    "RCH739"
+   ],
+   "zones": {
+    "ukraine": 0.18,
+    "gaza": 0.02,
+    "nato-baltic": 0.01,
+    "lebanon-syria": 0.01
+   },
+   "hours": {
+    "0": 13,
+    "1": 30,
+    "2": 29,
+    "3": 32,
+    "4": 23,
+    "5": 12,
+    "6": 20,
+    "7": 33,
+    "8": 20,
+    "9": 19,
+    "10": 13,
+    "11": 17,
+    "12": 14,
+    "13": 18,
+    "14": 30,
+    "15": 27,
+    "16": 19,
+    "17": 11,
+    "18": 9,
+    "19": 17,
+    "20": 23,
+    "21": 22,
+    "22": 29,
+    "23": 21
+   },
+   "dows": {
+    "0": 74,
+    "1": 40,
+    "2": 69,
+    "3": 66,
+    "4": 54,
+    "5": 74,
+    "6": 124
    }
   },
   {
@@ -3565,53 +3832,230 @@
    }
   },
   {
-   "hex": "3b7ba7",
-   "reg": "F-ZBPD",
-   "type_code": "EC45",
-   "role": "helicopter",
-   "nation": "FRA",
-   "n_obs": 211,
-   "n_days": 32,
-   "first_seen": "2026-09-14",
-   "last_seen": "2026-10-18",
-   "home_base": "HMNB Portsmouth",
-   "home_dist_km": 179,
+   "hex": "a2ec0c",
+   "reg": "N288DP",
+   "type_code": "B736",
+   "role": "unknown",
+   "nation": "USA",
+   "n_obs": 593,
+   "n_days": 31,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": "Nellis AFB",
+   "home_dist_km": 55,
    "usual_callsigns": [
-    "DRAG76"
+    "JANET59",
+    "JANET84",
+    "JANET46"
    ],
    "zones": {},
    "hours": {
-    "0": 10,
-    "1": 3,
-    "4": 2,
-    "5": 2,
-    "6": 1,
-    "7": 4,
-    "8": 13,
-    "9": 28,
-    "10": 15,
-    "11": 12,
-    "12": 12,
-    "13": 22,
-    "14": 14,
-    "15": 13,
-    "16": 11,
-    "17": 7,
-    "18": 13,
-    "19": 15,
-    "20": 3,
-    "21": 3,
-    "22": 4,
-    "23": 4
+    "0": 54,
+    "1": 39,
+    "2": 15,
+    "3": 18,
+    "4": 1,
+    "7": 5,
+    "8": 11,
+    "9": 14,
+    "10": 20,
+    "11": 39,
+    "12": 44,
+    "13": 36,
+    "14": 25,
+    "15": 28,
+    "16": 16,
+    "17": 23,
+    "18": 39,
+    "19": 13,
+    "20": 30,
+    "21": 37,
+    "22": 58,
+    "23": 28
    },
    "dows": {
-    "0": 29,
-    "1": 43,
+    "0": 117,
+    "1": 99,
+    "2": 113,
+    "3": 138,
+    "4": 94,
+    "5": 32
+   }
+  },
+  {
+   "hex": "3b7b9a",
+   "reg": "F-ZBPQ",
+   "type_code": "EC45",
+   "role": "helicopter",
+   "nation": "FRA",
+   "n_obs": 206,
+   "n_days": 31,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": "BA 113 Saint-Dizier",
+   "home_dist_km": 185,
+   "usual_callsigns": [
+    "DRAGO25",
+    "AZUR15"
+   ],
+   "zones": {},
+   "hours": {
+    "7": 4,
+    "8": 15,
+    "9": 17,
+    "10": 21,
+    "11": 19,
+    "12": 13,
+    "13": 13,
+    "14": 29,
+    "15": 21,
+    "16": 22,
+    "17": 13,
+    "18": 15,
+    "19": 4
+   },
+   "dows": {
+    "0": 41,
+    "1": 30,
     "2": 29,
-    "3": 30,
-    "4": 27,
-    "5": 33,
-    "6": 20
+    "3": 17,
+    "4": 45,
+    "5": 29,
+    "6": 15
+   }
+  },
+  {
+   "hex": "a0ec98",
+   "reg": "N159L",
+   "type_code": "CL60",
+   "role": "isr_biz",
+   "nation": "USA",
+   "n_obs": 744,
+   "n_days": 31,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": "Mihail Kogalniceanu AB",
+   "home_dist_km": 36,
+   "usual_callsigns": [
+    "BRIO66"
+   ],
+   "zones": {
+    "nato-baltic": 0.53,
+    "ukraine": 0.44
+   },
+   "hours": {
+    "5": 28,
+    "6": 86,
+    "7": 85,
+    "8": 94,
+    "9": 85,
+    "10": 83,
+    "11": 99,
+    "12": 66,
+    "13": 84,
+    "14": 34
+   },
+   "dows": {
+    "0": 97,
+    "1": 96,
+    "2": 64,
+    "3": 151,
+    "4": 118,
+    "5": 107,
+    "6": 111
+   }
+  },
+  {
+   "hex": "70c07b",
+   "reg": "554",
+   "type_code": "A320",
+   "role": "unknown",
+   "nation": "KWT",
+   "n_obs": 371,
+   "n_days": 31,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 309,
+   "usual_callsigns": [
+    "MJN575",
+    "MJN574",
+    "MJN576"
+   ],
+   "zones": {
+    "iran-gulf": 1.0
+   },
+   "hours": {
+    "3": 12,
+    "4": 46,
+    "5": 17,
+    "6": 14,
+    "7": 37,
+    "8": 52,
+    "9": 52,
+    "10": 26,
+    "11": 14,
+    "12": 24,
+    "13": 39,
+    "14": 20,
+    "16": 7,
+    "17": 10,
+    "18": 1
+   },
+   "dows": {
+    "0": 74,
+    "1": 68,
+    "2": 62,
+    "3": 75,
+    "4": 25,
+    "5": 22,
+    "6": 45
+   }
+  },
+  {
+   "hex": "7cfa93",
+   "reg": "A62-001",
+   "type_code": "B38M",
+   "role": "unknown",
+   "nation": "AUS",
+   "n_obs": 440,
+   "n_days": 31,
+   "first_seen": "2026-09-04",
+   "last_seen": "2026-10-19",
+   "home_base": null,
+   "home_dist_km": 810,
+   "usual_callsigns": [
+    "EVY31",
+    "EVY05",
+    "ASY330"
+   ],
+   "zones": {},
+   "hours": {
+    "0": 27,
+    "1": 34,
+    "2": 42,
+    "3": 41,
+    "4": 36,
+    "5": 23,
+    "6": 24,
+    "7": 27,
+    "8": 38,
+    "9": 36,
+    "10": 17,
+    "11": 5,
+    "20": 5,
+    "21": 24,
+    "22": 31,
+    "23": 30
+   },
+   "dows": {
+    "0": 72,
+    "1": 84,
+    "2": 88,
+    "3": 74,
+    "4": 41,
+    "5": 46,
+    "6": 35
    }
   },
   {
@@ -3732,394 +4176,17 @@
    }
   },
   {
-   "hex": "e49555",
-   "reg": "FAB3604",
-   "type_code": "E550",
-   "role": "unknown",
-   "nation": "BRA",
-   "n_obs": 316,
-   "n_days": 31,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-16",
-   "home_base": null,
-   "home_dist_km": 6809,
-   "usual_callsigns": [
-    "GEIV04"
-   ],
-   "zones": {},
-   "hours": {
-    "10": 4,
-    "11": 9,
-    "12": 41,
-    "13": 59,
-    "14": 52,
-    "15": 24,
-    "16": 24,
-    "17": 31,
-    "18": 35,
-    "19": 17,
-    "20": 9,
-    "21": 3,
-    "22": 4,
-    "23": 4
-   },
-   "dows": {
-    "0": 50,
-    "1": 68,
-    "2": 48,
-    "3": 60,
-    "4": 53,
-    "5": 22,
-    "6": 15
-   }
-  },
-  {
-   "hex": "ae1197",
-   "reg": "03-3114",
-   "type_code": "C17",
-   "role": "transport",
-   "nation": "USA",
-   "n_obs": 483,
-   "n_days": 31,
-   "first_seen": "2026-09-13",
-   "last_seen": "2026-10-18",
-   "home_base": null,
-   "home_dist_km": 2781,
-   "usual_callsigns": [
-    "RCH705",
-    "RCH5013",
-    "RCH739"
-   ],
-   "zones": {
-    "ukraine": 0.17,
-    "gaza": 0.02,
-    "nato-baltic": 0.01,
-    "lebanon-syria": 0.01
-   },
-   "hours": {
-    "0": 13,
-    "1": 30,
-    "2": 29,
-    "3": 32,
-    "4": 21,
-    "5": 7,
-    "6": 16,
-    "7": 30,
-    "8": 16,
-    "9": 19,
-    "10": 13,
-    "11": 17,
-    "12": 14,
-    "13": 18,
-    "14": 30,
-    "15": 27,
-    "16": 19,
-    "17": 11,
-    "18": 9,
-    "19": 17,
-    "20": 23,
-    "21": 22,
-    "22": 29,
-    "23": 21
-   },
-   "dows": {
-    "0": 56,
-    "1": 40,
-    "2": 69,
-    "3": 66,
-    "4": 54,
-    "5": 74,
-    "6": 124
-   }
-  },
-  {
-   "hex": "a2ec0c",
-   "reg": "N288DP",
-   "type_code": "B736",
-   "role": "unknown",
-   "nation": "USA",
-   "n_obs": 567,
-   "n_days": 30,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-17",
-   "home_base": "Nellis AFB",
-   "home_dist_km": 21,
-   "usual_callsigns": [
-    "JANET59",
-    "JANET84",
-    "JANET46"
-   ],
-   "zones": {},
-   "hours": {
-    "0": 54,
-    "1": 39,
-    "2": 15,
-    "3": 18,
-    "4": 1,
-    "7": 5,
-    "8": 11,
-    "9": 14,
-    "10": 20,
-    "11": 39,
-    "12": 44,
-    "13": 34,
-    "14": 25,
-    "15": 25,
-    "16": 11,
-    "17": 20,
-    "18": 35,
-    "19": 13,
-    "20": 28,
-    "21": 35,
-    "22": 56,
-    "23": 25
-   },
-   "dows": {
-    "0": 91,
-    "1": 99,
-    "2": 113,
-    "3": 138,
-    "4": 94,
-    "5": 32
-   }
-  },
-  {
-   "hex": "3b7b9a",
-   "reg": "F-ZBPQ",
-   "type_code": "EC45",
-   "role": "helicopter",
-   "nation": "FRA",
-   "n_obs": 200,
-   "n_days": 30,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-16",
-   "home_base": "BA 113 Saint-Dizier",
-   "home_dist_km": 185,
-   "usual_callsigns": [
-    "DRAGO25",
-    "AZUR15"
-   ],
-   "zones": {},
-   "hours": {
-    "7": 4,
-    "8": 15,
-    "9": 17,
-    "10": 21,
-    "11": 19,
-    "12": 13,
-    "13": 13,
-    "14": 29,
-    "15": 20,
-    "16": 21,
-    "17": 12,
-    "18": 12,
-    "19": 4
-   },
-   "dows": {
-    "0": 35,
-    "1": 30,
-    "2": 29,
-    "3": 17,
-    "4": 45,
-    "5": 29,
-    "6": 15
-   }
-  },
-  {
-   "hex": "a0ec98",
-   "reg": "N159L",
-   "type_code": "CL60",
-   "role": "isr_biz",
-   "nation": "USA",
-   "n_obs": 723,
-   "n_days": 30,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-18",
-   "home_base": "Mihail Kogalniceanu AB",
-   "home_dist_km": 36,
-   "usual_callsigns": [
-    "BRIO66"
-   ],
-   "zones": {
-    "nato-baltic": 0.55,
-    "ukraine": 0.42
-   },
-   "hours": {
-    "5": 27,
-    "6": 85,
-    "7": 82,
-    "8": 93,
-    "9": 80,
-    "10": 80,
-    "11": 94,
-    "12": 65,
-    "13": 83,
-    "14": 34
-   },
-   "dows": {
-    "0": 76,
-    "1": 96,
-    "2": 64,
-    "3": 151,
-    "4": 118,
-    "5": 107,
-    "6": 111
-   }
-  },
-  {
-   "hex": "70c07b",
-   "reg": "554",
-   "type_code": "A320",
-   "role": "unknown",
-   "nation": "KWT",
-   "n_obs": 356,
-   "n_days": 30,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-18",
-   "home_base": null,
-   "home_dist_km": 309,
-   "usual_callsigns": [
-    "MJN575",
-    "MJN574",
-    "MJN576"
-   ],
-   "zones": {
-    "iran-gulf": 1.0
-   },
-   "hours": {
-    "3": 9,
-    "4": 42,
-    "5": 17,
-    "6": 13,
-    "7": 36,
-    "8": 50,
-    "9": 52,
-    "10": 26,
-    "11": 12,
-    "12": 22,
-    "13": 39,
-    "14": 20,
-    "16": 7,
-    "17": 10,
-    "18": 1
-   },
-   "dows": {
-    "0": 59,
-    "1": 68,
-    "2": 62,
-    "3": 75,
-    "4": 25,
-    "5": 22,
-    "6": 45
-   }
-  },
-  {
-   "hex": "7cfa93",
-   "reg": "A62-001",
-   "type_code": "B38M",
-   "role": "unknown",
-   "nation": "AUS",
-   "n_obs": 422,
-   "n_days": 30,
-   "first_seen": "2026-09-04",
-   "last_seen": "2026-10-18",
-   "home_base": null,
-   "home_dist_km": 812,
-   "usual_callsigns": [
-    "EVY31",
-    "EVY05",
-    "ASY330"
-   ],
-   "zones": {},
-   "hours": {
-    "0": 27,
-    "1": 33,
-    "2": 39,
-    "3": 41,
-    "4": 36,
-    "5": 23,
-    "6": 24,
-    "7": 27,
-    "8": 38,
-    "9": 36,
-    "10": 17,
-    "11": 5,
-    "20": 5,
-    "21": 19,
-    "22": 26,
-    "23": 26
-   },
-   "dows": {
-    "0": 54,
-    "1": 84,
-    "2": 88,
-    "3": 74,
-    "4": 41,
-    "5": 46,
-    "6": 35
-   }
-  },
-  {
-   "hex": "ae2918",
-   "reg": "6041",
-   "type_code": "H60",
-   "role": "helicopter",
-   "nation": "USA",
-   "n_obs": 295,
-   "n_days": 30,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-17",
-   "home_base": null,
-   "home_dist_km": 917,
-   "usual_callsigns": [
-    "C6041"
-   ],
-   "zones": {},
-   "hours": {
-    "0": 20,
-    "1": 27,
-    "2": 12,
-    "4": 2,
-    "5": 2,
-    "6": 1,
-    "7": 2,
-    "10": 2,
-    "11": 3,
-    "12": 6,
-    "13": 22,
-    "14": 38,
-    "15": 21,
-    "16": 29,
-    "17": 28,
-    "18": 17,
-    "19": 22,
-    "20": 10,
-    "21": 6,
-    "22": 7,
-    "23": 18
-   },
-   "dows": {
-    "0": 42,
-    "1": 66,
-    "2": 41,
-    "3": 58,
-    "4": 24,
-    "5": 40,
-    "6": 24
-   }
-  },
-  {
    "hex": "ae2125",
    "reg": "07-27010",
    "type_code": "C27J",
    "role": "transport",
    "nation": "USA",
-   "n_obs": 702,
-   "n_days": 30,
+   "n_obs": 718,
+   "n_days": 31,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-18",
+   "last_seen": "2026-10-19",
    "home_base": null,
-   "home_dist_km": 343,
+   "home_dist_km": 349,
    "usual_callsigns": [
     "C2701"
    ],
@@ -4134,10 +4201,10 @@
     "7": 6,
     "8": 5,
     "9": 3,
-    "15": 25,
-    "16": 81,
-    "17": 85,
-    "18": 89,
+    "15": 26,
+    "16": 85,
+    "17": 90,
+    "18": 95,
     "19": 86,
     "20": 80,
     "21": 57,
@@ -4145,7 +4212,7 @@
     "23": 14
    },
    "dows": {
-    "0": 97,
+    "0": 113,
     "1": 90,
     "2": 129,
     "3": 123,
@@ -4155,108 +4222,159 @@
    }
   },
   {
-   "hex": "ae04d9",
-   "reg": "165831",
-   "type_code": "B737",
-   "role": "transport",
+   "hex": "a88e57",
+   "reg": "N650SN",
+   "type_code": "GLEX",
+   "role": "unknown",
    "nation": "USA",
-   "n_obs": 592,
-   "n_days": 30,
+   "n_obs": 567,
+   "n_days": 31,
    "first_seen": "2026-09-11",
-   "last_seen": "2026-10-17",
+   "last_seen": "2026-10-19",
    "home_base": null,
-   "home_dist_km": 775,
+   "home_dist_km": 631,
    "usual_callsigns": [
-    "CNV4154",
-    "CNV4798",
-    "CNV4566"
+    "LATTE92"
    ],
-   "zones": {},
+   "zones": {
+    "taiwan": 0.01
+   },
    "hours": {
-    "0": 41,
-    "1": 32,
-    "2": 18,
-    "3": 14,
-    "4": 9,
-    "5": 8,
-    "6": 5,
-    "7": 3,
-    "13": 8,
-    "14": 30,
-    "15": 35,
-    "16": 48,
-    "17": 49,
-    "18": 67,
-    "19": 55,
-    "20": 57,
-    "21": 46,
-    "22": 37,
-    "23": 30
+    "0": 6,
+    "1": 12,
+    "2": 10,
+    "3": 12,
+    "4": 6,
+    "5": 19,
+    "6": 30,
+    "7": 56,
+    "8": 73,
+    "9": 53,
+    "10": 25,
+    "11": 21,
+    "12": 24,
+    "13": 14,
+    "14": 15,
+    "15": 22,
+    "16": 21,
+    "17": 29,
+    "18": 4,
+    "19": 11,
+    "20": 46,
+    "21": 35,
+    "22": 20,
+    "23": 3
    },
    "dows": {
-    "0": 70,
-    "1": 82,
-    "2": 46,
-    "3": 58,
-    "4": 151,
-    "5": 96,
-    "6": 89
+    "0": 134,
+    "1": 72,
+    "2": 35,
+    "3": 59,
+    "4": 106,
+    "5": 81,
+    "6": 80
    }
   },
   {
-   "hex": "43c171",
-   "reg": "ZZ171",
+   "hex": "477ff2",
+   "reg": "02",
    "type_code": "C17",
    "role": "transport",
-   "nation": "UK",
-   "n_obs": 543,
-   "n_days": 30,
-   "first_seen": "2026-09-11",
-   "last_seen": "2026-10-17",
-   "home_base": null,
-   "home_dist_km": 1702,
+   "nation": "UNK",
+   "n_obs": 535,
+   "n_days": 31,
+   "first_seen": "2026-09-12",
+   "last_seen": "2026-10-19",
+   "home_base": "HMNB Portsmouth",
+   "home_dist_km": 87,
    "usual_callsigns": [
-    "RRR6201",
-    "BLKCT01",
-    "RRR6120"
+    "BRK50",
+    "BRK96",
+    "BRK51"
    ],
    "zones": {
-    "lebanon-syria": 0.02,
-    "iran-gulf": 0.01
+    "nato-baltic": 0.2,
+    "arctic": 0.14,
+    "ukraine": 0.1,
+    "lebanon-syria": 0.01
    },
    "hours": {
-    "0": 8,
-    "1": 9,
-    "2": 12,
-    "3": 7,
-    "4": 2,
-    "5": 2,
-    "7": 2,
-    "8": 10,
-    "9": 7,
-    "10": 11,
-    "11": 18,
-    "12": 31,
-    "13": 46,
-    "14": 45,
-    "15": 38,
-    "16": 34,
-    "17": 39,
-    "18": 48,
-    "19": 54,
-    "20": 46,
-    "21": 32,
+    "0": 15,
+    "1": 10,
+    "2": 5,
+    "3": 1,
+    "4": 5,
+    "5": 6,
+    "6": 5,
+    "7": 17,
+    "8": 37,
+    "9": 35,
+    "10": 28,
+    "11": 27,
+    "12": 34,
+    "13": 31,
+    "14": 49,
+    "15": 53,
+    "16": 32,
+    "17": 18,
+    "18": 35,
+    "19": 30,
+    "20": 11,
+    "21": 20,
     "22": 21,
-    "23": 21
+    "23": 10
    },
    "dows": {
-    "0": 91,
-    "1": 99,
-    "2": 80,
-    "3": 49,
-    "4": 78,
-    "5": 89,
-    "6": 57
+    "0": 102,
+    "1": 38,
+    "2": 122,
+    "3": 87,
+    "4": 45,
+    "5": 39,
+    "6": 102
+   }
+  },
+  {
+   "hex": "ae26b1",
+   "reg": "6591",
+   "type_code": "AS65",
+   "role": "helicopter",
+   "nation": "USA",
+   "n_obs": 237,
+   "n_days": 31,
+   "first_seen": "2026-09-12",
+   "last_seen": "2026-10-19",
+   "home_base": "Fort Shafter",
+   "home_dist_km": 6,
+   "usual_callsigns": [
+    "C6591"
+   ],
+   "zones": {},
+   "hours": {
+    "0": 11,
+    "1": 9,
+    "2": 2,
+    "3": 11,
+    "4": 23,
+    "5": 22,
+    "6": 8,
+    "14": 2,
+    "15": 4,
+    "18": 5,
+    "19": 28,
+    "20": 37,
+    "21": 24,
+    "22": 23,
+    "23": 28
+   },
+   "dows": {
+    "0": 23,
+    "1": 51,
+    "2": 37,
+    "3": 27,
+    "4": 42,
+    "5": 12,
+    "6": 45
    }
   }
  ]

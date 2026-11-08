@@ -3,7 +3,7 @@
 Fonti (nessuna chiave). Tre reti di ricevitori indipendenti, unite per hex:
   adsb.lol       /v2/mil   (ODbL)                 primaria
   adsb.fi        /v2/mil   (uso non commerciale)  riempie i buchi di copertura, porta desc+ownOp
-  airplanes.live /v2/mil   (uso non commerciale)  idem, spesso irraggiungibile
+  airplanes.live /v2/mil   (uso non commerciale)  SOSPESO 08/11/2026: 403, accesso su richiesta via email
   adsb.lol /v2/point/lat/lon/250 sui teatri: tutto il traffico, qui si pescano i militari
   che i database non marcano (Russia, Cina, Iran...) per callsign, matricola, tipo, hex.
 E' la stessa catena usata da World Monitor (adsb.lol primaria + airplanes.live/adsb.fi gap-fill).
@@ -31,7 +31,8 @@ BASE = "https://api.adsb.lol/v2"
 MIL_FEEDS = [
     ("adsb.lol", "https://api.adsb.lol/v2/mil"),
     ("adsb.fi", "https://opendata.adsb.fi/api/v2/mil"),
-    ("airplanes.live", "https://api.airplanes.live/v2/mil"),
+    # airplanes.live tolto il 08/11/2026: /v2/mil risponde 403 con "Please contact us at contact@airplanes.live"
+    # (accesso su richiesta scritta con descrizione del progetto). Rientra quando l'accesso viene concesso.
 ]
 
 # Punti di osservazione: (nome, lat, lon). Raggio 250 NM = il massimo dell'API.

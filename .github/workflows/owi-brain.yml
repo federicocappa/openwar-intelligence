@@ -28,7 +28,7 @@ jobs:
         env:
           OWI_SAMPLES: "2"          # campioni diretti adsb.lol (il grosso arriva dal feed live ogni 10 min)
           OWI_INTERVAL_MIN: "5"     # minuti fra i campioni
-          OWI_GDELT_BUDGET_S: "240" # GDELT: oltre questo budget si salta (i runner GitHub prendono 429)
+          OWI_GDELT_BUDGET_S: "600" # GDELT: oltre questo budget si salta (i runner GitHub prendono 429; 08/11: 240 s bastavano per 8 zone su 12)
           PYTHONUNBUFFERED: "1"
         run: python run_all.py
 

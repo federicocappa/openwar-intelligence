@@ -30,7 +30,7 @@ SAMPLES = int(os.environ.get("OWI_SAMPLES", "2"))  # il feed live (ogni 10 min) 
 INTERVAL_MIN = float(os.environ.get("OWI_INTERVAL_MIN", "5"))
 
 
-def http_json(url, timeout=40, retries=2, backoff=(3, 6, 12), wait_429=10):
+def http_json(url, timeout=40, retries=2, backoff=(3, 6, 12), wait_429=25):
     """GET JSON con retry breve. I 429 (GDELT limita gli IP condivisi di GitHub) NON devono
     allungare il run: il 04-13/09 nove run sono stati uccisi dal timeout per questo."""
     last = None
@@ -141,7 +141,7 @@ def collect_gdelt(days_back=3):
         if rows:
             store.append("gdelt_daily", rows)
             n += len(rows)
-        time.sleep(6)  # cortesia verso GDELT
+        time.sleep(12)  # cortesia verso GDELT (08/11/2026: con 6 s metà delle zone finiva in 429 e fuori budget)
     print(f"  GDELT: {n} punti/giorno scritti")
     return n
 

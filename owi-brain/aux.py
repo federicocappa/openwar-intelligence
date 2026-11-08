@@ -2,7 +2,7 @@
 
   firms.json  NASA FIRMS VIIRS (Suomi NPP) 24h: hotspot termici entro 888 km dai teatri.
               Nessuna chiave: CSV pubblico. Il browser non lo raggiunge (CORS): lo legge il brain.
-  news.json   19 feed RSS (mainstream + OSINT difesa), filtrati per parole chiave militari,
+  news.json   26 feed RSS (mainstream + OSINT difesa + testate di teatro), filtrati per parole chiave militari,
               con data ISO, fonte, teatro stimato. Sostituisce rss2json (bloccato dalla CSP).
   satellites.json  TLE reali da CelesTrak (GP) per ~250 piattaforme militari/dual-use (ISR, SAR, SIGINT,
               early warning, comms). La dashboard propaga con SGP4 (satellite.js). I satelliti NRO
@@ -48,40 +48,60 @@ FIRMS_URL = FIRMS_SOURCES[0][1]  # compatibilita' con chi importa il nome
 FIRMS_RADIUS_KM = 888
 FIRMS_MAX = 2500
 
+# 08/11/2026: verificati uno a uno dal container. Tolti IISS, ISW, Bulletin (403 ai bot) e Liveuamap (HTML, non RSS).
+# Aggiunte testate di teatro (regola del 02/09: interrogare la testata nazionale, non il tema) con teatro
+# predefinito nel 4o campo: vale solo se il testo passa il filtro militare e nessuna parola chiave di zona scatta.
+# tag NEWS = filtro parole chiave militari; OSINT = passa tutto; LOCAL = filtro militare + teatro predefinito.
 RSS_FEEDS = [
-    ("BBC World", "https://feeds.bbci.co.uk/news/world/rss.xml", "NEWS"),
-    ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "NEWS"),
-    ("Guardian World", "https://www.theguardian.com/world/rss", "NEWS"),
-    ("Defense News", "https://www.defensenews.com/arc/outboundfeeds/rss/", "OSINT"),
-    ("Military Times", "https://www.militarytimes.com/arc/outboundfeeds/rss/", "OSINT"),
-    ("Breaking Defense", "https://breakingdefense.com/feed/", "OSINT"),
-    ("War on the Rocks", "https://warontherocks.com/feed/", "OSINT"),
-    ("The War Zone", "https://www.thedrive.com/the-war-zone/feed", "OSINT"),
-    ("IISS", "https://www.iiss.org/rss", "OSINT"),
-    ("ISW", "https://understandingwar.org/feed", "OSINT"),
-    ("Arms Control", "https://www.armscontrol.org/rss.xml", "OSINT"),
-    ("Bulletin Atomic", "https://thebulletin.org/feed/", "OSINT"),
-    ("Liveuamap", "https://liveuamap.com/rss", "OSINT"),
-    ("Oryx OSINT", "https://www.oryxspioenkop.com/feeds/posts/default?alt=rss", "OSINT"),
-    ("Long War Journal", "https://www.longwarjournal.org/feed", "OSINT"),
+    ("BBC World", "https://feeds.bbci.co.uk/news/world/rss.xml", "NEWS", None),
+    ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "NEWS", None),
+    ("Guardian World", "https://www.theguardian.com/world/rss", "NEWS", None),
+    ("Middle East Eye", "https://www.middleeasteye.net/rss", "NEWS", None),
+    ("Al-Monitor", "https://www.al-monitor.com/rss", "NEWS", None),
+    ("Defense News", "https://www.defensenews.com/arc/outboundfeeds/rss/", "OSINT", None),
+    ("Military Times", "https://www.militarytimes.com/arc/outboundfeeds/rss/", "OSINT", None),
+    ("Breaking Defense", "https://breakingdefense.com/feed/", "OSINT", None),
+    ("Defense One", "https://www.defenseone.com/rss/all/", "OSINT", None),
+    ("Naval News", "https://www.navalnews.com/feed/", "OSINT", None),
+    ("UK Defence Journal", "https://ukdefencejournal.org.uk/feed/", "OSINT", None),
+    ("War on the Rocks", "https://warontherocks.com/feed/", "OSINT", None),
+    ("The War Zone", "https://www.thedrive.com/the-war-zone/feed", "OSINT", None),
+    ("Arms Control", "https://www.armscontrol.org/rss.xml", "OSINT", None),
+    ("Oryx OSINT", "https://www.oryxspioenkop.com/feeds/posts/default?alt=rss", "OSINT", None),
+    ("Long War Journal", "https://www.longwarjournal.org/feed", "OSINT", None),
+    ("Ukrinform", "https://www.ukrinform.net/rss/block-lastnews", "LOCAL", "ukraine"),
+    ("Jerusalem Post", "https://www.jpost.com/rss/rssfeedsfrontpage.aspx", "LOCAL", "gaza"),
+    ("Haaretz", "https://www.haaretz.com/srv/haaretz-latest-headlines", "LOCAL", "gaza"),
+    ("Yonhap", "https://en.yna.co.kr/RSS/news.xml", "LOCAL", "korea"),
+    ("NK News", "https://www.nknews.org/feed/", "LOCAL", "korea"),
+    ("Myanmar Now", "https://myanmar-now.org/en/feed/", "LOCAL", "myanmar"),
+    ("Radio Dabanga", "https://www.dabangasudan.org/en/all-news/feed", "LOCAL", "sudan"),
+    ("ERR News", "https://news.err.ee/rss", "LOCAL", "nato-baltic"),
+    ("Jeune Afrique", "https://www.jeuneafrique.com/feed/", "LOCAL", "sahel"),
+    ("Google News Taiwan", "https://news.google.com/rss/search?q=(Taiwan+OR+%22Taiwan+Strait%22)+(PLA+OR+drill+OR+incursion+OR+military)&hl=en-US&gl=US&ceid=US:en", "LOCAL", "taiwan"),
 ]
 MIL_KEYWORDS = ("military", "war", "conflict", "nato", "army", "navy", "missile", "drone", "bomb", "strike", "troops",
                 "tank", "defense", "defence", "ukraine", "gaza", "israel", "russia", "china", "taiwan", "nuclear",
                 "iran", "houthi", "hezbollah", "korea", "sudan", "sahel", "airstrike", "artillery", "submarine", "warship",
-                "ceasefire", "offensive", "escalation", "sanction", "pentagon", "kremlin", "idf", "pla ")
+                "ceasefire", "offensive", "escalation", "sanction", "pentagon", "kremlin", "idf", "pla ",
+                "shahed", "hostage", "rocket", "air defense", "air defence", "frontline", "front line", "mobilis",
+                # francese (Jeune Afrique, Sahel)
+                "frappe", "attaque", "armée", "armee", "militaire", "djihadiste", "jihadiste", "soldats", "embuscade")
 ZONE_KEYWORDS = {
-    "ukraine": ("ukrain", "kyiv", "kharkiv", "odesa", "donetsk", "zaporizh", "crimea", "kursk"),
-    "gaza": ("gaza", "rafah", "hamas", "khan younis", "west bank"),
-    "red-sea": ("houthi", "red sea", "hodeidah", "bab al-mandeb", "bab el-mandeb", "yemen"),
-    "taiwan": ("taiwan", "taipei", "pla ", "strait"),
-    "korea": ("north korea", "pyongyang", "dprk", "kim jong"),
-    "sudan": ("sudan", "khartoum", "darfur", "el fasher", "rsf"),
-    "lebanon-syria": ("lebanon", "hezbollah", "beirut", "syria", "damascus"),
-    "myanmar": ("myanmar", "burma", "junta"),
-    "sahel": ("mali", "burkina", "niger", "sahel", "jnim"),
-    "iran-gulf": ("iran", "tehran", "hormuz", "irgc", "persian gulf", "tanker"),
-    "nato-baltic": ("baltic", "kaliningrad", "estonia", "latvia", "lithuania", "poland", "suwalki", "finland"),
-    "arctic": ("arctic", "svalbard", "barents", "kola", "greenland"),
+    "ukraine": ("ukrain", "kyiv", "kharkiv", "odesa", "donetsk", "zaporizh", "crimea", "kursk", "zelensk", "kherson",
+                "dnipro", "sumy", "mykolaiv", "russian drone", "russian missile", "shahed"),
+    "gaza": ("gaza", "rafah", "hamas", "khan younis", "west bank", "idf", "israeli strike", "israeli military",
+             "israel's military", "hostage"),
+    "red-sea": ("houthi", "red sea", "hodeidah", "bab al-mandeb", "bab el-mandeb", "yemen", "sanaa", "saada"),
+    "taiwan": ("taiwan", "taipei", "pla ", "strait", "adiz", "kinmen"),
+    "korea": ("north korea", "pyongyang", "dprk", "kim jong", "north korean", "kpa "),
+    "sudan": ("sudan", "khartoum", "darfur", "el fasher", "rsf", "port sudan", "nyala", "el obeid"),
+    "lebanon-syria": ("lebanon", "hezbollah", "beirut", "syria", "damascus", "golan", "al-sharaa"),
+    "myanmar": ("myanmar", "burma", "junta", "naypyidaw", "arakan"),
+    "sahel": ("mali", "burkina", "niger", "sahel", "jnim", "bamako", "ouagadougou", "niamey", "azawad", "africa corps", "wagner"),
+    "iran-gulf": ("iran", "tehran", "hormuz", "irgc", "persian gulf", "tanker", "khamenei", "natanz", "fordow", "isfahan"),
+    "nato-baltic": ("baltic", "kaliningrad", "estonia", "latvia", "lithuania", "poland", "suwalki", "finland", "gotland"),
+    "arctic": ("arctic", "svalbard", "barents", "kola", "greenland", "murmansk", "northern fleet"),
 }
 
 
@@ -91,7 +111,11 @@ def fetch(url, timeout=60, retries=2):
     for attempt in range(retries + 1):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
-                return r.read()
+                raw = r.read()
+                if raw[:2] == b"\x1f\x8b":  # alcuni server (Middle East Eye) rispondono gzip anche senza richiederlo
+                    import gzip
+                    raw = gzip.decompress(raw)
+                return raw
         except Exception as e:  # noqa: BLE001
             last = e
             if attempt < retries:
@@ -187,9 +211,17 @@ def _date(el):
 def build_news():
     items, status = [], {}
     atom = "{http://www.w3.org/2005/Atom}"
-    for name, url, tag in RSS_FEEDS:
+    for name, url, tag, zone_default in RSS_FEEDS:
         try:
-            root = ET.fromstring(fetch(url, timeout=30))
+            raw = fetch(url, timeout=30)
+            # Arms Control: RSS valido seguito da uno <script> iniettato -> "junk after document element".
+            # Si taglia alla chiusura del documento, qualunque cosa segua.
+            for closer in (b"</rss>", b"</feed>"):
+                k = raw.rfind(closer)
+                if k > 0:
+                    raw = raw[:k + len(closer)]
+                    break
+            root = ET.fromstring(raw)
             entries = root.findall(".//item") or root.findall(f".//{atom}entry")
             n = 0
             for e in entries[:40]:
@@ -197,9 +229,11 @@ def build_news():
                 link = _text(e, "link") or (e.find(f"{atom}link").get("href") if e.find(f"{atom}link") is not None else "")
                 desc = _text(e, "description", "summary", f"{atom}summary", f"{atom}content")[:300]
                 blob = (title + " " + desc).lower()
-                if tag == "NEWS" and not any(k in blob for k in MIL_KEYWORDS):
+                if tag in ("NEWS", "LOCAL") and not any(k in blob for k in MIL_KEYWORDS):
                     continue
                 zone = next((z for z, kws in ZONE_KEYWORDS.items() if any(k in blob for k in kws)), None)
+                if zone is None and tag == "LOCAL":
+                    zone = zone_default  # testata di teatro: la notizia militare senza altra zona resta nel suo teatro
                 items.append(dict(title=title[:220], link=link, source=name, tag=tag, published=_date(e), zone=zone, summary=desc[:200]))
                 n += 1
             status[name] = n

@@ -22,6 +22,9 @@ TABLES = {
     "runs": "(run_id TEXT, started_at TEXT, samples INT, n_aircraft INT, notes TEXT)",
     "indicator_hist": "(date TEXT, run_id TEXT, zone TEXT, indicator TEXT, value REAL, mean REAL, std REAL, z REAL, active INT)",
     "scores_hist": "(date TEXT, run_id TEXT, zone TEXT, composite REAL, rule_score REAL, model_p REAL, level TEXT)",
+    # 08/11/2026: FIRMS e notizie RSS per teatro, dal branch live. Solo giorni in cui la fonte ha risposto.
+    "firms_daily": "(date TEXT, zone TEXT, hotspots INT, frp_sum REAL, status TEXT, fetched_at TEXT)",
+    "news_daily": "(date TEXT, zone TEXT, items INT, fetched_at TEXT)",
 }
 
 

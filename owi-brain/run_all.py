@@ -18,6 +18,9 @@ from zones import ZONES
 
 OUT = os.path.join(store.ROOT, "out")
 BASELINE_DAYS = 45
+# "quiet" non significa pace: significa nessuna anomalia rispetto alla norma del teatro stesso.
+LEVEL_IT = {"quiet": "nessuna anomalia rispetto alla norma del teatro", "watch": "attenzione: anomalia lieve",
+            "elevated": "elevato: anomalia marcata", "alert": "allerta: anomalia forte su piu' indicatori"}
 
 
 def analyse(run_id, date):
@@ -46,6 +49,12 @@ def analyse(run_id, date):
                               rule_score=round(composite, 1), indicators=inds,
                               counts={k: int(v) for k, v in today[zid].items() if k in features.BUCKETS or k in ("all", "approach_all")},
                               nations=today[zid].get("_nations", []),
+                              # 08/11/2026: ingressi non aerei, con None = fonte non letta oggi
+                              inputs=dict(firms_hotspots=today[zid].get("firms_hotspots"), news_items=today[zid].get("news_items"),
+                                          gdelt_strike_vol=today[zid].get("news_strike_vol", 0.0), threat_score=today[zid].get("threat_score", 0.0)),
+                              data_status=("no_data" if (today[zid].get("all", 0) == 0 and today[zid].get("approach_all", 0) == 0
+                                                        and today[zid].get("firms_hotspots") is None
+                                                        and not today[zid].get("news_items")) else "ok"),
                               strike_packages=[p for p in packages if p["zone"] == zid][:5],
                               orbits=[o for o in orbits if o["zone"] == zid],
                               anomalies=[a for a in anomalies if a["zone"] == zid][:8]))
@@ -62,6 +71,7 @@ def analyse(run_id, date):
         zo["model_p"] = None if p is None else round(p, 3)
         zo["score"] = round(0.5 * zo["rule_score"] + 50 * p, 1) if p is not None else zo["rule_score"]
         zo["level"] = level_of(zo["score"])
+        zo["level_it"] = LEVEL_IT[zo["level"]] if zo["data_status"] == "ok" else "nessun dato in ingresso oggi"
         zo["active_indicators"] = [i["name_it"] for i in zo["indicators"] if i["active"]]
         score_rows.append(dict(date=date, run_id=run_id, zone=zo["id"], composite=zo["score"], rule_score=zo["rule_score"],
                                model_p=zo["model_p"], level=zo["level"]))
@@ -74,10 +84,13 @@ def analyse(run_id, date):
     n_hex = con.execute("SELECT COUNT(DISTINCT hex) FROM aircraft_obs").fetchone()[0]
     top_prof = sorted(profs.values(), key=lambda p: -p["n_days"])[:30]
     report = dict(
-        schema="owi-iw/1", run_id=run_id, date=date, generated_at=store.utcnow().strftime("%Y-%m-%dT%H:%MZ"),
+        schema="owi-iw/2", run_id=run_id, date=date, generated_at=store.utcnow().strftime("%Y-%m-%dT%H:%MZ"),
         memory=dict(days=n_days, observations=n_obs, airframes=n_hex, profiled=len(profs), baseline_days=len(hist_dates)),
         model=status, method_it=(
             "Indicatori I&W valutati contro la baseline storica di ogni teatro (z-score, finestra 45 giorni). "
+            "ATTENZIONE: il punteggio misura il cambiamento rispetto alla norma del teatro, non l'intensita' assoluta: "
+            "una guerra che dura da mesi e' la sua stessa baseline e risulta 'quiet' finche' non cambia ritmo. "
+            "Dal 08/11/2026 entrano hotspot termici FIRMS (3 satelliti) e notizie RSS per teatro; i giorni senza fonte sono None, non zero. "
             "Punteggio = somma pesata degli z-score attivi. Il modello appreso si attiva solo con dati sufficienti "
             "e solo se batte la regola su holdout temporale; l'etichetta e' un proxy (spike GDELT o salto Threat Board entro 72h)."),
         indicators_catalog=[dict(id=i[0], name_it=i[4], weight=i[2], why_it=i[5]) for i in INDICATORS],

@@ -146,6 +146,56 @@ def collect_gdelt(days_back=3):
     return n
 
 
+LIVE_FIRMS_URL = os.environ.get("OWI_LIVE_FIRMS_URL",
+    "https://raw.githubusercontent.com/federicocappa/openwar-intelligence/live/firms.json")
+LIVE_NEWS_URL = os.environ.get("OWI_LIVE_NEWS_URL",
+    "https://raw.githubusercontent.com/federicocappa/openwar-intelligence/live/news.json")
+
+
+def collect_firms(date=None):
+    """Hotspot termici per teatro dal feed live (owi-firms/2). Se la fonte e' 'unavailable' o il
+    file e' vecchio (schema 1, senza status) NON si scrive nulla: uno zero da fonte morta non deve
+    entrare nella baseline. Il giorno e' quello del run (il feed copre le 24 ore precedenti)."""
+    date = date or store.today_str()
+    d = http_json(LIVE_FIRMS_URL)
+    if not d or d.get("status") in (None, "unavailable") or d.get("total_in_theatres") is None:
+        print("  FIRMS: feed assente, non disponibile o schema vecchio: nessuna riga scritta")
+        return 0
+    fetched = store.utcnow().strftime("%Y-%m-%dT%H:%MZ")
+    by_zone = d.get("by_zone_total") or d.get("by_zone") or {}
+    frp = d.get("frp_by_zone") or {}
+    rows = [dict(date=date, zone=z["id"], hotspots=int(by_zone.get(z["id"], 0)),
+                 frp_sum=float(frp.get(z["id"], 0.0)), status=d.get("status"), fetched_at=fetched) for z in ZONES]
+    store.append("firms_daily", rows, date=date)
+    print(f"  FIRMS: {d.get('total_in_theatres')} hotspot nei teatri ({d.get('status')}), {len(rows)} righe")
+    return len(rows)
+
+
+def collect_news(days_back=3):
+    """Notizie RSS per teatro e per giorno di pubblicazione dal feed live (news.json, 200 voci).
+    Si riscrivono gli ultimi giorni: la feature prende il MAX per (giorno, zona)."""
+    d = http_json(LIVE_NEWS_URL)
+    items = (d or {}).get("items") or []
+    if not items:
+        print("  NEWS: feed assente o vuoto: nessuna riga scritta")
+        return 0
+    fetched = store.utcnow().strftime("%Y-%m-%dT%H:%MZ")
+    today = store.utcnow().date()
+    days = {(today - timedelta(days=i)).strftime("%Y-%m-%d") for i in range(days_back)}
+    counts = {}
+    for it in items:
+        day, zone = (it.get("published") or "")[:10], it.get("zone")
+        if zone and day in days:
+            counts[(day, zone)] = counts.get((day, zone), 0) + 1
+    n = 0
+    for day in sorted(days):
+        rows = [dict(date=day, zone=z["id"], items=counts.get((day, z["id"]), 0), fetched_at=fetched) for z in ZONES]
+        store.append("news_daily", rows, date=day)
+        n += len(rows)
+    print(f"  NEWS: {len(items)} voci nel feed, {n} righe giorno x zona")
+    return n
+
+
 def collect_threat_scores():
     d = http_json(THREAT_URL)
     if not d or "zones" not in d:
@@ -175,6 +225,10 @@ def run(run_id):
     collect_gdelt()
     print("[collector] threat-board")
     collect_threat_scores()
+    print("[collector] FIRMS (feed live)")
+    collect_firms()
+    print("[collector] notizie RSS (feed live)")
+    collect_news()
     store.append("runs", [dict(run_id=run_id, started_at=run_id, samples=SAMPLES, n_aircraft=n, notes="")])
     return n
 

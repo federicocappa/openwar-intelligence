@@ -29,6 +29,11 @@ INDICATORS = [
      "Quota anomala di attivita' nelle ore notturne locali: profilo tipico di operazioni reali, non di addestramento."),
     ("news_velocity",    "news_strike_vol",    1.5, 1.5, "Velocita' notizie (colpi)",
      "Il volume globale di articoli su attacchi nel teatro accelera rispetto alla sua norma."),
+    ("thermal_surge",    "firms_hotspots",     2.0, 1.5, "Surge termico (FIRMS)",
+     "Hotspot termici VIIRS nel teatro sopra la norma del teatro stesso: colpi, incendi da combattimento, depositi. "
+     "Tre satelliti NASA; contano solo i giorni in cui la fonte ha risposto, quindi la baseline parte dopo 5 giorni di dati."),
+    ("news_rss_velocity", "news_items",        1.0, 1.5, "Velocita' notizie (RSS)",
+     "Numero di notizie dei feed OSINT e mainstream attribuite al teatro nel giorno, sopra la norma del teatro."),
     ("threat_delta",     "threat_delta",       1.0, 0.0, "Salto Threat Board",
      "Il punteggio OWI del teatro e' salito di >= 6 punti dal run precedente."),
 ]
@@ -42,6 +47,9 @@ def evaluate_zone(zid, today_feats, history):
     score = 0.0
     for ind_id, feat, w, thr, name, why in INDICATORS:
         x = today_feats.get(feat, 0.0)
+        missing = x is None  # fonte non letta oggi: indicatore neutro, mai attivo
+        if missing:
+            x = 0.0
         if ind_id == "threat_delta":
             z = min(max(x / 6.0, 0.0), MAX_Z)  # +6 punti = z 1, +18 = saturo
             mean, std, n = None, None, len(history)
@@ -50,13 +58,17 @@ def evaluate_zone(zid, today_feats, history):
             mean, std, n = baseline(history, feat)
             z = zscore(x, mean, std)
             min_count = 1 if ind_id in ("bomber_presence", "awacs_coverage", "threat_delta") else 2
+            if ind_id == "thermal_surge":
+                min_count = 5
             if feat in ("night_share",):
                 min_count = 0.0
-            active = mean is not None and z >= thr and x >= min_count
+            active = mean is not None and z >= thr and x >= min_count and not missing
+            if missing:
+                z = 0.0
         zc = min(max(z, 0.0), MAX_Z)
         score += w * zc
         total_w += w
-        out.append(dict(id=ind_id, name_it=name, value=round(x, 2),
+        out.append(dict(id=ind_id, name_it=name, value=None if missing else round(x, 2),
                         baseline_mean=None if mean is None else round(mean, 2),
                         baseline_std=None if std is None else round(std, 2),
                         baseline_days=n, z=round(z, 2), active=bool(active), weight=w, why_it=why))

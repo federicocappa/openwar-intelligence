@@ -52,6 +52,17 @@ def daily_features(con, date):
             feats[zid]["news_strike_vol"] = float(v or 0)
     for zid in feats:
         feats[zid].setdefault("news_strike_vol", 0.0)
+    # 08/11/2026: FIRMS e notizie RSS. None = fonte non letta quel giorno (non zero): la baseline li salta.
+    for zid in feats:
+        feats[zid]["firms_hotspots"] = None
+        feats[zid]["news_items"] = None
+    for zid, v in con.execute(
+            "SELECT zone, MAX(hotspots) FROM firms_daily WHERE date=? AND status!='unavailable' GROUP BY zone", (date,)).fetchall():
+        if zid in feats:
+            feats[zid]["firms_hotspots"] = float(v or 0)
+    for zid, v in con.execute("SELECT zone, MAX(items) FROM news_daily WHERE date=? GROUP BY zone", (date,)).fetchall():
+        if zid in feats:
+            feats[zid]["news_items"] = float(v or 0)
     # threat-board: ultimo punteggio disponibile fino a quel giorno e delta rispetto al precedente
     for zid in feats:
         pts = con.execute(
@@ -69,6 +80,7 @@ def observed_dates(con):
 def baseline(history, feature, exclude_date=None, min_days=5):
     """history: lista di (date, feats_zone). Ritorna (mean, std, n)."""
     xs = [f.get(feature, 0.0) for d, f in history if d != exclude_date]
+    xs = [x for x in xs if x is not None]  # giorni senza fonte (None) non fanno baseline
     n = len(xs)
     if n < min_days:
         return None, None, n

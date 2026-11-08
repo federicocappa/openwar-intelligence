@@ -149,12 +149,17 @@ def build_firms(sources=FIRMS_SOURCES, fetcher=None):
                     radius_km=FIRMS_RADIUS_KM, total_in_theatres=None, shown=0, by_zone={}, hotspots=[])
     pts = sorted(merged.values(), key=lambda p: -p["frp"])
     total = len(pts)
+    by_zone_total, frp_by_zone = {}, {}
+    for p in pts:  # conteggi veri per teatro, prima del tetto di visualizzazione
+        by_zone_total[p["zone"]] = by_zone_total.get(p["zone"], 0) + 1
+        frp_by_zone[p["zone"]] = round(frp_by_zone.get(p["zone"], 0.0) + p["frp"], 1)
     pts = pts[:FIRMS_MAX]
     by_zone = {}
     for p in pts:
         by_zone[p["zone"]] = by_zone.get(p["zone"], 0) + 1
     return dict(schema="owi-firms/2", generated_at=now, source=src, status=status, sources=status_by_source,
-                radius_km=FIRMS_RADIUS_KM, total_in_theatres=total, shown=len(pts), by_zone=by_zone, hotspots=pts)
+                radius_km=FIRMS_RADIUS_KM, total_in_theatres=total, shown=len(pts), by_zone=by_zone,
+                by_zone_total=by_zone_total, frp_by_zone=frp_by_zone, hotspots=pts)
 
 def _text(el, *names):
     for n in names:

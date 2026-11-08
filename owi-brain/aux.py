@@ -18,6 +18,7 @@ Regola: se una fonte non risponde, il file NON viene scritto e la dashboard most
 Uso: python aux.py --out DIR
 """
 import csv
+import math
 import io
 import json
 import os
@@ -33,7 +34,17 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from zones import ZONES, haversine_km  # noqa: E402
 
 UA = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) OWI-brain/1.0 (+https://openwarintelligence.org)"}
-FIRMS_URL = "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv"
+# 08/11/2026: FIRMS non e' piu' una fonte sola. Il prodotto Suomi NPP e' arrivato vuoto (112 byte, sola
+# intestazione) mentre NOAA-20 e NOAA-21 avevano 114k e 123k rilevazioni: con una fonte sola scrivevamo
+# "0 hotspot nei teatri" come se fosse una misura. Ora si leggono i tre VIIRS, si fondono (deduplica su
+# griglia di 0,02 gradi e data, si tiene la FRP piu' alta) e si dichiara lo stato: ok / degraded /
+# unavailable. Se nessun satellite risponde, hotspots=[] e total_in_theatres=None: "non disponibile", mai 0.
+FIRMS_SOURCES = (
+    ("Suomi NPP", "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_Global_24h.csv"),
+    ("NOAA-20", "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/csv/J1_VIIRS_C2_Global_24h.csv"),
+    ("NOAA-21", "https://firms.modaps.eosdis.nasa.gov/data/active_fire/noaa-21-viirs-c2/csv/J2_VIIRS_C2_Global_24h.csv"),
+)
+FIRMS_URL = FIRMS_SOURCES[0][1]  # compatibilita' con chi importa il nome
 FIRMS_RADIUS_KM = 888
 FIRMS_MAX = 2500
 
@@ -88,11 +99,12 @@ def fetch(url, timeout=60, retries=2):
     raise last
 
 
-def build_firms():
-    raw = fetch(FIRMS_URL, timeout=180).decode("utf-8", "replace")
+def _firms_rows(raw):
+    """Righe FIRMS dentro i teatri da un CSV; ritorna (righe_totali_nel_file, punti)."""
     rd = csv.DictReader(io.StringIO(raw))
-    pts = []
+    n, pts = 0, []
     for row in rd:
+        n += 1
         try:
             lat, lon = float(row["latitude"]), float(row["longitude"])
         except (KeyError, ValueError):
@@ -108,19 +120,41 @@ def build_firms():
             frp = float(row.get("frp") or 0)
         except ValueError:
             frp = 0.0
-        conf = row.get("confidence", "")
-        pts.append(dict(lat=round(lat, 3), lng=round(lon, 3), frp=round(frp, 1), confidence=conf,
-                        date=row.get("acq_date", ""), time=row.get("acq_time", ""), daynight=row.get("daynight", ""), zone=zone))
-    pts.sort(key=lambda p: -p["frp"])
+        pts.append(dict(lat=round(lat, 3), lng=round(lon, 3), frp=round(frp, 1), confidence=row.get("confidence", ""),
+                        date=row.get("acq_date", ""), time=row.get("acq_time", ""), daynight=row.get("daynight", ""),
+                        sat=row.get("satellite", ""), zone=zone))
+    return n, pts
+
+
+def build_firms(sources=FIRMS_SOURCES, fetcher=None):
+    fetcher = fetcher or (lambda url: fetch(url, timeout=180).decode("utf-8", "replace"))
+    status_by_source, merged = {}, {}
+    for name, url in sources:
+        try:
+            n, pts = _firms_rows(fetcher(url))
+        except Exception as e:  # noqa: BLE001
+            status_by_source[name] = "errore: " + str(e)[:80]
+            continue
+        status_by_source[name] = n if n > 0 else "vuoto"
+        for p in pts:
+            key = (math.floor(p["lat"] / 0.02), math.floor(p["lng"] / 0.02), p["date"])
+            if key not in merged or p["frp"] > merged[key]["frp"]:
+                merged[key] = p
+    good = [k for k, v in status_by_source.items() if isinstance(v, int)]
+    status = "ok" if len(good) == len(sources) else ("degraded" if good else "unavailable")
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    src = "NASA FIRMS VIIRS 24h (" + ", ".join(good) + ")" if good else "NASA FIRMS VIIRS 24h"
+    if not good:
+        return dict(schema="owi-firms/2", generated_at=now, source=src, status=status, sources=status_by_source,
+                    radius_km=FIRMS_RADIUS_KM, total_in_theatres=None, shown=0, by_zone={}, hotspots=[])
+    pts = sorted(merged.values(), key=lambda p: -p["frp"])
     total = len(pts)
     pts = pts[:FIRMS_MAX]
     by_zone = {}
     for p in pts:
         by_zone[p["zone"]] = by_zone.get(p["zone"], 0) + 1
-    return dict(schema="owi-firms/1", generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                source="NASA FIRMS VIIRS Suomi NPP 24h", radius_km=FIRMS_RADIUS_KM, total_in_theatres=total,
-                shown=len(pts), by_zone=by_zone, hotspots=pts)
-
+    return dict(schema="owi-firms/2", generated_at=now, source=src, status=status, sources=status_by_source,
+                radius_km=FIRMS_RADIUS_KM, total_in_theatres=total, shown=len(pts), by_zone=by_zone, hotspots=pts)
 
 def _text(el, *names):
     for n in names:
@@ -453,7 +487,8 @@ def main():
     try:
         f = build_firms()
         json.dump(f, open(os.path.join(out, "firms.json"), "w"), separators=(",", ":"))
-        print(f"[aux] FIRMS: {f['total_in_theatres']} hotspot nei teatri, {f['shown']} scritti, per zona {f['by_zone']}")
+        print(f"[aux] FIRMS {f['status']}: {f['total_in_theatres']} hotspot nei teatri, {f['shown']} scritti, "
+              f"fonti {f['sources']}, per zona {f['by_zone']}")
     except Exception as e:  # noqa: BLE001
         print(f"[aux] FIRMS non disponibile: {e}", file=sys.stderr)
     try:

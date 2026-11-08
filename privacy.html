@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — OpenWar Intelligence</title>
+<meta name="description" content="What OpenWar Intelligence collects (website, PWA and store apps), which third-party services the dashboard contacts, how long data is kept and how to exercise your rights.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://openwarintelligence.org/privacy.html">
+<meta name="theme-color" content="#040810">
+<link rel="icon" type="image/svg+xml" href="/openwar-icon.svg">
+<style>
+:root{--bg:#040810;--panel:#0b1018;--border:#1a2535;--text:#e6edf3;--text2:#9fb0c3;--cyan:#00e5ff;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.6}
+header{border-bottom:1px solid var(--border);background:var(--panel)}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+header a{color:var(--text);text-decoration:none;font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:2px;font-size:13px;font-weight:700}
+header nav a{letter-spacing:0;font-weight:500;margin-left:14px;color:var(--text2);font-family:Inter,system-ui,sans-serif}
+main{padding:28px 0 56px}
+h1{font-size:28px;margin:0 0 6px}
+.meta{color:var(--text2);font-size:14px;margin-bottom:28px}
+h2{font-size:18px;margin:30px 0 8px;color:var(--cyan)}
+p,li{color:var(--text)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 18px}
+th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--text2);font-weight:600}
+code{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;color:var(--cyan)}
+footer{border-top:1px solid var(--border);background:var(--panel);padding:18px 0;color:var(--text2);font-size:13px;text-align:center}
+footer a{color:var(--text2)}
+@media(max-width:600px){header nav a{margin-left:10px;font-size:13px}h1{font-size:22px}table{display:block;overflow-x:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="/">OPENWAR INTELLIGENCE</a><nav><a href="/monitor-guerra.html">Dashboard</a><a href="/docs">Docs</a><a href="/threat-board">Threat Board</a></nav></div></header>
+<main class="wrap">
+<h1>Privacy Policy</h1>
+<div class="meta">Applies to openwarintelligence.org, the installable web app (PWA) and the Android/iOS apps that wrap it. Version of 8 November 2026.</div>
+
+<p>OpenWar Intelligence is a free, open-source (MIT) dashboard that shows public open-source data about military and geopolitical events. It has no user accounts and sells nothing. This page says, plainly, what is collected and by whom.</p>
+
+<h2>1. Who is responsible</h2>
+<p>The site and the apps are published by Cappa Business S.r.l., Via Bagutta 13, 20121 Milano, Italy. Contact for privacy matters: <a href="mailto:openwarintelligence@gmail.com">openwarintelligence@gmail.com</a>.</p>
+
+<h2>2. What we collect ourselves</h2>
+<table>
+<tr><th>Data</th><th>When</th><th>Why</th><th>Kept</th></tr>
+<tr><td>Usage analytics (pages viewed, approximate country, device type, referrer, anonymised events such as "download" or "sign-up")</td><td>On every visit, through Google Analytics 4 (property <code>G-QVT0LS68LC</code>)</td><td>To know which pages are used and where visitors come from</td><td>Google Analytics default retention (2 months for event data in our configuration unless changed); IP addresses are not stored by GA4</td></tr>
+<tr><td>Name, e-mail, role, country, newsletter consent (yes/no)</td><td>Only if you fill in the download registration form</td><td>To send the download link and, if you consented, occasional project updates</td><td>Until you ask us to delete it. Processed by Formspree (form processor) and stored in the project mailbox</td></tr>
+<tr><td>Local settings (selected layers, last visit snapshot for the "brief" bar, PWA caches)</td><td>When you use the dashboard</td><td>Convenience: remembers your view and lets the app open offline with the last snapshot</td><td>In your browser only (<code>localStorage</code>, Cache Storage). Never sent to us. Clear it from your browser settings</td></tr>
+</table>
+<p>We do not use advertising networks, do not sell data and do not build profiles.</p>
+
+<h2>3. Third-party services the dashboard contacts</h2>
+<p>The dashboard runs in your browser and fetches public data directly. Each of these services receives your IP address and the request as any website would. None receives your name.</p>
+<table>
+<tr><th>Service</th><th>Purpose</th></tr>
+<tr><td>GitHub (raw.githubusercontent.com)</td><td>Data feeds produced by the project's own public jobs: aircraft, satellites, fires, news, fleet, I&amp;W report</td></tr>
+<tr><td>adsb.lol</td><td>Military aircraft positions from community ADS-B receivers (as a secondary source)</td></tr>
+<tr><td>Map tile providers (dark, satellite, terrain basemaps)</td><td>Map background images</td></tr>
+<tr><td>cdnjs.cloudflare.com, Google Fonts</td><td>Open-source libraries (Leaflet, satellite.js) and web fonts</td></tr>
+<tr><td>Google Analytics</td><td>Usage statistics, see section 2</td></tr>
+<tr><td>Public CORS proxies (api.allorigins.win and similar), only as a last resort when a source blocks the browser</td><td>Relay of a public data request; the proxy sees your IP and the requested URL</td></tr>
+<tr><td>Weather and webcam providers (Open-Meteo, Windy) when you open those panels</td><td>Weather and camera data for the selected area</td></tr>
+</table>
+<p>We are working to remove the public CORS proxies and any source whose terms do not allow this use; the current list is kept honest in the <a href="/docs">documentation</a>.</p>
+
+<h2>4. Cookies</h2>
+<p>The site itself sets no cookies. Google Analytics sets its own cookies (<code>_ga</code>, <code>_ga_*</code>) to distinguish visitors. You can block them with your browser or an extension; the dashboard works without them.</p>
+
+<h2>5. Apps from the stores</h2>
+<p>The Android and iOS apps are wrappers around this website. They load only <code>openwarintelligence.org</code> and the services above, collect nothing on their own, request no permissions beyond network access and send no notifications unless you opt in to a future notification feature, which will be described here before it is released.</p>
+
+<h2>6. Your rights (GDPR)</h2>
+<p>You can ask for access, correction, deletion or export of the data you gave us through the registration form, and withdraw newsletter consent at any time, by writing to <a href="mailto:openwarintelligence@gmail.com">openwarintelligence@gmail.com</a>. You also have the right to lodge a complaint with the Italian supervisory authority (Garante per la protezione dei dati personali).</p>
+
+<h2>7. Changes</h2>
+<p>Changes to this page are dated at the top and recorded in the project's public repository.</p>
+</main>
+<footer><div class="wrap">OpenWar Intelligence · MIT licence · <a href="/">Home</a> · <a href="/docs">Documentation</a> · <a href="https://github.com/federicocappa/openwar-intelligence">GitHub</a></div></footer>
+</body>
+</html>

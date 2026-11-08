@@ -1,0 +1,25 @@
+{
+  "name": "OpenWar Intelligence — Monitor Guerra",
+  "short_name": "OpenWar",
+  "description": "Open-source C4ISR dashboard: live military aircraft (ADS-B), NASA FIRMS thermal hotspots, satellites, defence news and a daily I&W brain. Every figure carries its source and age.",
+  "id": "/monitor-guerra.html",
+  "start_url": "/monitor-guerra.html?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#040810",
+  "theme_color": "#040810",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["news", "utilities", "education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Threat Board", "short_name": "Board", "url": "/threat-board?utm_source=pwa", "description": "12 theatres, daily escalation score" },
+    { "name": "Live map", "short_name": "Map", "url": "/monitor-guerra.html?utm_source=pwa", "description": "Live C4ISR dashboard" }
+  ]
+}

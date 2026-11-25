@@ -1,0 +1,37 @@
+{
+ "w": [
+  -0.026391004058927834,
+  -0.024462527306716022,
+  0.02837253409473921,
+  0.03902227331990339,
+  0.0,
+  -0.22839410767807122,
+  0.24963832141638956,
+  -0.008863928250004961,
+  0.20201618061683368,
+  0.15857132012386702,
+  -0.015545037727879551,
+  0.14786766360253117,
+  -0.03371970026395647
+ ],
+ "b": -1.9429504546449854,
+ "features": [
+  "tanker_surge",
+  "awacs_coverage",
+  "isr_surge",
+  "fighter_mass",
+  "bomber_presence",
+  "transport_inflow",
+  "staging_mass",
+  "new_actors",
+  "night_ops",
+  "news_velocity",
+  "thermal_surge",
+  "news_rss_velocity",
+  "threat_delta"
+ ],
+ "trained_on": 271,
+ "trained_at": "2026-11-25T14:52Z",
+ "auc_holdout": 0.654,
+ "auc_rule_holdout": 0.442
+}
